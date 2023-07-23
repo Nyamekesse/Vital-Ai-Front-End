@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { Button, TextField, Typography } from '@mui/material'
 import Logo from '../../assets/logo.svg'
 
-export default function LogInPage() {
+export default function SignUpPage() {
   const initialState = {
+    username: '',
     email: '',
     password: '',
   }
@@ -23,14 +24,25 @@ export default function LogInPage() {
         <img src={Logo} alt="logo" />
       </div>
       <Typography variant="h6" mt={2}>
-        Login to Your Account
+        Create New Account
       </Typography>
       <form
         onSubmit={handleSubmit}
         className="mt-5 py-4 w-11/12 mx-auto flex flex-col justify-center"
       >
         <TextField
-          margin="normal"
+          margin="dense"
+          name="username"
+          label="Username"
+          placeholder="Enter your username..."
+          type="text"
+          onChange={handleInputChange}
+          size="small"
+          value={formData.username}
+          key="username"
+        />
+        <TextField
+          margin="dense"
           name="email"
           label="Email"
           placeholder="Enter email..."
@@ -40,9 +52,8 @@ export default function LogInPage() {
           value={formData.email}
           key="email"
         />
-
         <TextField
-          margin="normal"
+          margin="dense"
           name="password"
           label="Password"
           placeholder="Enter your password..."
@@ -54,12 +65,12 @@ export default function LogInPage() {
         />
         <div className="mx-auto w-1/2 mt-6">
           <Button
-            variant="contained"
             sx={{ textTransform: 'initial' }}
+            variant="contained"
             type="submit"
             fullWidth
           >
-            Sign in
+            Sign up
           </Button>
         </div>
       </form>
