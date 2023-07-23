@@ -26,7 +26,8 @@
     ".eslintrc.cjs",
     "tailwind.config.js",
     "postcss.config.js",
-    "types.d.ts"
+    "types.d.ts",
+    ".prettierrc.cjs"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -45,6 +45,8 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     'object-curly-newline': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'react/jsx-props-no-spreading': 'off',
+    'import/no-named-default': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -56,4 +58,4 @@ module.exports = {
       },
     ],
   },
-};
+}
