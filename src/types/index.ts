@@ -36,8 +36,18 @@ export interface HealthProfessional {
   medicalLicenseNumber: string
   contactInfo: string
   userId: string
+  organizationID: string
   medicalRecords: MedicalRecord[]
   appointments: Appointment[]
+}
+
+export interface Organization {
+  id?: string
+  name: string
+  location: string
+  createdAt?: Date | string
+  updatedAt: Date | string
+  healthProfessionals: HealthProfessional[]
 }
 
 export interface MedicalRecord {
