@@ -1,11 +1,12 @@
-import { FillProfile, LogInPage, SignUpPage } from './pages'
+import { FillProfile, HomeScreen, LogInPage, SignUpPage } from './pages'
 
 function App() {
   return (
     <div>
       {/* <LogInPage /> */}
       {/* <SignUpPage /> */}
-      <FillProfile />
+      {/* <FillProfile /> */}
+      <HomeScreen />
     </div>
   )
 }
