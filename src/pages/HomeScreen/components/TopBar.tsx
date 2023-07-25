@@ -8,11 +8,16 @@ export default function TopBar() {
     <div className="flex justify-between items-center px-2 py-3 shadow-md bg-white">
       <div className="flex">
         <div className="mr-3">
-          <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+          <Avatar
+            alt="Cindy Baker"
+            src="https://i.pinimg.com/originals/07/33/ba/0733ba760b29378474dea0fdbcb97107.png"
+          />
         </div>
         <div>
-          <Typography>Good Morning</Typography>
-          <Typography>Samuel Nyamekesse</Typography>
+          <Typography variant="caption">Good Morning</Typography>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+            Samuel Nyamekesse
+          </Typography>
         </div>
       </div>
       <div className="flex justify-between items-center mr-[5%] ">

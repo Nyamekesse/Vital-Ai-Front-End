@@ -4,8 +4,10 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import RestoreIcon from '@mui/icons-material/Restore'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
-import MainScreen from './views/main'
+import Fab from '@mui/material/Fab'
+import AddIcon from '@mui/icons-material/Add'
 import TopBar from './components/TopBar'
+import MainScreen from './views/main'
 
 function TopView() {
   const [bottomNavHeight, setBottomNavHeight] = useState(0)
@@ -37,11 +39,12 @@ export default function HomeScreen() {
   const [value, setValue] = useState(0)
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-x-hidden">
       <div className="top-nav fixed left-0 right-0">
         <TopBar />
       </div>
       <TopView />
+
       <div className="bottom-nav fixed bottom-0 left-0 right-0">
         <BottomNavigation
           showLabels

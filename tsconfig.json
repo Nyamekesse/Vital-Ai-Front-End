@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
+    "allowJs": true,
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
@@ -26,8 +27,7 @@
     ".eslintrc.cjs",
     "tailwind.config.js",
     "postcss.config.js",
-    "types.d.ts",
-    ".prettierrc.cjs"
+    "types.d.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2020: true,
   },
   extends: [
     'airbnb',
@@ -13,6 +13,11 @@ module.exports = {
   ],
   ignorePatterns: ['*.css'],
   parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: './tsconfig.json',
+  },
   overrides: [
     {
       env: {
@@ -24,12 +29,7 @@ module.exports = {
       },
     },
   ],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: './tsconfig.json',
-  },
-  plugins: ['@typescript-eslint', 'react'],
+  plugins: ['@typescript-eslint', 'react', 'react-refresh'],
   rules: {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/comma-dangle': ['error', 'always-multiline'],
