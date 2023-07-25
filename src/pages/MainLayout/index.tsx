@@ -4,6 +4,7 @@ import BottomBar from './components/BottomBar'
 import HomeScreen from './views/HomeView'
 import FillProfile from './views/FillProfileView'
 import FilterHealthProfessionals from './views/FilterHealthProfessionalsView'
+import BookAppointmentView from './views/BookAppointmentView'
 
 function RenderViews() {
   const [bottomNavHeight, setBottomNavHeight] = useState(0)
@@ -22,7 +23,8 @@ function RenderViews() {
     <div style={{ marginBottom: bottomNavHeight, marginTop: topNavHeight }}>
       {/* <HomeScreen /> */}
       {/* <FillProfile /> */}
-      <FilterHealthProfessionals />
+      {/* <FilterHealthProfessionals /> */}
+      <BookAppointmentView />
     </div>
   )
 }
@@ -33,7 +35,7 @@ export default function MainLayout() {
       <div className="top-nav fixed left-0 right-0 z-30">
         <TopBar />
       </div>
-      <div className="-z-20">
+      <div>
         <RenderViews />
       </div>
 
