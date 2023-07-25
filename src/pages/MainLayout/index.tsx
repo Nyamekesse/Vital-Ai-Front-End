@@ -3,7 +3,7 @@ import TopBar from './components/TopBar'
 import BottomBar from './components/BottomBar'
 import HomeScreen from './views/HomeView'
 import FillProfile from './views/FillProfileView'
-import FilterHealthProfessionals from './views/FilterHealthProfesssionals'
+import FilterHealthProfessionals from './views/FilterHealthProfessionalsView'
 
 function RenderViews() {
   const [bottomNavHeight, setBottomNavHeight] = useState(0)

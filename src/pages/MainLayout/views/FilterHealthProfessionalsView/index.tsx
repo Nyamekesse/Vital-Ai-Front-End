@@ -14,7 +14,7 @@ export default function FilterHealthProfessionals() {
     { key: 2, label: 'Dentists' },
   ])
   return (
-    <div className="py-3 px-3">
+    <div className="py-3 px-3 flex flex-col justify-center items-center">
       <div className="flex flex-wrap mb-2">
         {chipData.map((chip) => {
           return (

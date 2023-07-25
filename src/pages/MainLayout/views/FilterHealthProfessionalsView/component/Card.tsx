@@ -2,6 +2,7 @@
 import Avatar from '@mui/material/Avatar'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import Typography from '@mui/material/Typography/Typography'
+import Divider from '@mui/material/Divider'
 
 export default function Card() {
   return (
@@ -16,12 +17,19 @@ export default function Card() {
       </div>
       <div className="flex flex-col p-2">
         <div className="flex justify-between items-center">
-          <h6 className="text-lg font-bold">Dr. Randy Wigham</h6>
+          <Typography
+            sx={{ fontWeight: 700 }}
+            variant="body1"
+            noWrap
+            align="center"
+          >
+            Dr. Randy Wigham
+          </Typography>
           <FavoriteBorderIcon color="primary" />
         </div>
         <hr />
         <div className="mt-3">
-          <div className="flex items-center">
+          <div className="flex justify-between items-center">
             <Typography
               sx={{ fontWeight: 500 }}
               variant="caption"
@@ -30,7 +38,11 @@ export default function Card() {
             >
               Cardiologists
             </Typography>
-            <div className="mx-1">|</div>
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{ marginLeft: 0.5, marginRight: 0.5 }}
+            />
             <Typography
               sx={{ fontWeight: 500, width: 100 }}
               variant="caption"
