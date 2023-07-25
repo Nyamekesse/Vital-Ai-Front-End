@@ -3,6 +3,7 @@ import TopBar from './components/TopBar'
 import BottomBar from './components/BottomBar'
 import HomeScreen from './views/HomeView'
 import FillProfile from './views/FillProfileView'
+import FilterHealthProfessionals from './views/FilterHealthProfesssionals'
 
 function RenderViews() {
   const [bottomNavHeight, setBottomNavHeight] = useState(0)
@@ -19,8 +20,9 @@ function RenderViews() {
 
   return (
     <div style={{ marginBottom: bottomNavHeight, marginTop: topNavHeight }}>
-      <HomeScreen />
+      {/* <HomeScreen /> */}
       {/* <FillProfile /> */}
+      <FilterHealthProfessionals />
     </div>
   )
 }
