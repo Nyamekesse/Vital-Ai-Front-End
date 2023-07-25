@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Typography } from '@mui/material'
-import RoundedLabelledButton from '../../FillProfile/component/RoundedLabelledButton'
+import RoundedLabelledButton from '../components/RoundedLabelledButton'
 
 interface ChipData {
   key: number

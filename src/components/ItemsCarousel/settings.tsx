@@ -4,5 +4,6 @@ export const carouselSettings = {
   autoplay: true,
   speed: 500,
   slidesToShow: 1,
+  arrows: false,
   slidesToScroll: 1,
 }

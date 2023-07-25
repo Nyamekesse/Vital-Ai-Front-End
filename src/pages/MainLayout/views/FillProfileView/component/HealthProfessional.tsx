@@ -24,7 +24,7 @@ export default function HealthProfessional() {
     setFormData(initialState)
   }
   return (
-    <div className="flex pt-3 flex-col items-center h-screen">
+    <div className="flex pt-3 flex-col items-center">
       <Typography variant="h6" mb={2}>
         Fill Your Profile
       </Typography>

@@ -39,23 +39,25 @@ export default function CareRecipient() {
     setFormData(initialState)
   }
   return (
-    <div className="flex pt-3 flex-col items-center h-screen">
+    <div className="flex flex-col items-center py-3 px-3">
       <Typography variant="h6" mb={2}>
         Fill Your Profile
       </Typography>
       <div className="relative">
-        <div className="absolute right-3 bottom-4 z-30">
+        <div className="absolute right-3 bottom-4 z-10">
           <AddAPhotoIcon
             fontSize="large"
             color="primary"
             onClick={() => console.log('add photo')}
           />
         </div>
-        <Avatar
-          alt="Remy Sharp"
-          src="https://i.pinimg.com/originals/07/33/ba/0733ba760b29378474dea0fdbcb97107.png"
-          sx={{ width: 150, height: 150 }}
-        />
+        <div className="">
+          <Avatar
+            alt="Remy Sharp"
+            src="https://i.pinimg.com/originals/07/33/ba/0733ba760b29378474dea0fdbcb97107.png"
+            sx={{ width: 150, height: 150, zIndex: 0 }}
+          />
+        </div>
       </div>
 
       <form

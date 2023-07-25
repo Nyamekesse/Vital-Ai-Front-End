@@ -5,7 +5,7 @@ import Badge from '@mui/material/Badge'
 
 export default function TopBar() {
   return (
-    <div className="flex justify-between items-center px-2 py-3 shadow-md bg-white">
+    <div className="flex justify-between items-center px-2 py-3 shadow-md bg-white z-40">
       <div className="flex">
         <div className="mr-3">
           <Avatar
