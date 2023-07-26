@@ -47,6 +47,8 @@ module.exports = {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'react/jsx-props-no-spreading': 'off',
     'import/no-named-default': 'off',
+    'no-nested-ternary': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

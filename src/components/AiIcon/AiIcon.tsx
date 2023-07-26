@@ -1,6 +1,4 @@
-import { SvgIcon } from '@mui/material'
-
-export default function RobotIcon() {
+export default function AiIcon() {
   return (
     <svg
       width="30px"

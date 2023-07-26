@@ -3,7 +3,7 @@ import BottomNavigation from '@mui/material/BottomNavigation'
 import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import HomeIcon from '@mui/icons-material/Home'
-import RobotIcon from './RobotIcon'
+import AiIcon from '../../../components/AiIcon/AiIcon'
 
 export default function BottomBar() {
   const [value, setValue] = useState(0)
@@ -17,7 +17,7 @@ export default function BottomBar() {
       }}
     >
       <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-      <BottomNavigationAction icon={<RobotIcon />} />
+      <BottomNavigationAction icon={<AiIcon />} />
       <BottomNavigationAction label="Appointments" icon={<BookmarkIcon />} />
     </BottomNavigation>
   )
