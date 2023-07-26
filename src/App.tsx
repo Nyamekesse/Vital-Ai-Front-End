@@ -12,8 +12,8 @@ function App() {
   // }
   return (
     <div>
-      <LogInPage />
-      {/* <SignUpPage /> */}
+      {/* <LogInPage /> */}
+      <SignUpPage />
       {/* <MainLayout /> */}
       {/* <Loading open={open} /> */}
     </div>
