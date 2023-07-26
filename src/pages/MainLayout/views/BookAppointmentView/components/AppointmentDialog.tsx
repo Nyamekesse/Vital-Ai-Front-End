@@ -7,6 +7,7 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker'
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker'
 import moment, { Moment } from 'moment'
 import { useState } from 'react'
+import TextField from '@mui/material/TextField'
 
 type Props = {
   fullScreen: boolean
@@ -22,6 +23,7 @@ export default function AppointmentDialog({
   const appointmentInitialState = {
     appointmentDate: '',
     appointmentTime: '',
+    patientProblem: '',
   }
   const [formData, setFormData] = useState(appointmentInitialState)
   const [, setValue] = useState<Moment | null>(null)
@@ -38,6 +40,10 @@ export default function AppointmentDialog({
   const handleDateChange = (date: Date | null) => {
     formData.appointmentDate = moment(date).format('YYYY-MM-DD')
     setDate(null)
+  }
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setFormData({ ...formData, [name]: value })
   }
   const handleSubmit = () => {
     console.log(formData)
@@ -75,6 +81,21 @@ export default function AppointmentDialog({
           </div>
           <div className="">
             <MobileTimePicker onChange={handleTimeChange} />
+          </div>
+          <div className="w-full">
+            <TextField
+              sx={{ width: '100%' }}
+              margin="dense"
+              name="patientProblem"
+              placeholder="Please tell us about your health Bio"
+              type="text"
+              multiline
+              minRows={2}
+              maxRows={4}
+              onChange={handleInputChange}
+              value={formData.patientProblem}
+              key="patientProblem"
+            />
           </div>
         </DialogContent>
         <DialogActions>

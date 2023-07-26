@@ -25,8 +25,8 @@ function RenderViews() {
       {/* <HomeScreen /> */}
       {/* <FillProfile /> */}
       {/* <FilterHealthProfessionals /> */}
-      {/* <BookAppointmentView /> */}
-      <AppointmentsHistoryView />
+      <BookAppointmentView />
+      {/* <AppointmentsHistoryView /> */}
     </div>
   )
 }
