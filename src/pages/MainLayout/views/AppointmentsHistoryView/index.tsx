@@ -12,9 +12,9 @@ export default function AppointmentsHistoryView() {
   const [change, setChange] = useState(0)
   const [status, setStatus] = useState('upcoming')
   const body = [
-    ['you', 'are', 'welcome', 'welcome'],
-    ['you', 'are'],
-    ['you', 'are', 'welcome', 'you', 'are', 'welcome', 'welcome', 'welcome'],
+    ['a', 'b', 'c', 'd'],
+    ['e', 'f'],
+    ['g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'],
   ]
   const items = body[change]
 
