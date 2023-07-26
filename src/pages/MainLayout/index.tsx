@@ -5,6 +5,7 @@ import HomeScreen from './views/HomeView'
 import FillProfile from './views/FillProfileView'
 import FilterHealthProfessionals from './views/FilterHealthProfessionalsView'
 import BookAppointmentView from './views/BookAppointmentView'
+import AppointmentsHistoryView from './views/AppointmentsHistoryView'
 
 function RenderViews() {
   const [bottomNavHeight, setBottomNavHeight] = useState(0)
@@ -24,7 +25,8 @@ function RenderViews() {
       {/* <HomeScreen /> */}
       {/* <FillProfile /> */}
       {/* <FilterHealthProfessionals /> */}
-      <BookAppointmentView />
+      {/* <BookAppointmentView /> */}
+      <AppointmentsHistoryView />
     </div>
   )
 }
