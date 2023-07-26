@@ -16,8 +16,8 @@ export default function TopBar() {
     setAnchorEl(null)
   }
   return (
-    <div className="flex justify-between items-center px-2 py-3 shadow-md bg-white z-40">
-      <div className="flex">
+    <div className="flex justify-between items-center px-2 py-3 shadow-md bg-white z-40 ">
+      <div className="flex w-full">
         <div className="mr-3">
           <Avatar
             component="button"
