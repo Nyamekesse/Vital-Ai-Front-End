@@ -1,7 +1,8 @@
-import { Typography } from '@mui/material'
+import { IconButton, Typography } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import Badge from '@mui/material/Badge'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 
 export default function TopBar() {
   return (
@@ -20,7 +21,10 @@ export default function TopBar() {
           </Typography>
         </div>
       </div>
-      <div className="flex justify-between items-center mr-[5%] ">
+      <div className="flex justify-between items-center mr-[5%] w-[60px]">
+        <IconButton>
+          <LocationOnIcon />
+        </IconButton>
         <Badge badgeContent={4} color="primary">
           <NotificationsIcon />
         </Badge>
