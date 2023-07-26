@@ -30,7 +30,7 @@ export default function SpecialitySection() {
       >
         Doctor Speciality
       </Typography>
-      <div className="flex flex-wrap items-center justify-between">
+      <div className="flex flex-wrap items-center justify-evenly">
         {components.map((Component, index) => (
           <div className="m-1" key={index}>
             <Component />

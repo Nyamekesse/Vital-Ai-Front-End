@@ -27,7 +27,7 @@ export default function OrganizationSection() {
       >
         Partnered Organizations
       </Typography>
-      <div className="flex flex-wrap items-center justify-between">
+      <div className="flex flex-wrap items-center justify-stretch">
         {chipData.map((chip: ChipData) => {
           return (
             <div className="" key={chip.key}>
