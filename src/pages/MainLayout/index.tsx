@@ -23,12 +23,12 @@ function RenderViews() {
 
   return (
     <div style={{ marginBottom: bottomNavHeight, marginTop: topNavHeight }}>
-      {/* <HomeScreen /> */}
+      <HomeScreen />
       {/* <FillProfile /> */}
       {/* <FilterHealthProfessionals /> */}
       {/* <BookAppointmentView /> */}
       {/* <AppointmentsHistoryView /> */}
-      <AppointmentDetails />
+      {/* <AppointmentDetails /> */}
     </div>
   )
 }

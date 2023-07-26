@@ -1,25 +1,28 @@
-import { useState } from 'react'
 import { Typography } from '@mui/material'
-import RoundedLabelledButton from '../components/RoundedLabelledButton'
+import {
+  Cardiologist,
+  Dentists,
+  General,
+  Neurologist,
+  Nutritionist,
+  Optometrist,
+  Pediatric,
+  Radiologist,
+} from '../../../../assets/customIcons'
 
-interface ChipData {
-  key: number
-  label: string
-}
 export default function SpecialitySection() {
-  const [chipData, setChipData] = useState<readonly ChipData[]>([
-    { key: 0, label: 'General' },
-    { key: 1, label: 'Dentists' },
-    { key: 2, label: 'Nutrition' },
-    { key: 3, label: 'Neurology' },
-    { key: 4, label: 'Optometrist' },
-    { key: 5, label: 'Gynecologist' },
-    { key: 6, label: 'Radiologist' },
-    { key: 7, label: 'Pediatric' },
-    { key: 8, label: 'More...' },
-  ])
+  const components = [
+    General,
+    Cardiologist,
+    Dentists,
+    Neurologist,
+    Nutritionist,
+    Optometrist,
+    Pediatric,
+    Radiologist,
+  ]
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mt-6 w-full">
       <Typography
         variant="h5"
         mb={1}
@@ -27,14 +30,12 @@ export default function SpecialitySection() {
       >
         Doctor Speciality
       </Typography>
-      <div className="flex flex-wrap">
-        {chipData.map((chip, index) => {
-          return (
-            <div className="" key={chip.key}>
-              <RoundedLabelledButton label={chip.label} />
-            </div>
-          )
-        })}
+      <div className="flex flex-wrap items-center justify-between">
+        {components.map((Component, index) => (
+          <div className="m-1" key={index}>
+            <Component />
+          </div>
+        ))}
       </div>
     </div>
   )

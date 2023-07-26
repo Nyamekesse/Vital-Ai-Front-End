@@ -49,6 +49,7 @@ module.exports = {
     'import/no-named-default': 'off',
     'no-nested-ternary': 'off',
     '@typescript-eslint/no-unused-expressions': 'off',
+    'react/no-array-index-key': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
