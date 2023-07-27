@@ -87,7 +87,7 @@ export default function AppointmentDialog({
               sx={{ width: '100%' }}
               margin="dense"
               name="patientProblem"
-              placeholder="Please tell us about your health Bio"
+              placeholder="Please provide a brief description of problem"
               type="text"
               multiline
               minRows={2}
