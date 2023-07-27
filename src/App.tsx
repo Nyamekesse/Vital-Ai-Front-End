@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Loading from './components/Loading'
 import { LogInPage, MainLayout, SignUpPage } from './pages'
@@ -10,13 +9,6 @@ import FillProfile from './pages/MainLayout/views/FillProfileView'
 import HomeScreen from './pages/MainLayout/views/HomeView'
 
 function App() {
-  const [open] = useState(false)
-  // const handleClose = () => {
-  //   setOpen(false)
-  // }
-  // const handleOpen = () => {
-  //   setOpen(true)
-  // }
   return (
     <div>
       <Routes>
@@ -40,7 +32,7 @@ function App() {
         <Route path="/log-in" element={<LogInPage />} />
         <Route path="/register-new-user" element={<SignUpPage />} />
       </Routes>
-      <Loading open={open} />
+      <Loading />
     </div>
   )
 }

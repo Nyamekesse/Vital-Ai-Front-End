@@ -50,6 +50,7 @@ module.exports = {
     'no-nested-ternary': 'off',
     '@typescript-eslint/no-unused-expressions': 'off',
     'react/no-array-index-key': 'off',
+    'operator-linebreak': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
