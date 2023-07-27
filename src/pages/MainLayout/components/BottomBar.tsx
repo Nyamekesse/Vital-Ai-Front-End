@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BottomNavigation from '@mui/material/BottomNavigation'
 import BottomNavigationAction from '@mui/material/BottomNavigationAction'
@@ -7,11 +7,12 @@ import HomeIcon from '@mui/icons-material/Home'
 import AiIcon from '../../../components/AiIcon/AiIcon'
 import ChatSessionView from '../views/ChatSessionView'
 
-type NavigationValue = 'home' | 'appointments'
+type NavigationValue = string
 
 export default function BottomBar() {
   const navigate = useNavigate()
-
+  const [value, setValue] = useState('home')
+  const [isActive, setIsActive] = useState(false)
   const [open, setOpen] = useState(false)
   const handleClickOpen = () => {
     setOpen(true)
@@ -19,23 +20,35 @@ export default function BottomBar() {
   const handleClose = () => {
     setOpen(false)
   }
-  const handleNavChange = (value: NavigationValue) => {
+  const handleChange = (value: NavigationValue) => {
+    setValue(value)
     if (value === 'home') {
+      setIsActive(false)
       navigate('/', { replace: true })
     } else if (value === 'appointments') {
+      setIsActive(false)
       navigate('/all-appointments', { replace: true })
+    } else if (value === 'chat') {
+      setIsActive(true)
     }
   }
+
   return (
     <>
       <BottomNavigation
         sx={{ boxShadow: '0 -2px 4px rgba(0, 0, 0, 0.1)' }}
         showLabels
-        value="home"
-        onChange={(_event, value) => handleNavChange(value)}
+        value={value}
+        onChange={(_event, newValue) => {
+          handleChange(newValue)
+        }}
       >
         <BottomNavigationAction value="home" label="Home" icon={<HomeIcon />} />
-        <BottomNavigationAction icon={<AiIcon />} onClick={handleClickOpen} />
+        <BottomNavigationAction
+          value="chat"
+          icon={<AiIcon isActive={isActive} />}
+          onClick={handleClickOpen}
+        />
         <BottomNavigationAction
           value="appointments"
           label="Appointments"
