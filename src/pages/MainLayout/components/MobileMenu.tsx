@@ -1,5 +1,6 @@
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
+import { Link } from 'react-router-dom'
 
 type Props = {
   open: boolean
@@ -19,7 +20,9 @@ export default function MobileMenu({ open, anchorEl, handleClose }: Props) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link to="/profile/4/me">Profile</Link>
+        </MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>

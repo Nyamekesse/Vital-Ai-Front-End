@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react'
+import { Outlet } from 'react-router-dom'
 import TopBar from './components/TopBar'
 import BottomBar from './components/BottomBar'
-import HomeScreen from './views/HomeView'
-import FillProfile from './views/FillProfileView'
-import FilterHealthProfessionals from './views/FilterHealthProfessionalsView'
-import BookAppointmentView from './views/BookAppointmentView'
-import AppointmentsHistoryView from './views/AppointmentsHistoryView'
-import AppointmentDetails from './views/AppointmentDetailsView'
 
 function RenderViews() {
   const [bottomNavHeight, setBottomNavHeight] = useState(0)
@@ -23,12 +18,7 @@ function RenderViews() {
 
   return (
     <div style={{ marginBottom: bottomNavHeight, marginTop: topNavHeight }}>
-      <HomeScreen />
-      {/* <FillProfile /> */}
-      {/* <FilterHealthProfessionals /> */}
-      {/* <BookAppointmentView /> */}
-      {/* <AppointmentsHistoryView /> */}
-      {/* <AppointmentDetails /> */}
+      <Outlet />
     </div>
   )
 }
