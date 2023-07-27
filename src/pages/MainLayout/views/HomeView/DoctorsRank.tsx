@@ -11,7 +11,7 @@ export default function DoctorsRank() {
     { key: 0, label: 'All' },
     { key: 1, label: 'Excellent' },
     { key: 2, label: 'Very Good' },
-    { key: 2, label: 'Good' },
+    { key: 3, label: 'Good' },
   ])
   return (
     <div className="flex flex-col mt-6 w-full ">

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .vector {
-  background-image: url('./assets/logo-symbol.png'),
+  background-image: url('./assets/logo.png'),
     url('./assets/vector/bg-vector-1.svg'),
     url('./assets/vector/bg-vector-2.svg');
   background-position:

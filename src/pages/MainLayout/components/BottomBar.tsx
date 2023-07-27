@@ -4,21 +4,32 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import HomeIcon from '@mui/icons-material/Home'
 import AiIcon from '../../../components/AiIcon/AiIcon'
+import ChatSessionView from '../views/ChatSessionView'
 
 export default function BottomBar() {
   const [value, setValue] = useState(0)
+  const [open, setOpen] = useState(false)
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
   return (
-    <BottomNavigation
-      sx={{ boxShadow: '0 -2px 4px rgba(0, 0, 0, 0.1)' }}
-      showLabels
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue)
-      }}
-    >
-      <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-      <BottomNavigationAction icon={<AiIcon />} />
-      <BottomNavigationAction label="Appointments" icon={<BookmarkIcon />} />
-    </BottomNavigation>
+    <>
+      <BottomNavigation
+        sx={{ boxShadow: '0 -2px 4px rgba(0, 0, 0, 0.1)' }}
+        showLabels
+        value={value}
+        onChange={(_event, newValue) => {
+          setValue(newValue)
+        }}
+      >
+        <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+        <BottomNavigationAction icon={<AiIcon />} onClick={handleClickOpen} />
+        <BottomNavigationAction label="Appointments" icon={<BookmarkIcon />} />
+      </BottomNavigation>
+      <ChatSessionView open={open} handleClose={handleClose} />
+    </>
   )
 }

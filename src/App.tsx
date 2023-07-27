@@ -13,8 +13,8 @@ function App() {
   return (
     <div>
       {/* <LogInPage /> */}
-      <SignUpPage />
-      {/* <MainLayout /> */}
+      {/* <SignUpPage /> */}
+      <MainLayout />
       {/* <Loading open={open} /> */}
     </div>
   )
