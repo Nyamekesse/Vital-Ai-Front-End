@@ -5,6 +5,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import Badge from '@mui/material/Badge'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import MobileMenu from './MobileMenu'
+import NotificationsView from '../views/NotificationsView'
 
 export default function TopBar() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -14,6 +15,13 @@ export default function TopBar() {
   }
   const handleClose = () => {
     setAnchorEl(null)
+  }
+  const [notificationOpen, setNotificationOpen] = useState(false)
+  const handleClickOpen = () => {
+    setNotificationOpen(true)
+  }
+  const handleNotificationClose = () => {
+    setNotificationOpen(false)
   }
   return (
     <div className="flex justify-between items-center px-2 py-3 shadow-md bg-white z-40 ">
@@ -37,11 +45,17 @@ export default function TopBar() {
         <IconButton>
           <LocationOnIcon />
         </IconButton>
-        <Badge badgeContent={4} color="primary">
-          <NotificationsIcon />
-        </Badge>
+        <IconButton onClick={handleClickOpen}>
+          <Badge badgeContent={4} color="primary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
       </div>
       <MobileMenu open={open} anchorEl={anchorEl} handleClose={handleClose} />
+      <NotificationsView
+        notificationOpen={notificationOpen}
+        handleNotificationClose={handleNotificationClose}
+      />
     </div>
   )
 }
