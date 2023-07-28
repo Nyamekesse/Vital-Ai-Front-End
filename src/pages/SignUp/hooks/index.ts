@@ -1,19 +1,23 @@
 import axios from 'axios'
-import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
+import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { axiosInstance } from '../../../axios-instance'
 
 interface FormData {
+  username: string
   email: string
   password: string
+  userType: string
 }
 const SERVER_ERROR = 'There was an error contacting the server.'
-async function signin({ email, password }: FormData) {
+async function signup({ username, password, email, userType }: FormData) {
   try {
-    const { data } = await axiosInstance.post('/auth/login', {
+    const { data } = await axiosInstance.post('/auth/register', {
+      username,
       email,
       password,
+      userType,
     })
     return data.message
   } catch (error) {
@@ -25,12 +29,12 @@ async function signin({ email, password }: FormData) {
   }
 }
 
-export function useAuthLogin() {
+export function useAuthSignUp() {
   const navigate = useNavigate()
-  const { mutate } = useMutation((data: FormData) => signin(data), {
+  const { mutate } = useMutation((data: FormData) => signup(data), {
     onSuccess: () => {
-      toast.success('Login Successful')
-      navigate('/', { replace: true })
+      toast.success('Registration Successful')
+      navigate('/log-in', { replace: true })
     },
   })
 

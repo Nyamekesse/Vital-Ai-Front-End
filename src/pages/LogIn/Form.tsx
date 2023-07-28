@@ -1,13 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button/Button'
 import TextField from '@mui/material/TextField/TextField'
-import { toast } from 'react-toastify'
 import { useAuthLogin } from './hooks'
 
 export default function Form() {
-  const navigate = useNavigate()
   const { mutate } = useAuthLogin()
   const initialState = {
     email: '',
@@ -22,8 +18,6 @@ export default function Form() {
     event.preventDefault()
     mutate(formData)
     setFormData(initialState)
-    toast.success('Login Successful')
-    navigate('/', { replace: true })
   }
   return (
     <div className="w-full">

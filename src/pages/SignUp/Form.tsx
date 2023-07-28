@@ -1,12 +1,18 @@
 import Button from '@mui/material/Button/Button'
 import TextField from '@mui/material/TextField/TextField'
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { useAuthSignUp } from './hooks'
 
 export default function Form() {
+  const navigate = useNavigate()
+  const { mutate } = useAuthSignUp()
   const initialState = {
     username: '',
     email: '',
     password: '',
+    userType: 'PATIENT',
   }
   const [formData, setFormData] = useState(initialState)
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +21,7 @@ export default function Form() {
   }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
+    mutate(formData)
     setFormData(initialState)
   }
   return (
