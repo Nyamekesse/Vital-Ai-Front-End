@@ -15,21 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <App />
-          <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar
-            limit={2}
-            newestOnTop
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable={false}
-            pauseOnHover={false}
-            theme="light"
-          />
         </LocalizationProvider>
       </BrowserRouter>
     </QueryClientProvider>
+    <ToastContainer />
   </React.StrictMode>,
 )
