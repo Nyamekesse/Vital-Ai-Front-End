@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Carousel } from '../../../../components'
 import DoctorsRank from './DoctorsRank'
 import SpecialitySection from './SpecialitySection'

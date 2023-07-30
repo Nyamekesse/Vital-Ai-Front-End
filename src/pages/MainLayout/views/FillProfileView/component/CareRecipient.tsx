@@ -1,15 +1,28 @@
 /* eslint-disable no-console */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, TextField, Typography } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import { DateField } from '@mui/x-date-pickers/DateField'
-import moment from 'moment'
+import moment, { Moment } from 'moment'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import OutlinedInput from '@mui/material/OutlinedInput'
+import { getStoredUser } from '../../../../../user-storage'
+import { CareRecipient } from '../../../../../types'
 
-export default function CareRecipient() {
+interface CareRecipientData {
+  firstName: string
+  lastName: string
+  dateOfBirth: string
+  gender: string
+  contactInfo: string
+  location: string
+  displayPicture: string
+  healthBackground: string
+}
+
+export default function CareRecipientView() {
   const [date, setDate] = useState<Date | null>(null)
   const initialState = {
     firstName: '',
@@ -18,9 +31,15 @@ export default function CareRecipient() {
     gender: '',
     contactInfo: '',
     location: '',
-    healthBio: '',
+    displayPicture: '',
+    healthBackground: '',
   }
   const [formData, setFormData] = useState(initialState)
+
+  useEffect(() => {
+    const activeUser: CareRecipientData = getStoredUser() as CareRecipientData
+    activeUser && setFormData(activeUser)
+  }, [])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -38,6 +57,7 @@ export default function CareRecipient() {
     console.log(formData)
     setFormData(initialState)
   }
+
   return (
     <div className="flex flex-col items-center py-3 px-3">
       <Typography variant="h6" mb={2}>
@@ -54,7 +74,7 @@ export default function CareRecipient() {
         <div className="">
           <Avatar
             alt="Remy Sharp"
-            src="https://i.pinimg.com/originals/07/33/ba/0733ba760b29378474dea0fdbcb97107.png"
+            src={formData.displayPicture}
             sx={{ width: 150, height: 150, zIndex: 0 }}
           />
         </div>
@@ -127,8 +147,8 @@ export default function CareRecipient() {
               return selected
             }}
           >
-            <MenuItem value="Male">Male</MenuItem>
-            <MenuItem value="Female">Female</MenuItem>
+            <MenuItem value="MALE">Male</MenuItem>
+            <MenuItem value="FEMALE">Female</MenuItem>
           </Select>
         </div>
 
@@ -148,7 +168,7 @@ export default function CareRecipient() {
           minRows={2}
           maxRows={4}
           onChange={handleInputChange}
-          value={formData.healthBio}
+          value={formData.healthBackground}
           key="healthBio"
         />
         <div className="mx-auto w-1/2 mt-6">

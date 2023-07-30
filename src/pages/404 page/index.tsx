@@ -5,9 +5,13 @@ import PageNotFoundImage from '../../assets/vector/page_not_found_re_e9o6.svg'
 export default function PageNotFound() {
   const navigate = useNavigate()
   return (
-    <div className="relative w-full h-full max-w-7xl">
-      <div className="absolute w-[786px] top-[50%] left-[50%] mx-auto px-[2%] text-center">
-        <img className="" src={PageNotFoundImage} alt="404 not found" />
+    <div className="w-full h-screen max-w-7xl ">
+      <div className="flex justify-center h-full flex-col items-center w-[80%] mx-auto text-center">
+        <img
+          className="w-[50%] mx-auto"
+          src={PageNotFoundImage}
+          alt="404 not found"
+        />
         <Typography
           variant="body1"
           fontSize={{ mobile_0: 30, mobile_393: 40 }}

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import TopBar from './components/TopBar'
 import BottomBar from './components/BottomBar'
+import { getStoredUser } from '../../user-storage'
 
 function RenderViews() {
   const [bottomNavHeight, setBottomNavHeight] = useState(0)

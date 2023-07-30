@@ -7,6 +7,7 @@ import AppointmentsHistoryView from './pages/MainLayout/views/AppointmentsHistor
 import AppointmentDetails from './pages/MainLayout/views/AppointmentDetailsView'
 import FillProfile from './pages/MainLayout/views/FillProfileView'
 import HomeScreen from './pages/MainLayout/views/HomeView'
+import PageNotFound from './pages/404 page'
 
 function App() {
   return (
@@ -18,6 +19,10 @@ function App() {
             path="/filter/health-professional/:id"
             element={<FilterHealthProfessionals />}
           />
+          <Route
+            path="/organizations/:id/health-professionals"
+            element={<FilterHealthProfessionals />}
+          />
           <Route path="/new-appointment" element={<BookAppointmentView />} />
           <Route
             path="/all-appointments"
@@ -27,10 +32,11 @@ function App() {
             path="/appointment/:id/details"
             element={<AppointmentDetails />}
           />
-          <Route path="/profile/:id/me" element={<FillProfile />} />
+          <Route path="/profile/me" element={<FillProfile />} />
         </Route>
         <Route path="/log-in" element={<LogInPage />} />
         <Route path="/register-new-user" element={<SignUpPage />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Loading />
     </div>

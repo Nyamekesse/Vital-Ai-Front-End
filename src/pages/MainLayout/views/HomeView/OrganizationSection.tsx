@@ -1,23 +1,12 @@
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Chip from '@mui/material/Chip/Chip'
 import Typography from '@mui/material/Typography/Typography'
+import { useOrganizations } from '../../hooks/useOrganizations'
+import { Organization } from '../../../../types'
 
-interface ChipData {
-  key: number
-  label: string
-}
 export default function OrganizationSection() {
-  const [chipData] = useState<readonly ChipData[]>([
-    { key: 0, label: 'General' },
-    { key: 1, label: 'Dentists' },
-    { key: 2, label: 'Nutrition' },
-    { key: 3, label: 'Neurology' },
-    { key: 4, label: 'Optometrist' },
-    { key: 5, label: 'Gynecologist' },
-    { key: 6, label: 'Radiologist' },
-    { key: 7, label: 'Pediatric' },
-    { key: 8, label: 'More...' },
-  ])
+  const organizations = useOrganizations()
+
   return (
     <div className="flex flex-col mt-4 w-full">
       <Typography
@@ -28,15 +17,19 @@ export default function OrganizationSection() {
         Partnered Organizations
       </Typography>
       <div className="flex flex-wrap items-center justify-stretch">
-        {chipData.map((chip: ChipData) => {
+        {organizations.map((organization: Organization) => {
           return (
-            <div className="" key={chip.key}>
-              <Chip
-                variant="outlined"
-                color="primary"
-                label={chip.label}
-                sx={{ margin: 0.5 }}
-              />
+            <div key={organization.id}>
+              <Link
+                to={`/organizations/${organization.id}/health-professionals`}
+              >
+                <Chip
+                  variant="outlined"
+                  color="primary"
+                  label={organization.name}
+                  sx={{ margin: 0.5 }}
+                />
+              </Link>
             </div>
           )
         })}

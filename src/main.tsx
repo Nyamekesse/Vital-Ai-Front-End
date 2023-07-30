@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { BrowserRouter } from 'react-router-dom'
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <App />
         </LocalizationProvider>
       </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
     <ToastContainer
       position="top-center"
@@ -26,6 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       newestOnTop
       closeOnClick
       rtl={false}
+      limit={2}
       pauseOnFocusLoss={false}
       draggable
       pauseOnHover={false}

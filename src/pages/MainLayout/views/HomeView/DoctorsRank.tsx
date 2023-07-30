@@ -22,7 +22,7 @@ export default function DoctorsRank() {
       >
         Top Doctors
       </Typography>
-      <div className="flex flex-wrap items-center justify-between">
+      <div className="flex flex-wrap items-center justify-start">
         {chipData.map((chip) => {
           return (
             <div key={chip.key}>

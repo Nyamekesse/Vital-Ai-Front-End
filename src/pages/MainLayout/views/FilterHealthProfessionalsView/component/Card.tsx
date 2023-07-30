@@ -4,13 +4,26 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import Typography from '@mui/material/Typography/Typography'
 import Divider from '@mui/material/Divider'
 
-export default function Card() {
+type Props = {
+  firstName: string
+  lastName: string
+  displayPicture: string
+  specialization: string
+  organization: string
+}
+export default function Card({
+  firstName,
+  lastName,
+  displayPicture,
+  organization,
+  specialization,
+}: Props) {
   return (
     <div className="flex p-4 shadow-lg rounded-lg">
       <div className="">
         <Avatar
           alt="Remy Sharp"
-          src="https://i.pinimg.com/originals/07/33/ba/0733ba760b29378474dea0fdbcb97107.png"
+          src={displayPicture}
           variant="rounded"
           sx={{ width: 80, height: 80 }}
         />
@@ -23,7 +36,7 @@ export default function Card() {
             noWrap
             align="center"
           >
-            Dr. Randy Wigham
+            Dr. {firstName} {lastName}
           </Typography>
           <FavoriteBorderIcon color="primary" />
         </div>
@@ -31,12 +44,12 @@ export default function Card() {
         <div className="mt-3">
           <div className="flex justify-between items-center">
             <Typography
-              sx={{ fontWeight: 500 }}
+              sx={{ fontWeight: 500, textTransform: 'capitalize' }}
               variant="caption"
               noWrap
               align="center"
             >
-              Cardiologists
+              {specialization}
             </Typography>
             <Divider
               orientation="vertical"
@@ -44,12 +57,12 @@ export default function Card() {
               sx={{ marginLeft: 0.5, marginRight: 0.5 }}
             />
             <Typography
-              sx={{ fontWeight: 500, width: 100 }}
+              sx={{ fontWeight: 500, width: 100, textTransform: 'capitalize' }}
               variant="caption"
               noWrap
               align="center"
             >
-              Valley View Hospital
+              {organization}
             </Typography>
           </div>
         </div>

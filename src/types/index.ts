@@ -1,44 +1,41 @@
-// AUTO GENERATED FILE BY @kalissaac/prisma-typegen
-// DO NOT EDIT
-
-export enum UserType {
-  PATIENT = 'PATIENT',
-  HEALTHPROFESSIONAL = 'HEALTHPROFESSIONAL',
-}
-
-export interface User {
-  id?: string
-  username: string
-  email: string
-  password: string
-  userType: UserType
-  created_at?: Date | string
-  updated_at: Date | string
-}
-
 export interface CareRecipient {
   firstName: string
   lastName: string
   dateOfBirth: Date | string
-  gender: string
+  gender: Gender
   contactInfo: string
   location: string
-  healthBio: string
-  userId: string
-  medicalRecords: MedicalRecord[]
-  appointments: Appointment[]
+  healthBackground: string
+  displayPicture?: string | null
+  createdAt?: Date | string
+  updatedAt: Date | string
+  userID: string
 }
 
 export interface HealthProfessional {
   firstName: string
   lastName: string
-  specialization: string
+  gender: Gender
+  specializationId: string
   medicalLicenseNumber: string
   contactInfo: string
-  userId: string
+  displayPicture?: string | null
+  createdAt?: Date | string
+  updatedAt: Date | string
+  userID: string
   organizationID: string
-  medicalRecords: MedicalRecord[]
-  appointments: Appointment[]
+}
+
+export interface Appointment {
+  id?: string
+  date: Date | string
+  time: Date | string
+  purpose: string
+  status?: Status
+  createdAt?: Date | string
+  updatedAt: Date | string
+  careRecipientID: string
+  healthProfessionalID: string
 }
 
 export interface Organization {
@@ -47,27 +44,36 @@ export interface Organization {
   location: string
   createdAt?: Date | string
   updatedAt: Date | string
-  healthProfessionals: HealthProfessional[]
 }
 
-export interface MedicalRecord {
-  id?: string
-  date: Date | string
-  diagnosis: string
-  treatmentDetails: string
-  patientId: string
-  healthProfessionalId: string
-  created_at?: Date | string
-  updated_at: Date | string
+export enum UserType {
+  CARE_RECIPIENT = 'CARE_RECIPIENT',
+  HEALTH_PROFESSIONAL = 'HEALTH_PROFESSIONAL',
+  ORGANIZATION_ADMIN = 'ORGANIZATION_ADMIN',
+  ADMIN = 'ADMIN',
+}
+export interface HealthProfessionalResponse {
+  firstName: string
+  lastName: string
+  specialization: {
+    id: string
+    name: string
+  }
+  displayPicture: string
+  organizationID: string
+  userID: string
+  organization: {
+    name: string
+  }
+}
+export enum Status {
+  PENDING = 'PENDING',
+  UPCOMING = 'UPCOMING',
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED',
 }
 
-export interface Appointment {
-  id?: string
-  date: Date | string
-  time: string
-  status: string
-  patientId: string
-  healthProfessionalId: string
-  created_at?: Date | string
-  updated_at: Date | string
+export enum Gender {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
 }
