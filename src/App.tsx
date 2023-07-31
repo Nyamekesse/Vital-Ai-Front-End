@@ -17,14 +17,13 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomeScreen />} />
           <Route
-            path="/filter/health-professional/:id"
-            element={<FilterHealthProfessionals />}
-          />
-          <Route
             path="/organizations/:id/health-professionals"
             element={<FilterHealthProfessionals />}
           />
-          <Route path="/new-appointment" element={<BookAppointmentView />} />
+          <Route
+            path="/details/health-professional/:id"
+            element={<BookAppointmentView />}
+          />
           <Route
             path="/all-appointments"
             element={<AppointmentsHistoryView />}

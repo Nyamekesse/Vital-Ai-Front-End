@@ -1,14 +1,28 @@
-import Avatar from '@mui/material/Avatar'
-import Typography from '@mui/material/Typography/Typography'
-import Divider from '@mui/material/Divider'
+/* eslint-disable react/jsx-one-expression-per-line */
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography/Typography';
+import Divider from '@mui/material/Divider';
 
-export default function Card() {
+type Props = {
+  firstName: string;
+  lastname: string;
+  specialization: string;
+  organization: string;
+  displayPicture: string;
+};
+export default function Card({
+  firstName,
+  lastname,
+  specialization,
+  organization,
+  displayPicture,
+}: Props) {
   return (
     <div className="flex p-4 shadow-md rounded-lg">
       <div className="">
         <Avatar
-          alt="Remy Sharp"
-          src="https://i.pinimg.com/originals/07/33/ba/0733ba760b29378474dea0fdbcb97107.png"
+          alt={firstName}
+          src={displayPicture}
           variant="rounded"
           sx={{ width: 80, height: 80 }}
         />
@@ -21,7 +35,7 @@ export default function Card() {
             noWrap
             align="center"
           >
-            Dr. Randy Wigham
+            Dr. {firstName} {lastname}
           </Typography>
         </div>
         <hr />
@@ -32,8 +46,9 @@ export default function Card() {
               variant="caption"
               noWrap
               align="center"
+              textTransform="capitalize"
             >
-              Cardiologists
+              {specialization}
             </Typography>
             <Divider
               orientation="vertical"
@@ -46,11 +61,11 @@ export default function Card() {
               noWrap
               align="center"
             >
-              Valley View Hospital
+              {organization}
             </Typography>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

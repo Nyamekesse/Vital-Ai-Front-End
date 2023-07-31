@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import dayjs, { Dayjs } from 'dayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
-import moment, { Moment } from 'moment';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { getStoredUser } from '../../../../../user-storage';
 
-interface CareRecipientData {
+interface UserDetails {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -20,33 +20,32 @@ interface CareRecipientData {
   displayPicture: string;
   healthBackground: string;
 }
-
 export default function CareRecipientView() {
-  const [date, setDate] = useState<Date | null>(null);
-  const initialState = {
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    gender: '',
-    contactInfo: '',
-    location: '',
-    displayPicture: '',
-    healthBackground: '',
-  };
-  const [formData, setFormData] = useState(initialState);
+  const [userDetails, setUserDetails] = useState<UserDetails>(getStoredUser());
+  const [formData, setFormData] = useState({
+    firstName: userDetails.firstName,
+    lastName: userDetails.lastName,
+    dateOfBirth: dayjs(userDetails.dateOfBirth).toString(),
+    gender: userDetails.gender,
+    contactInfo: userDetails.contactInfo,
+    location: userDetails.location,
+    displayPicture: userDetails.displayPicture,
+    healthBackground: userDetails.healthBackground,
+  });
 
   useEffect(() => {
-    const activeUser: CareRecipientData = getStoredUser() as CareRecipientData;
-    activeUser && setFormData(activeUser);
+    setUserDetails(getStoredUser());
   }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-  const handleDate = (date: Date | null) => {
-    formData.dateOfBirth = moment(date).format('YYYY-MM-DD');
-    setDate(null);
+  const handleDateChange = (date) => {
+    setFormData((prevValues) => ({
+      ...prevValues,
+      dateOfBirth: dayjs(date).format('YYYY-MM-DD'),
+    }));
   };
   const handleGender = (event: SelectChangeEvent) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -54,7 +53,6 @@ export default function CareRecipientView() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(formData);
-    setFormData(initialState);
   };
 
   return (
@@ -91,7 +89,7 @@ export default function CareRecipientView() {
           type="text"
           onChange={handleInputChange}
           size="small"
-          value={formData.firstName}
+          defaultValue={userDetails.firstName}
           key="firstName"
         />
         <TextField
@@ -102,7 +100,7 @@ export default function CareRecipientView() {
           type="text"
           onChange={handleInputChange}
           size="small"
-          value={formData.lastName}
+          defaultValue={userDetails.lastName}
           key="lastname"
         />
         <TextField
@@ -113,7 +111,7 @@ export default function CareRecipientView() {
           type="text"
           onChange={handleInputChange}
           size="small"
-          value={formData.location}
+          defaultValue={userDetails.location}
           key="location"
         />
         <TextField
@@ -124,13 +122,13 @@ export default function CareRecipientView() {
           type="text"
           onChange={handleInputChange}
           size="small"
-          value={formData.contactInfo}
+          defaultValue={userDetails.contactInfo}
           key="contactInfo"
         />
         <div className="my-3">
           <Select
             id="select-gender"
-            value={formData.gender}
+            defaultValue={userDetails.gender}
             label="Gender"
             name="gender"
             displayEmpty
@@ -153,12 +151,14 @@ export default function CareRecipientView() {
 
         <div className="w-full">
           <DateField
-            value={date}
+            defaultValue={dayjs(userDetails.dateOfBirth)}
             sx={{ padding: '0px' }}
-            onChange={(date) => handleDate(date)}
+            onChange={handleDateChange}
+            format="YYYY-MM-DD"
           />
         </div>
         <TextField
+          defaultValue={userDetails.healthBackground}
           margin="dense"
           name="healthBio"
           placeholder="Please tell us about your health Bio"
@@ -167,7 +167,6 @@ export default function CareRecipientView() {
           minRows={2}
           maxRows={4}
           onChange={handleInputChange}
-          value={formData.healthBackground}
           key="healthBio"
         />
         <div className="mx-auto w-1/2 mt-6">

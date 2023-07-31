@@ -1,19 +1,18 @@
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker'
-import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker'
-import moment, { Moment } from 'moment'
-import { useState } from 'react'
-import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+import { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import dayjs from 'dayjs';
 
 type Props = {
-  fullScreen: boolean
-  open: boolean
-  handleClose: () => void
-}
+  fullScreen: boolean;
+  open: boolean;
+  handleClose: () => void;
+};
 
 export default function AppointmentDialog({
   fullScreen,
@@ -24,32 +23,29 @@ export default function AppointmentDialog({
     appointmentDate: '',
     appointmentTime: '',
     patientProblem: '',
-  }
-  const [formData, setFormData] = useState(appointmentInitialState)
-  const [, setValue] = useState<Moment | null>(null)
-  const [, setDate] = useState<Moment | null>(null)
+  };
+  const [formData, setFormData] = useState(appointmentInitialState);
+  const [, setValue] = useState<Date | null>(null);
+  const [, setDate] = useState<Date | null>(null);
 
   const handleCancel = () => {
-    setFormData(appointmentInitialState)
-    handleClose()
-  }
-  const handleTimeChange = (time: Moment | null) => {
-    setValue(time)
-    formData.appointmentTime = moment(time).format('HH:mm:ss')
-  }
+    setFormData(appointmentInitialState);
+    handleClose();
+  };
+
   const handleDateChange = (date: Date | null) => {
-    formData.appointmentDate = moment(date).format('YYYY-MM-DD')
-    setDate(null)
-  }
+    formData.appointmentDate = dayjs(date).format('YYYY-MM-DD');
+    setDate(null);
+  };
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setFormData({ ...formData, [name]: value })
-  }
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
   const handleSubmit = () => {
-    console.log(formData)
-    setFormData(appointmentInitialState)
-    handleClose()
-  }
+    console.log(formData);
+    setFormData(appointmentInitialState);
+    handleClose();
+  };
   return (
     <div>
       <Dialog
@@ -79,9 +75,7 @@ export default function AppointmentDialog({
               onChange={handleDateChange}
             />
           </div>
-          <div className="">
-            <MobileTimePicker onChange={handleTimeChange} />
-          </div>
+
           <div className="w-full">
             <TextField
               sx={{ width: '100%' }}
@@ -108,5 +102,5 @@ export default function AppointmentDialog({
         </DialogActions>
       </Dialog>
     </div>
-  )
+  );
 }

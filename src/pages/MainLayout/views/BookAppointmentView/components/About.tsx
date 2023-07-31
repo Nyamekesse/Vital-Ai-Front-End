@@ -1,6 +1,12 @@
-import { Typography } from '@mui/material'
+import { Typography } from '@mui/material';
 
-export default function About() {
+type Props = {
+  firstName: string;
+  lastname: string;
+  about: string;
+};
+
+export default function About({ firstName, lastname, about }: Props) {
   return (
     <div>
       <Typography
@@ -8,7 +14,7 @@ export default function About() {
         mt={3}
         sx={{ fontSize: '1.25rem', fontWeight: 700, color: '#212121' }}
       >
-        About me
+        About {firstName} {lastname}
       </Typography>
       <Typography variant="caption" sx={{ fontWeight: 400 }} mt={2}>
         Dr. Randy Wigham is the top most Immunologists specialist in Christ
@@ -17,5 +23,5 @@ export default function About() {
         consultation. view more
       </Typography>
     </div>
-  )
+  );
 }

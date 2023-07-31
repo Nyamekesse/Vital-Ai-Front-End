@@ -51,6 +51,7 @@ module.exports = {
     '@typescript-eslint/no-unused-expressions': 'off',
     'react/no-array-index-key': 'off',
     'operator-linebreak': 'off',
+    'react/jsx-one-expression-per-line': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -62,4 +63,4 @@ module.exports = {
       },
     ],
   },
-}
+};

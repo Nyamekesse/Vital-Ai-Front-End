@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { url } from '../shared/constants';
 
@@ -14,6 +15,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       toast.error('Session has expired. Please log in again.');
+      return redirect('/log-in');
     }
     return Promise.reject(error);
   },

@@ -1,15 +1,15 @@
-import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import Chip from '@mui/material/Chip/Chip'
-import Typography from '@mui/material/Typography/Typography'
-import Card from './component/Card'
-import { useHealthProfessionals } from '../../hooks/useHealthProfessionals'
-import { HealthProfessionalResponse } from '../../../../types'
-import Nodata from '../../../../assets/vector/no_data_re_kwbl.svg'
+import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Chip from '@mui/material/Chip/Chip';
+import Typography from '@mui/material/Typography/Typography';
+import Card from './component/Card';
+import { useHealthProfessionals } from '../../hooks/useHealthProfessionals';
+import { HealthProfessionalResponse } from '../../../../types';
+import Nodata from '../../../../assets/vector/no_data_re_kwbl.svg';
 
 interface ChipData {
-  key: number
-  label: string
+  key: number;
+  label: string;
 }
 export default function FilterHealthProfessionals() {
   const [chipData] = useState<ChipData[]>([
@@ -17,13 +17,13 @@ export default function FilterHealthProfessionals() {
     { key: 1, label: 'Excellent' },
     { key: 2, label: 'Very Good' },
     { key: 3, label: 'Good' },
-  ])
+  ]);
 
-  const { id } = useParams()
-  const { healthProfessionals, setFilter } = useHealthProfessionals(id!)
+  const { id } = useParams();
+  const { healthProfessionals, setFilter } = useHealthProfessionals(id!);
   useEffect(() => {
-    setFilter(id!)
-  }, [id, setFilter])
+    setFilter(id!);
+  }, [id, setFilter]);
   return (
     <div className="py-3 px-3 flex flex-col justify-center items-center">
       <div className="flex flex-wrap mb-2">
@@ -37,7 +37,7 @@ export default function FilterHealthProfessionals() {
                 sx={{ margin: 0.5 }}
               />
             </div>
-          )
+          );
         })}
       </div>
       {/* DISPLAY RESULTS */}
@@ -53,7 +53,10 @@ export default function FilterHealthProfessionals() {
           </>
         ) : (
           healthProfessionals.map((staff: HealthProfessionalResponse) => (
-            <div key={staff.userID}>
+            <Link
+              key={staff.userID}
+              to={`/details/health-professional/${staff.userID}`}
+            >
               <Card
                 firstName={staff.firstName}
                 lastName={staff.lastName}
@@ -61,10 +64,10 @@ export default function FilterHealthProfessionals() {
                 specialization={staff.specialization.name}
                 organization={staff.organization.name}
               />
-            </div>
+            </Link>
           ))
         )}
       </div>
     </div>
-  )
+  );
 }

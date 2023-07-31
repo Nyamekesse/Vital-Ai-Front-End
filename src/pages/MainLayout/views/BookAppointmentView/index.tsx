@@ -1,31 +1,46 @@
-import { useTheme } from '@mui/material/styles'
-import { useState } from 'react'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import About from './components/About'
-import Card from './components/Card'
-import ReviewCard from './components/ReviewCard'
-import WorkingTime from './components/WorkingTime'
-import AppointmentDialog from './components/AppointmentDialog'
+import { useTheme } from '@mui/material/styles';
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import About from './components/About';
+import Card from './components/Card';
+import ReviewCard from './components/ReviewCard';
+import WorkingTime from './components/WorkingTime';
+import AppointmentDialog from './components/AppointmentDialog';
+import { useHealthProfessionalDetails } from './hooks';
+import EmptyResponse from '../../../EmptyResults';
 
 export default function BookAppointmentView() {
-  const [open, setOpen] = useState(false)
-  const theme = useTheme()
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
+  const { id = '' } = useParams();
+  const details = useHealthProfessionalDetails(id);
+
+  const [open, setOpen] = useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleClickOpen = () => {
-    setOpen(true)
-  }
-
+    setOpen(true);
+  };
   const handleClose = () => {
-    setOpen(false)
-  }
-  return (
-    <>
+    setOpen(false);
+  };
+  return details ? (
+    <div>
       <div className="py-2 px-3 flex flex-col justify-start">
-        <Card />
-        <About />
+        <Card
+          firstName={details.firstName}
+          lastname={details.lastName}
+          displayPicture={details.displayPicture as string}
+          organization={details.organization.name}
+          specialization={details.specialization.name}
+        />
+        <About
+          firstName={details.firstName}
+          lastname={details.lastName}
+          about="hi"
+        />
         <WorkingTime />
         <div className="my-3">
           <Button
@@ -57,6 +72,8 @@ export default function BookAppointmentView() {
         handleClose={handleClose}
         fullScreen={fullScreen}
       />
-    </>
-  )
+    </div>
+  ) : (
+    <EmptyResponse />
+  );
 }
