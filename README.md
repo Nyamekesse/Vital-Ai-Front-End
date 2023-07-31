@@ -1,6 +1,6 @@
 # VitalAI Healthcare Platform - Frontend
 
-![VitalAI Logo]('https://github.com/Vital-Ai-GH/frontend-web/blob/main/src/assets/Vital-Ai-Cover-Logo.png')
+![VitalAI Logo](https://github.com/Vital-Ai-GH/frontend-web/blob/main/src/assets/Vital-Ai-Cover-Logo.png)
 
 Welcome to the frontend repository of VitalAI, a cutting-edge healthcare platform that aims to provide fast and reliable medical care services to patients through the power of Artificial Intelligence.
 
