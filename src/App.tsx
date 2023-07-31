@@ -1,13 +1,14 @@
-import { Route, Routes } from 'react-router-dom'
-import Loading from './components/Loading'
-import { LogInPage, MainLayout, SignUpPage } from './pages'
-import FilterHealthProfessionals from './pages/MainLayout/views/FilterHealthProfessionalsView'
-import BookAppointmentView from './pages/MainLayout/views/BookAppointmentView'
-import AppointmentsHistoryView from './pages/MainLayout/views/AppointmentsHistoryView'
-import AppointmentDetails from './pages/MainLayout/views/AppointmentDetailsView'
-import FillProfile from './pages/MainLayout/views/FillProfileView'
-import HomeScreen from './pages/MainLayout/views/HomeView'
-import PageNotFound from './pages/404 page'
+/* eslint-disable @typescript-eslint/no-extra-semi */
+import { Route, Routes } from 'react-router-dom';
+import Loading from './components/Loading';
+import { LogInPage, MainLayout, SignUpPage } from './pages';
+import FilterHealthProfessionals from './pages/MainLayout/views/FilterHealthProfessionalsView';
+import BookAppointmentView from './pages/MainLayout/views/BookAppointmentView';
+import AppointmentsHistoryView from './pages/MainLayout/views/AppointmentsHistoryView';
+import AppointmentDetails from './pages/MainLayout/views/AppointmentDetailsView';
+import FillProfile from './pages/MainLayout/views/FillProfileView';
+import HomeScreen from './pages/MainLayout/views/HomeView';
+import PageNotFound from './pages/404 page';
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
       </Routes>
       <Loading />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

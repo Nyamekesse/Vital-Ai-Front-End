@@ -1,14 +1,20 @@
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import { Link } from 'react-router-dom'
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogOut';
 
 type Props = {
-  open: boolean
-  anchorEl: null | HTMLElement
-  handleClose: () => void
-}
+  open: boolean;
+  anchorEl: null | HTMLElement;
+  handleClose: () => void;
+};
 
 export default function MobileMenu({ open, anchorEl, handleClose }: Props) {
+  const { logout } = useLogout();
+  const handleLogout = () => {
+    logout();
+    handleClose();
+  };
   return (
     <div>
       <Menu
@@ -21,11 +27,11 @@ export default function MobileMenu({ open, anchorEl, handleClose }: Props) {
         }}
       >
         <MenuItem onClick={handleClose}>
-          <Link to="/profile/4/me">Profile</Link>
+          <Link to="/profile/me">Profile</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </div>
-  )
+  );
 }

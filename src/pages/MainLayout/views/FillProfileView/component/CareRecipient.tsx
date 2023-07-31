@@ -1,29 +1,28 @@
 /* eslint-disable no-console */
-import { useEffect, useState } from 'react'
-import { Button, TextField, Typography } from '@mui/material'
-import Avatar from '@mui/material/Avatar'
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
-import { DateField } from '@mui/x-date-pickers/DateField'
-import moment, { Moment } from 'moment'
-import MenuItem from '@mui/material/MenuItem'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import { getStoredUser } from '../../../../../user-storage'
-import { CareRecipient } from '../../../../../types'
+import { useEffect, useState } from 'react';
+import { Button, TextField, Typography } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { DateField } from '@mui/x-date-pickers/DateField';
+import moment, { Moment } from 'moment';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { getStoredUser } from '../../../../../user-storage';
 
 interface CareRecipientData {
-  firstName: string
-  lastName: string
-  dateOfBirth: string
-  gender: string
-  contactInfo: string
-  location: string
-  displayPicture: string
-  healthBackground: string
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  gender: string;
+  contactInfo: string;
+  location: string;
+  displayPicture: string;
+  healthBackground: string;
 }
 
 export default function CareRecipientView() {
-  const [date, setDate] = useState<Date | null>(null)
+  const [date, setDate] = useState<Date | null>(null);
   const initialState = {
     firstName: '',
     lastName: '',
@@ -33,30 +32,30 @@ export default function CareRecipientView() {
     location: '',
     displayPicture: '',
     healthBackground: '',
-  }
-  const [formData, setFormData] = useState(initialState)
+  };
+  const [formData, setFormData] = useState(initialState);
 
   useEffect(() => {
-    const activeUser: CareRecipientData = getStoredUser() as CareRecipientData
-    activeUser && setFormData(activeUser)
-  }, [])
+    const activeUser: CareRecipientData = getStoredUser() as CareRecipientData;
+    activeUser && setFormData(activeUser);
+  }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setFormData({ ...formData, [name]: value })
-  }
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
   const handleDate = (date: Date | null) => {
-    formData.dateOfBirth = moment(date).format('YYYY-MM-DD')
-    setDate(null)
-  }
+    formData.dateOfBirth = moment(date).format('YYYY-MM-DD');
+    setDate(null);
+  };
   const handleGender = (event: SelectChangeEvent) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value })
-  }
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(formData)
-    setFormData(initialState)
-  }
+    event.preventDefault();
+    console.log(formData);
+    setFormData(initialState);
+  };
 
   return (
     <div className="flex flex-col items-center py-3 px-3">
@@ -142,9 +141,9 @@ export default function CareRecipientView() {
             margin="dense"
             renderValue={(selected) => {
               if (!selected) {
-                return 'Gender'
+                return 'Gender';
               }
-              return selected
+              return selected;
             }}
           >
             <MenuItem value="MALE">Male</MenuItem>
@@ -183,5 +182,5 @@ export default function CareRecipientView() {
         </div>
       </form>
     </div>
-  )
+  );
 }
