@@ -1,9 +1,8 @@
-/* eslint-disable no-console */
 import { useEffect, useState } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
@@ -52,7 +51,6 @@ export default function CareRecipientView() {
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(formData);
   };
 
   return (
@@ -62,15 +60,11 @@ export default function CareRecipientView() {
       </Typography>
       <div className="relative">
         <div className="absolute right-3 bottom-4 z-10">
-          <AddAPhotoIcon
-            fontSize="large"
-            color="primary"
-            onClick={() => console.log('add photo')}
-          />
+          <AddAPhotoIcon fontSize="large" color="primary" onClick={() => {}} />
         </div>
         <div className="">
           <Avatar
-            alt="Remy Sharp"
+            alt={formData.firstName}
             src={formData.displayPicture}
             sx={{ width: 150, height: 150, zIndex: 0 }}
           />

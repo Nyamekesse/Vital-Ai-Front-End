@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-extra-semi */
 import { Route, Routes } from 'react-router-dom';
 import Loading from './components/Loading';
 import { LogInPage, MainLayout, SignUpPage } from './pages';

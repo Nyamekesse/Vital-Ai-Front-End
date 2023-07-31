@@ -17,10 +17,7 @@ export default function About({ firstName, lastname, about }: Props) {
         About {firstName} {lastname}
       </Typography>
       <Typography variant="caption" sx={{ fontWeight: 400 }} mt={2}>
-        Dr. Randy Wigham is the top most Immunologists specialist in Christ
-        Hospital at London. She achived several awards for her wonderful
-        contribution in medical field. She is available for private
-        consultation. view more
+        {about}
       </Typography>
     </div>
   );

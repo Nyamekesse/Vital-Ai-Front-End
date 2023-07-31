@@ -1,12 +1,13 @@
 import { useQuery } from 'react-query';
 import { queryKeys } from '../../../../../react-query/constants';
 import axiosInstance from '../../../../../axios-instance';
+import { Gender } from '../../../../../types';
 
 interface HealthProfessionalDetails {
   firstName: string;
   lastName: string;
   contactInfo: string;
-  gender: 'MALE' | 'FEMALE';
+  gender: Gender;
   displayPicture?: string;
   organization: {
     name: string;

@@ -25,7 +25,7 @@ export default function AppointmentDialog({
     patientProblem: '',
   };
   const [formData, setFormData] = useState(appointmentInitialState);
-  const [, setValue] = useState<Date | null>(null);
+
   const [, setDate] = useState<Date | null>(null);
 
   const handleCancel = () => {
@@ -42,7 +42,6 @@ export default function AppointmentDialog({
     setFormData({ ...formData, [name]: value });
   };
   const handleSubmit = () => {
-    console.log(formData);
     setFormData(appointmentInitialState);
     handleClose();
   };
