@@ -26,6 +26,7 @@ export interface HealthProfessional {
   updatedAt: Date | string;
   userID: string;
   organizationID: string;
+  connection: Connection[];
 }
 
 export interface Appointment {
@@ -80,7 +81,13 @@ export interface HealthProfessionalResponse {
     name: string;
   };
 }
-
+export interface Connection {
+  id: string;
+  createdAt?: Date | string;
+  updatedAt: Date | string;
+  careRecipientID: string;
+  healthProfessionalID: string;
+}
 export interface Specialization {
   id: string;
   name: string;

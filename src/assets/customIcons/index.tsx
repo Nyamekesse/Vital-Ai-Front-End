@@ -91,47 +91,55 @@ export function Cardiologist() {
     </div>
   );
 }
-export function Patients(number: string) {
+export function Patients({ numberOfPatients }: { numberOfPatients: number }) {
   return (
     <div className="flex flex-col text-center w-16 justify-center items-center">
       <div className="w-[3rem] h-[3rem] rounded-full bg-blue-50 flex cursor-pointer justify-center items-center">
         <img src={group} alt="" />
       </div>
-      <p className="text-[1rem] font-[500] text-blue-500">{number}+</p>
+      <p className="text-[1rem] font-[500] text-blue-500">
+        {numberOfPatients}+
+      </p>
       <p className="text-xs font-[500] mt-1">patients</p>
     </div>
   );
 }
-export function Experience(number: string) {
+export function Experience({
+  numberOfExperience,
+}: {
+  numberOfExperience: number;
+}) {
   return (
     <div className="flex flex-col text-center w-16 justify-center items-center">
       <div className="w-[3rem] h-[3rem] rounded-full bg-blue-50 flex cursor-pointer justify-center items-center">
         <img src={experience} alt="" />
       </div>
-      <p className="text-[1rem] font-[500] text-blue-500">{number}+</p>
+      <p className="text-[1rem] font-[500] text-blue-500">
+        {numberOfExperience}+
+      </p>
       <p className="text-xs font-[500] mt-1">years exper.</p>
     </div>
   );
 }
-export function Rating(number: string) {
+export function Rating({ averageRating }: { averageRating: number }) {
   return (
     <div className="flex flex-col text-center w-16 justify-center items-center">
       <div className="w-[3rem] h-[3rem] rounded-full bg-blue-50 flex cursor-pointer justify-center items-center">
         <img src={rating} alt="" />
       </div>
-      <p className="text-[1rem] font-[500] text-blue-500">{number}</p>
+      <p className="text-[1rem] font-[500] text-blue-500">{averageRating}</p>
       <p className="text-xs font-[500] mt-1">rating</p>
     </div>
   );
 }
 
-export function Reviews(number: string) {
+export function Reviews({ numberOfReviews }: { numberOfReviews: number }) {
   return (
     <div className="flex flex-col text-center w-16 justify-center items-center">
       <div className="w-[3rem] h-[3rem] rounded-full bg-blue-50 flex cursor-pointer justify-center items-center">
         <img src={reviews} alt="" />
       </div>
-      <p className="text-[1rem] font-[500] text-blue-500">{number}</p>
+      <p className="text-[1rem] font-[500] text-blue-500">{numberOfReviews}</p>
       <p className="text-xs font-[500] mt-1">reviews</p>
     </div>
   );

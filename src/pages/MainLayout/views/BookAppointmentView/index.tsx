@@ -11,6 +11,8 @@ import WorkingTime from './components/WorkingTime';
 import AppointmentDialog from './components/AppointmentDialog';
 import { useHealthProfessionalDetails } from './hooks';
 import EmptyResponse from '../../../EmptyResults';
+import Credentials from './components/Credentials';
+import { calculateReviewRatingAverage } from '../../../../utils/calculateReviewsAverage';
 
 export default function BookAppointmentView() {
   const { id = '' } = useParams();
@@ -35,6 +37,12 @@ export default function BookAppointmentView() {
           displayPicture={details.displayPicture as string}
           organization={details.organization.name}
           specialization={details.specialization.name}
+        />
+        <Credentials
+          experience={details.experience}
+          numOfReviews={details.Review.length}
+          patients={details.Connection.length}
+          rating={details.Review}
         />
         <About
           firstName={details.firstName}

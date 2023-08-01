@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 import { queryKeys } from '../../../../../react-query/constants';
 import axiosInstance from '../../../../../axios-instance';
 import {
+  Connection,
   Gender,
   Organization,
   Review,
@@ -12,12 +13,14 @@ interface HealthProfessionalDetails {
   firstName: string;
   lastName: string;
   contactInfo: string;
+  experience: number;
   gender: Gender;
   displayPicture: string;
   about: string;
   organization: Organization;
   specialization: Specialization;
   Review: Review[];
+  Connection: Connection[];
 }
 
 async function fetchHealthProfessionalDetailsById(
