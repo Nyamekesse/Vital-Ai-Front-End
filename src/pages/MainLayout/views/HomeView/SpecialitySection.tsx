@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import {
   Cardiologist,
   Dentists,
@@ -9,7 +9,7 @@ import {
   Optometrist,
   Pediatric,
   Radiologist,
-} from '../../../../assets/customIcons'
+} from '../../../../assets/customIcons';
 
 export default function SpecialitySection() {
   const specializationType = [
@@ -21,7 +21,7 @@ export default function SpecialitySection() {
     { id: 'optometrist', component: Optometrist },
     { id: 'pediatric', component: Pediatric },
     { id: 'radiologist', component: Radiologist },
-  ]
+  ];
   return (
     <div className="flex flex-col mt-6 w-full">
       <Typography
@@ -32,7 +32,7 @@ export default function SpecialitySection() {
         Doctor Speciality
       </Typography>
       <div className="flex flex-wrap items-center justify-start">
-        {specializationType.map((item, index) => (
+        {specializationType.map((item) => (
           <Link
             to={`/organizations/${item.id}/health-professionals`}
             key={item.id}
@@ -44,5 +44,5 @@ export default function SpecialitySection() {
         ))}
       </div>
     </div>
-  )
+  );
 }
