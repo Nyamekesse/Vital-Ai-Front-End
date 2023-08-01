@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Chip from '@mui/material/Chip/Chip';
 import Typography from '@mui/material/Typography/Typography';
 import Card from './component/Card';
-import { useHealthProfessionals } from '../../hooks/useHealthProfessionals';
+import { useHealthProfessionals } from './hooks/useHealthProfessionals';
 import { HealthProfessionalResponse } from '../../../../types';
 import Nodata from '../../../../assets/vector/no_data_re_kwbl.svg';
 

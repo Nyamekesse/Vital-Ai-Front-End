@@ -1,22 +1,31 @@
-import Avatar from '@mui/material/Avatar'
-import Typography from '@mui/material/Typography'
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 
-export default function ReviewCard() {
+type Props = {
+  firstName: string;
+  lastName: string;
+  displayPicture: string | null;
+  text: string;
+};
+
+export default function ReviewCard({
+  firstName,
+  lastName,
+  displayPicture,
+  text,
+}: Props) {
   return (
     <div className="my-2 border-b-2 shadow-sm p-3">
       <div className="flex justify-between items-center">
         <div>
-          <Avatar
-            alt="Cindy Baker"
-            src="https://i.pinimg.com/originals/07/33/ba/0733ba760b29378474dea0fdbcb97107.png"
-          />
+          <Avatar alt={firstName} src={`${displayPicture}`} />
         </div>
         <Typography
           variant="body1"
           align="center"
           sx={{ fontSize: '1rem', fontWeight: 500, color: '#212121' }}
         >
-          Samuel Nyamekesse
+          {firstName} {lastName}
         </Typography>
       </div>
       <div className="">
@@ -26,10 +35,9 @@ export default function ReviewCard() {
           sx={{ fontWeight: 400 }}
           mt={2}
         >
-          Dr. Randy Wigham is very professional in his work and responsive. I
-          have consulted and my problem is solved. 😍😍
+          {text}
         </Typography>
       </div>
     </div>
-  )
+  );
 }

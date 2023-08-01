@@ -1,20 +1,23 @@
 import { useQuery } from 'react-query';
 import { queryKeys } from '../../../../../react-query/constants';
 import axiosInstance from '../../../../../axios-instance';
-import { Gender } from '../../../../../types';
+import {
+  Gender,
+  Organization,
+  Review,
+  Specialization,
+} from '../../../../../types';
 
 interface HealthProfessionalDetails {
   firstName: string;
   lastName: string;
   contactInfo: string;
   gender: Gender;
-  displayPicture?: string;
-  organization: {
-    name: string;
-  };
-  specialization: {
-    name: string;
-  };
+  displayPicture: string;
+  about: string;
+  organization: Organization;
+  specialization: Specialization;
+  Review: Review[];
 }
 
 async function fetchHealthProfessionalDetailsById(

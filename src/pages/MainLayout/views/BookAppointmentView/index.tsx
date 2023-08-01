@@ -39,9 +39,12 @@ export default function BookAppointmentView() {
         <About
           firstName={details.firstName}
           lastname={details.lastName}
-          about="hi"
+          about={details.about}
         />
-        <WorkingTime />
+        <WorkingTime
+          openTime={details.organization.openTime}
+          closeTime={details.organization.closeTime}
+        />
         <div className="my-3">
           <Button
             sx={{ textTransform: 'initial' }}
@@ -59,12 +62,21 @@ export default function BookAppointmentView() {
           Reviews
         </Typography>
         <div className="flex flex-col">
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
+          {details.Review.length ? (
+            details.Review.map((review) => (
+              <ReviewCard
+                firstName={review.careRecipient.firstName}
+                lastName={review.careRecipient.lastName}
+                text={review.text}
+                displayPicture={review.careRecipient.displayPicture}
+                key={review.id}
+              />
+            ))
+          ) : (
+            <Typography>
+              Sorry no reviews for {details.firstName} {details.lastName} yet!
+            </Typography>
+          )}
         </div>
       </div>
       <AppointmentDialog

@@ -6,7 +6,7 @@ export interface CareRecipient {
   contactInfo: string;
   location: string;
   healthBackground: string;
-  displayPicture?: string | null;
+  displayPicture: string;
   createdAt?: Date | string;
   updatedAt: Date | string;
   userID: string;
@@ -15,11 +15,13 @@ export interface CareRecipient {
 export interface HealthProfessional {
   firstName: string;
   lastName: string;
+  about: string;
   gender: Gender;
   specializationId: string;
   medicalLicenseNumber: string;
   contactInfo: string;
-  displayPicture?: string | null;
+  displayPicture: string;
+  experience: number;
   createdAt?: Date | string;
   updatedAt: Date | string;
   userID: string;
@@ -39,13 +41,24 @@ export interface Appointment {
 }
 
 export interface Organization {
-  id?: string;
+  id: string;
   name: string;
   location: string;
+  openTime: Date | string;
+  closeTime: Date | string;
   createdAt?: Date | string;
   updatedAt: Date | string;
 }
-
+export interface Review {
+  id: string;
+  text: string;
+  rating: number;
+  careRecipient: CareRecipient;
+  healthProfessionalID: string;
+  careRecipientID: string;
+  created_at?: Date | string;
+  updated_at: Date | string;
+}
 export enum UserType {
   CARE_RECIPIENT = 'CARE_RECIPIENT',
   HEALTH_PROFESSIONAL = 'HEALTH_PROFESSIONAL',
@@ -59,12 +72,18 @@ export interface HealthProfessionalResponse {
     id: string;
     name: string;
   };
+  about: string;
   displayPicture: string;
   organizationID: string;
   userID: string;
   organization: {
     name: string;
   };
+}
+
+export interface Specialization {
+  id: string;
+  name: string;
 }
 
 export interface InfoResponse {

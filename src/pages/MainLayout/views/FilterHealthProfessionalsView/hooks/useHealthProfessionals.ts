@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
 import { Dispatch, SetStateAction, useCallback, useState } from 'react';
-import { HealthProfessionalResponse } from '../../../types';
-import { queryKeys } from '../../../react-query/constants';
-import axiosInstance from '../../../axios-instance';
+import { HealthProfessionalResponse } from '../../../../../types';
+import { queryKeys } from '../../../../../react-query/constants';
+import axiosInstance from '../../../../../axios-instance';
 
 function filterHealthProfessionals(
   staff: HealthProfessionalResponse[],
