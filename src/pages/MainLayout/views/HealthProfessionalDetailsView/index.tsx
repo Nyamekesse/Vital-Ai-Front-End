@@ -4,19 +4,22 @@ import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import IconButton from '@mui/material/IconButton/IconButton';
 import About from './components/About';
 import Card from './components/Card';
 import ReviewCard from './components/ReviewCard';
 import WorkingTime from './components/WorkingTime';
 import AppointmentDialog from './components/AppointmentDialog';
-import { useHealthProfessionalDetails } from './hooks';
+import { useHealthProfessionalDetails } from './hooks/useHealthProfessionalDetails';
 import EmptyResponse from '../../../EmptyResults';
 import Credentials from './components/Credentials';
-import { calculateReviewRatingAverage } from '../../../../utils/calculateReviewsAverage';
+import { useAddHealthProfessional } from './hooks/useAddHealthProfessionalConnection';
 
-export default function BookAppointmentView() {
+export default function HealthProfessionalDetailsView() {
   const { id = '' } = useParams();
   const details = useHealthProfessionalDetails(id);
+  const { mutate } = useAddHealthProfessional(id);
 
   const [open, setOpen] = useState(false);
   const theme = useTheme();
@@ -55,12 +58,20 @@ export default function BookAppointmentView() {
         />
         <div className="my-3">
           <Button
-            sx={{ textTransform: 'initial' }}
+            sx={{ textTransform: 'initial', marginRight: '1rem' }}
             variant="contained"
             onClick={handleClickOpen}
+            size="small"
           >
             Book Appointment
           </Button>
+          <IconButton
+            color="primary"
+            aria-label="add connection"
+            onClick={() => mutate(id)}
+          >
+            <PersonAddAlt1Icon />
+          </IconButton>
         </div>
         <Typography
           variant="h5"

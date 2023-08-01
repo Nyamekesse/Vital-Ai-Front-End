@@ -4,12 +4,13 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../axios-instance';
 import { setStoredUser } from '../../../user-storage';
+import { SERVER_ERROR } from '../../../shared/constants';
 
 interface FormData {
   email: string;
   password: string;
 }
-const SERVER_ERROR = 'There was an error contacting the server.';
+
 async function signin({ email, password }: FormData) {
   try {
     const { data } = await axiosInstance.post('/auth/login', {

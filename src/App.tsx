@@ -2,12 +2,12 @@ import { Route, Routes } from 'react-router-dom';
 import Loading from './components/Loading';
 import { LogInPage, MainLayout, SignUpPage } from './pages';
 import FilterHealthProfessionals from './pages/MainLayout/views/FilterHealthProfessionalsView';
-import BookAppointmentView from './pages/MainLayout/views/BookAppointmentView';
 import AppointmentsHistoryView from './pages/MainLayout/views/AppointmentsHistoryView';
 import AppointmentDetails from './pages/MainLayout/views/AppointmentDetailsView';
 import FillProfile from './pages/MainLayout/views/FillProfileView';
 import HomeScreen from './pages/MainLayout/views/HomeView';
 import PageNotFound from './pages/404 page';
+import HealthProfessionalDetailsView from './pages/MainLayout/views/HealthProfessionalDetailsView';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           />
           <Route
             path="/details/health-professional/:id"
-            element={<BookAppointmentView />}
+            element={<HealthProfessionalDetailsView />}
           />
           <Route
             path="/all-appointments"
