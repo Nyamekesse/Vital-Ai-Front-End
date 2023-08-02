@@ -30,15 +30,13 @@ export interface HealthProfessional {
 }
 
 export interface Appointment {
-  id?: string;
+  id: string;
   date: Date | string;
   time: Date | string;
   purpose: string;
-  status?: Status;
-  createdAt?: Date | string;
-  updatedAt: Date | string;
+  status: Status;
   careRecipientID: string;
-  healthProfessionalID: string;
+  healthProfessional: HealthProfessional;
 }
 
 export interface Organization {

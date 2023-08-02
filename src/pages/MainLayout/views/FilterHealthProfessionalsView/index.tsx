@@ -6,6 +6,7 @@ import Card from './component/Card';
 import { useHealthProfessionals } from './hooks/useHealthProfessionals';
 import { HealthProfessionalResponse } from '../../../../types';
 import Nodata from '../../../../assets/vector/no_data_re_kwbl.svg';
+import EmptyResults from '../../../EmptyResponse/EmptyResults';
 
 interface ChipData {
   key: number;
@@ -43,14 +44,7 @@ export default function FilterHealthProfessionals() {
       {/* DISPLAY RESULTS */}
       <div className="flex flex-col justify-center items-center">
         {!healthProfessionals.length ? (
-          <>
-            <Typography variant="h5" mb={2}>
-              No Staff found
-            </Typography>
-            <div className="w-24">
-              <img src={Nodata} alt="data not found" />
-            </div>
-          </>
+          <EmptyResults message="No Staff found" />
         ) : (
           healthProfessionals.map((staff: HealthProfessionalResponse) => (
             <Link

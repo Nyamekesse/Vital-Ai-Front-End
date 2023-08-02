@@ -12,7 +12,7 @@ import ReviewCard from './components/ReviewCard';
 import WorkingTime from './components/WorkingTime';
 import AppointmentDialog from './components/AppointmentDialog';
 import { useHealthProfessionalDetails } from './hooks/useHealthProfessionalDetails';
-import EmptyResponse from '../../../EmptyResults';
+import EmptyResponse from '../../../EmptyResponse/NotFoundHealthProInfo';
 import Credentials from './components/Credentials';
 import { useAddHealthProfessional } from './hooks/useAddHealthProfessionalConnection';
 
