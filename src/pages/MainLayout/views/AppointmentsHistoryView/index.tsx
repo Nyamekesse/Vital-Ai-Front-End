@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import { Link } from 'react-router-dom';
 import DisplayAppointments from './components/DisplayAppointments';
 import { useGetAllAppointments } from './hooks/useGetAllAppointments';
 import EmptyResults from '../../../EmptyResponse/EmptyResults';
@@ -64,7 +65,14 @@ export default function AppointmentsHistoryView() {
       </div>
       <div className="flex flex-col mt-10 items-center justify-center">
         {appointments.length ? (
-          <DisplayAppointments items={items} status={status} />
+          appointments.map((appointment) => (
+            <Link
+              key={appointment.id}
+              to={`/appointment/${appointment.id}/details`}
+            >
+              <DisplayAppointments items={items} status={status} />
+            </Link>
+          ))
         ) : (
           <EmptyResults message="No Appointments for now" />
         )}

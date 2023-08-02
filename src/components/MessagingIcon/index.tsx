@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function MessagingIcon() {
   return (
     <div>
@@ -18,5 +16,5 @@ export default function MessagingIcon() {
         />
       </svg>
     </div>
-  )
+  );
 }

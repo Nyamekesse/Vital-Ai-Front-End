@@ -1,24 +1,24 @@
-import { useState } from 'react'
-import Button from '@mui/material/Button/Button'
-import TextField from '@mui/material/TextField/TextField'
-import { useAuthLogin } from './hooks'
+import { useState } from 'react';
+import Button from '@mui/material/Button/Button';
+import TextField from '@mui/material/TextField/TextField';
+import { useAuthLogin } from './hooks/useLogin';
 
 export default function Form() {
-  const { mutate } = useAuthLogin()
+  const { mutate } = useAuthLogin();
   const initialState = {
     email: '',
     password: '',
-  }
-  const [formData, setFormData] = useState(initialState)
+  };
+  const [formData, setFormData] = useState(initialState);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setFormData({ ...formData, [name]: value })
-  }
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    mutate(formData)
-    setFormData(initialState)
-  }
+    event.preventDefault();
+    mutate(formData);
+    setFormData(initialState);
+  };
   return (
     <div className="w-full">
       <form
@@ -60,5 +60,5 @@ export default function Form() {
         </div>
       </form>
     </div>
-  )
+  );
 }

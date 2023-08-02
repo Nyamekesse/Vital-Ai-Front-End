@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import axios from 'axios';
 import { queryKeys } from '../../../../../react-query/constants';
 import axiosInstance from '../../../../../axios-instance';
 import {
@@ -8,6 +9,7 @@ import {
   Review,
   Specialization,
 } from '../../../../../types';
+import { SERVER_ERROR } from '../../../../../shared/constants';
 
 interface HealthProfessionalDetails {
   firstName: string;
@@ -32,11 +34,11 @@ async function fetchHealthProfessionalDetailsById(
     );
     return data;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      throw new Error('Error contacting the server');
-    }
+    const message =
+      axios.isAxiosError(error) && error?.response?.data?.message
+        ? error?.response?.data?.message
+        : SERVER_ERROR;
+    throw new Error(message);
   }
 }
 
