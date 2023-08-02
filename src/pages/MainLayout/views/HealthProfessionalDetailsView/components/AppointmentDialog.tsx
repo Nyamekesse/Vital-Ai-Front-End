@@ -7,10 +7,13 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import dayjs from 'dayjs';
+import { getAvailableTimes } from '../../../../../utils/openHoursTimeDisplay';
 
 type Props = {
   fullScreen: boolean;
   open: boolean;
+  openTime: string | Date;
+  closeTime: string | Date;
   handleClose: () => void;
 };
 
@@ -18,6 +21,8 @@ export default function AppointmentDialog({
   fullScreen,
   open,
   handleClose,
+  openTime,
+  closeTime,
 }: Props) {
   const appointmentInitialState = {
     appointmentDate: '',
@@ -27,6 +32,9 @@ export default function AppointmentDialog({
   const [formData, setFormData] = useState(appointmentInitialState);
 
   const [, setDate] = useState<Date | null>(null);
+
+  const allTimes = getAvailableTimes(openTime.toString(), closeTime.toString());
+  allTimes.map((time) => console.log(dayjs(time).format('HH::A')));
 
   const handleCancel = () => {
     setFormData(appointmentInitialState);

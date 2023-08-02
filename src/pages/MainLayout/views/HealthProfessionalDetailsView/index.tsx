@@ -102,6 +102,8 @@ export default function HealthProfessionalDetailsView() {
         open={open}
         handleClose={handleClose}
         fullScreen={fullScreen}
+        openTime={details.organization.openTime}
+        closeTime={details.organization.closeTime}
       />
     </div>
   ) : (
