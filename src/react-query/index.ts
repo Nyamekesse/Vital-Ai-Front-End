@@ -13,11 +13,6 @@ export const queryClient = new QueryClient({
     queries: {
       onError: queryErrorHandler,
       retry: 1,
-      staleTime: 600000,
-      cacheTime: 900000,
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
     },
     mutations: {
       onError: queryErrorHandler,

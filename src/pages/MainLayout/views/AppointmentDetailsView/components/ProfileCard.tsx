@@ -1,13 +1,27 @@
-import Avatar from '@mui/material/Avatar/Avatar'
-import Typography from '@mui/material/Typography/Typography'
+import Avatar from '@mui/material/Avatar/Avatar';
+import Typography from '@mui/material/Typography/Typography';
 
-export default function ProfileCard() {
+type Props = {
+  image: string;
+  firstName: string;
+  lastName: string;
+  specialization: string;
+  organization: string;
+};
+
+export default function ProfileCard({
+  image,
+  firstName,
+  lastName,
+  specialization,
+  organization,
+}: Props) {
   return (
     <div className="flex p-4 shadow-md rounded-lg">
       <div className="">
         <Avatar
-          alt="Remy Sharp"
-          src="https://i.pinimg.com/originals/07/33/ba/0733ba760b29378474dea0fdbcb97107.png"
+          alt={firstName}
+          src={`${image}`}
           variant="rounded"
           sx={{ width: 80, height: 80 }}
         />
@@ -20,32 +34,32 @@ export default function ProfileCard() {
             noWrap
             align="center"
           >
-            Dr. Randy Wigham
+            Dr. {firstName} {lastName}
           </Typography>
         </div>
         <hr />
         <div className="mt-3">
           <div className="flex flex-col justify-center items-start">
             <Typography
-              sx={{ fontWeight: 500 }}
+              sx={{ fontWeight: 500, textTransform: 'capitalize' }}
               variant="caption"
               noWrap
               align="center"
             >
-              Cardiologists
+              {specialization}
             </Typography>
 
             <Typography
-              sx={{ fontWeight: 500 }}
+              sx={{ fontWeight: 500, textTransform: 'capitalize' }}
               variant="caption"
               noWrap
               align="center"
             >
-              Valley View Hospital
+              {organization}
             </Typography>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

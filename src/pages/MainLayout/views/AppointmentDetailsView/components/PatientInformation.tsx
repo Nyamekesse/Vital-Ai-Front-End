@@ -1,6 +1,18 @@
-import Typography from '@mui/material/Typography/Typography'
+import Typography from '@mui/material/Typography/Typography';
 
-export default function PatientInformation() {
+type Props = {
+  firstName: string;
+  lastName: string;
+  gender: string;
+  purpose: string;
+};
+
+export default function PatientInformation({
+  firstName,
+  lastName,
+  gender,
+  purpose,
+}: Props) {
   return (
     <div className="flex flex-col">
       <Typography
@@ -16,14 +28,14 @@ export default function PatientInformation() {
         sx={{ fontWeight: 400, fontSize: '1rem' }}
         mt={1}
       >
-        Full Name&nbsp;&nbsp;&nbsp;&nbsp;: Samuel Nyamekesse
+        Full Name&nbsp;&nbsp;&nbsp;&nbsp;: {firstName} {lastName}
       </Typography>
       <Typography
         variant="caption"
         sx={{ fontWeight: 400, fontSize: '1rem' }}
         mt={1}
       >
-        Gender&nbsp;&nbsp;&nbsp;&nbsp;: Male
+        Gender&nbsp;&nbsp;&nbsp;&nbsp;: {gender}
       </Typography>
       <Typography
         variant="caption"
@@ -37,10 +49,8 @@ export default function PatientInformation() {
         sx={{ fontWeight: 400, fontSize: '1rem' }}
         mt={1}
       >
-        Problem&nbsp;&nbsp;&nbsp;&nbsp;: Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Beatae vitae ducimus odio rem, voluptatibus aliquid
-        natus voluptatem enim
+        Problem&nbsp;&nbsp;&nbsp;&nbsp;: {purpose}
       </Typography>
     </div>
-  )
+  );
 }

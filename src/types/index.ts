@@ -26,6 +26,8 @@ export interface HealthProfessional {
   updatedAt: Date | string;
   userID: string;
   organizationID: string;
+  organization: Organization;
+  specialization: Specialization;
   connection: Connection[];
 }
 

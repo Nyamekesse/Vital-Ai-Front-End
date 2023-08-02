@@ -35,8 +35,8 @@ async function addNewAppointment({
 export function useAddAppointment() {
   const queryClient = useQueryClient();
   const { mutate } = useMutation((data: InputData) => addNewAppointment(data), {
-    onSuccess: () => {
-      queryClient.invalidateQueries([queryKeys.appointments]);
+    onSuccess: async () => {
+      queryClient.invalidateQueries(queryKeys.appointments);
       toast.success('Appointment successfully booked');
     },
   });

@@ -1,11 +1,39 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import axiosInstance from '../../../../../axios-instance';
-import { Appointment } from '../../../../../types';
+import {
+  Appointment,
+  CareRecipient,
+  HealthProfessional,
+} from '../../../../../types';
 import { queryKeys } from '../../../../../react-query/constants';
 import { SERVER_ERROR } from '../../../../../shared/constants';
 
-async function fetchAppointmentDetailsById(id: string): Promise<Appointment> {
+interface AppointmentDetails {
+  id: string;
+  careRecipient: {
+    firstName: string;
+    lastName: string;
+    gender: string;
+  };
+  scheduledTime: string;
+  healthProfessional: {
+    firstName: string;
+    lastName: string;
+    displayPicture: string;
+    specialization: {
+      name: string;
+    };
+    organization: {
+      name: string;
+    };
+  };
+  purpose: string;
+}
+
+async function fetchAppointmentDetailsById(
+  id: string,
+): Promise<AppointmentDetails> {
   try {
     const { data } = await axiosInstance.get(`/appointment/${id}/details`);
     return data;
@@ -18,8 +46,10 @@ async function fetchAppointmentDetailsById(id: string): Promise<Appointment> {
   }
 }
 
-export function useGetAppointmentDetails(id: string) {
-  const { data: details = [] } = useQuery([queryKeys.appointments, id], () =>
+export function useGetAppointmentDetails(
+  id: string,
+): AppointmentDetails | undefined {
+  const { data: details } = useQuery([queryKeys.appointments, id], () =>
     fetchAppointmentDetailsById(id),
   );
   return details;

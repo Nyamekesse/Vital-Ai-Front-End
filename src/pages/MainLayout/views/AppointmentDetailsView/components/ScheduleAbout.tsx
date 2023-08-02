@@ -1,6 +1,22 @@
-import Typography from '@mui/material/Typography/Typography'
+import Typography from '@mui/material/Typography/Typography';
+import dayjs from 'dayjs';
 
-export default function ScheduleAbout() {
+type Props = {
+  scheduledTime: string;
+};
+
+export default function ScheduleAbout({ scheduledTime }: Props) {
+  const formattedDate = dayjs(scheduledTime);
+  const currentDate = dayjs();
+  const differenceInDays = formattedDate.diff(currentDate, 'day');
+  let displayText = '';
+  if (differenceInDays === 0) {
+    displayText = 'Today';
+  } else if (differenceInDays === 1) {
+    displayText = 'Tomorrow';
+  } else if (differenceInDays > 1) {
+    displayText = `${differenceInDays} days left`;
+  }
   return (
     <div className="flex flex-col">
       <Typography
@@ -16,15 +32,15 @@ export default function ScheduleAbout() {
         sx={{ fontWeight: 400, fontSize: '1rem' }}
         mt={1}
       >
-        Today June 4 2023
+        {`${formattedDate}`}
       </Typography>
       <Typography
         variant="caption"
         sx={{ fontWeight: 400, fontSize: '1rem' }}
         mt={1}
       >
-        06:00 - 06:30 (30 mins)
+        {displayText}
       </Typography>
     </div>
-  )
+  );
 }
