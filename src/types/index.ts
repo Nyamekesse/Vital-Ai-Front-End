@@ -86,7 +86,9 @@ export interface Connection {
   createdAt?: Date | string;
   updatedAt: Date | string;
   careRecipientID: string;
+  careRecipient: CareRecipient;
   healthProfessionalID: string;
+  healthProfessional: HealthProfessional;
 }
 export interface Specialization {
   id: string;
@@ -102,6 +104,7 @@ export interface InfoResponse {
   healthBackground: string;
   lastName: string;
   location: string;
+  Connection: Connection[];
 }
 
 export enum Status {

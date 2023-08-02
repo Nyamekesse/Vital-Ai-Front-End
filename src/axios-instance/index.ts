@@ -15,9 +15,9 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       toast.error('Session has expired. Please log in again.');
-      return redirect('/log-in');
     }
-    return Promise.reject(error);
+    // return Promise.reject(error);
+    return redirect('/log-in');
   },
 );
 

@@ -1,8 +1,8 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import Avatar from '@mui/material/Avatar';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Typography from '@mui/material/Typography/Typography';
 import Divider from '@mui/material/Divider';
+import dayjs from 'dayjs';
 
 type Props = {
   firstName: string;
@@ -10,6 +10,7 @@ type Props = {
   displayPicture: string;
   specialization: string;
   organization: string;
+  connectedOn: string | Date | undefined;
 };
 export default function Card({
   firstName,
@@ -17,9 +18,10 @@ export default function Card({
   displayPicture,
   organization,
   specialization,
+  connectedOn,
 }: Props) {
   return (
-    <div className="flex p-4 shadow-lg rounded-lg">
+    <div className="flex p-4 shadow-lg rounded-lg w-[340px] min-w-full ">
       <div className="">
         <Avatar
           alt={firstName}
@@ -65,6 +67,17 @@ export default function Card({
               {organization}
             </Typography>
           </div>
+        </div>
+        <div className="">
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={{ marginLeft: 0.5, marginRight: 0.5 }}
+          />
+          <Typography variant="caption">
+            <b>Connected on:</b>&nbsp;&nbsp;
+            {dayjs(connectedOn).format('MMMM, D YYYY')}
+          </Typography>
         </div>
       </div>
     </div>

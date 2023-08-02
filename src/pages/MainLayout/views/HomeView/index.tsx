@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Carousel } from '../../../../components'
-import DoctorsRank from './DoctorsRank'
-import SpecialitySection from './SpecialitySection'
-import OrganizationSection from './OrganizationSection'
+import { Carousel } from '../../../../components';
+import ConnectionsListDisplay from './ConnectionsDisplay';
+import SpecialitySection from './SpecialitySection';
+import OrganizationSection from './OrganizationSection';
 
 export default function HomeScreen() {
   return (
@@ -11,8 +11,8 @@ export default function HomeScreen() {
       <div className="mt-8 flex flex-col items-center justify-start">
         <OrganizationSection />
         <SpecialitySection />
-        <DoctorsRank />
+        <ConnectionsListDisplay />
       </div>
     </div>
-  )
+  );
 }
