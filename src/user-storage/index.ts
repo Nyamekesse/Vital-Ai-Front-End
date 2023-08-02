@@ -1,8 +1,7 @@
+import { useQueryClient } from 'react-query';
 import { CareRecipient, HealthProfessional, InfoResponse } from '../types';
 
 const USER_LOCAL_STORAGE_KEY = 'vital_ai_user';
-
-// helper to get user from local_storage
 export function getStoredUser(): InfoResponse {
   const storedUser = localStorage.getItem(USER_LOCAL_STORAGE_KEY);
   return storedUser ? JSON.parse(storedUser) : null;
