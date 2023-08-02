@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { SERVER_ERROR } from '../../../../../shared/constants';
 import axiosInstance from '../../../../../axios-instance';
+import { queryKeys } from '../../../../../react-query/constants';
 
 interface InputData {
   healthProfessionalID: string;
@@ -32,8 +33,10 @@ async function addNewAppointment({
 }
 
 export function useAddAppointment() {
+  const queryClient = useQueryClient();
   const { mutate } = useMutation((data: InputData) => addNewAppointment(data), {
     onSuccess: () => {
+      queryClient.invalidateQueries([queryKeys.appointments]);
       toast.success('Appointment successfully booked');
     },
   });

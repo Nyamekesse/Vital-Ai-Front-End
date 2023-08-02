@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-newline */
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -21,7 +22,6 @@ type Props = {
   closeTime: string | Date;
   handleClose: () => void;
 };
-
 export default function BookAppointmentView({
   healthProfessionalID,
   fullScreen,
@@ -35,6 +35,7 @@ export default function BookAppointmentView({
     scheduledTime: '',
     purpose: '',
   };
+
   const [formData, setFormData] = useState(appointmentInitialState);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -115,15 +116,17 @@ export default function BookAppointmentView({
               variant="h5"
               fontSize="1rem"
             >
-              Select Hour
+              Select Hour : {selectedTime}
             </Typography>
             <div className="flex flex-wrap items-center justify-normal">
-              {availableOpenHours.map((time) => (
+              {availableOpenHours.map((time, index) => (
                 <Chip
                   sx={{ margin: '0.5rem' }}
-                  key={time}
+                  key={index}
                   label={dayjs(time).format('HH:mm:A')}
                   onClick={handleSelectTime}
+                  color="primary"
+                  variant="outlined"
                 />
               ))}
             </div>

@@ -33,9 +33,10 @@ export interface Appointment {
   id: string;
   scheduledTime: Date | string;
   purpose: string;
-  status?: Status;
+  status: Status;
   careRecipientID: string;
   healthProfessionalID: string;
+  healthProfessional: HealthProfessional;
 }
 
 export interface Organization {

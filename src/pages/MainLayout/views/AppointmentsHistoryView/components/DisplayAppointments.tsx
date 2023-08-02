@@ -1,16 +1,9 @@
-import AppointmentInfoCard from './AppointmentInfoCard';
+import { Appointment } from '../../../../../types';
 
 type Props = {
-  items: string[];
-  status: string;
+  appointments: Appointment[];
 };
 
-export default function DisplayAppointments({ items, status }: Props) {
-  return (
-    <div>
-      {items.map((item: string) => (
-        <AppointmentInfoCard status={status} key={item} />
-      ))}
-    </div>
-  );
+export default function DisplayAppointments({ appointments }: Props) {
+  return <div>hi</div>;
 }

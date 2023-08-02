@@ -1,36 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { Link } from 'react-router-dom';
-import DisplayAppointments from './components/DisplayAppointments';
 import { useGetAllAppointments } from './hooks/useGetAllAppointments';
 import EmptyResults from '../../../../components/EmptyResponse/EmptyResults';
+import AppointmentInfoCard from './components/AppointmentInfoCard';
 
 export default function AppointmentsHistoryView() {
-  const appointments = useGetAllAppointments();
-  const [value, setValue] = useState(1);
-  const [change, setChange] = useState(0);
-  const [status, setStatus] = useState('upcoming');
-  const body = [
-    ['a', 'b', 'c', 'd'],
-    ['e', 'f'],
-    ['g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'],
-  ];
-  const items = body[change];
+  const [value, setValue] = useState(0);
+  const [filter, setFilter] = useState('pending');
+  const { appointments, setStatusFilter } = useGetAllAppointments(filter);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  const handleItems = (newValue: number) => {
-    setChange(newValue);
-    newValue === 0
-      ? setStatus('upcoming')
-      : newValue === 1
-      ? setStatus('completed')
-      : newValue === 2
-      ? setStatus('cancelled')
-      : setStatus('');
-  };
+  useEffect(() => {
+    setStatusFilter(filter);
+  }, [filter, setStatusFilter]);
   return (
     <div className="py-3 px-3">
       <div className="fixed z-10 top-[76px] left-0 right-0">
@@ -44,22 +30,28 @@ export default function AppointmentsHistoryView() {
           aria-label="secondary tabs example"
         >
           <Tab
+            value={0}
+            sx={{ textTransform: 'initial' }}
+            label="Pending"
+            onClick={() => setFilter('pending')}
+          />
+          <Tab
             value={1}
             sx={{ textTransform: 'initial' }}
             label="Upcoming"
-            onClick={() => handleItems(0)}
+            onClick={() => setFilter('upcoming')}
           />
           <Tab
             value={2}
             sx={{ textTransform: 'initial' }}
             label="Completed"
-            onClick={() => handleItems(1)}
+            onClick={() => setFilter('completed')}
           />
           <Tab
             value={3}
             sx={{ textTransform: 'initial' }}
             label="Cancelled"
-            onClick={() => handleItems(2)}
+            onClick={() => setFilter('cancelled')}
           />
         </Tabs>
       </div>
@@ -70,7 +62,15 @@ export default function AppointmentsHistoryView() {
               key={appointment.id}
               to={`/appointment/${appointment.id}/details`}
             >
-              <DisplayAppointments items={items} status={status} />
+              <AppointmentInfoCard
+                firstName={appointment.healthProfessional.firstName}
+                lastName={appointment.healthProfessional.lastName}
+                healthProfessionalImage={
+                  appointment.healthProfessional.displayPicture
+                }
+                status={appointment.status}
+                scheduledTime={appointment.scheduledTime}
+              />
             </Link>
           ))
         ) : (

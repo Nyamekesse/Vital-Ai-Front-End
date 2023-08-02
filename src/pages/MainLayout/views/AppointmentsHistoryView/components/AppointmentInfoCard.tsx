@@ -1,15 +1,30 @@
-import Avatar from '@mui/material/Avatar'
-import Typography from '@mui/material/Typography/Typography'
-import Divider from '@mui/material/Divider'
-import StatusLabels from './StatusLabels'
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography/Typography';
+import Divider from '@mui/material/Divider';
+import dayjs from 'dayjs';
+import StatusLabels from './StatusLabels';
 
-export default function AppointmentInfoCard({ status }: { status: string }) {
+type Props = {
+  healthProfessionalImage: string;
+  firstName: string;
+  lastName: string;
+  status: string;
+  scheduledTime: Date | string;
+};
+
+export default function AppointmentInfoCard({
+  healthProfessionalImage,
+  firstName,
+  lastName,
+  status,
+  scheduledTime,
+}: Props) {
   return (
-    <div className="flex p-4 shadow-md rounded-lg">
+    <div className="flex p-4 shadow-md rounded-lg w-80 max-w-md min-w-full">
       <div className="">
         <Avatar
-          alt="Remy Sharp"
-          src="https://i.pinimg.com/originals/07/33/ba/0733ba760b29378474dea0fdbcb97107.png"
+          alt={firstName}
+          src={`${healthProfessionalImage}`}
           variant="rounded"
           sx={{ width: 80, height: 80 }}
         />
@@ -22,7 +37,7 @@ export default function AppointmentInfoCard({ status }: { status: string }) {
             noWrap
             align="center"
           >
-            Dr. Randy Wigham
+            Dr. {firstName} {lastName}
           </Typography>
         </div>
         <hr />
@@ -34,7 +49,7 @@ export default function AppointmentInfoCard({ status }: { status: string }) {
               noWrap
               align="center"
             >
-              June 12 2023
+              {dayjs(scheduledTime).format('MMMM DD YYYY')}
             </Typography>
             <Divider
               orientation="vertical"
@@ -47,15 +62,14 @@ export default function AppointmentInfoCard({ status }: { status: string }) {
               noWrap
               align="center"
             >
-              09:00 AM
+              {dayjs(scheduledTime).format('hh:mm A')}
             </Typography>
           </div>
-
           <div className="mt-3">
             <StatusLabels status={status} />
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
