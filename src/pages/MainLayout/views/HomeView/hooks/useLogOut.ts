@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../../axios-instance';
-import { clearStoredUser } from '../../../user-storage';
-import { queryKeys } from '../../../react-query/constants';
+import axiosInstance from '../../../../../axios-instance';
+import { clearStoredUser } from '../../../../../user-storage';
+import { queryKeys } from '../../../../../react-query/constants';
 
 export function useLogout() {
   const queryClient = useQueryClient();
@@ -22,7 +22,6 @@ export function useLogout() {
     {
       enabled: isActive,
       onSuccess: () => {
-        clearStoredUser();
         queryClient.removeQueries([
           queryKeys.appointments,
           queryKeys.healthProfessional,
@@ -30,6 +29,8 @@ export function useLogout() {
           queryKeys.organization,
           queryKeys.user,
         ]);
+
+        clearStoredUser();
 
         navigate('/log-in', { replace: true, relative: 'route' });
       },

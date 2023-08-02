@@ -6,7 +6,7 @@ import Card from './component/Card';
 import { useHealthProfessionals } from './hooks/useHealthProfessionals';
 import { HealthProfessionalResponse } from '../../../../types';
 import Nodata from '../../../../assets/vector/no_data_re_kwbl.svg';
-import EmptyResults from '../../../EmptyResponse/EmptyResults';
+import EmptyResults from '../../../../components/EmptyResponse/EmptyResults';
 
 interface ChipData {
   key: number;

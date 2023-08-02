@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../axios-instance';
+import { SERVER_ERROR } from '../../../shared/constants';
 
 interface FormData {
   username: string;
@@ -10,7 +11,7 @@ interface FormData {
   password: string;
   userType: string;
 }
-const SERVER_ERROR = 'There was an error contacting the server.';
+
 async function signup({ username, password, email, userType }: FormData) {
   try {
     const { data } = await axiosInstance.post('/auth/register', {

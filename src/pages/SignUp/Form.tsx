@@ -1,29 +1,26 @@
-import Button from '@mui/material/Button/Button'
-import TextField from '@mui/material/TextField/TextField'
-import React, { useState } from 'react'
-import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-import { useAuthSignUp } from './hooks'
+import Button from '@mui/material/Button/Button';
+import TextField from '@mui/material/TextField/TextField';
+import React, { useState } from 'react';
+import { useAuthSignUp } from './hooks/useSignup';
 
 export default function Form() {
-  const navigate = useNavigate()
-  const { mutate } = useAuthSignUp()
+  const { mutate } = useAuthSignUp();
   const initialState = {
     username: '',
     email: '',
     password: '',
     userType: 'PATIENT',
-  }
-  const [formData, setFormData] = useState(initialState)
+  };
+  const [formData, setFormData] = useState(initialState);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setFormData({ ...formData, [name]: value })
-  }
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    mutate(formData)
-    setFormData(initialState)
-  }
+    event.preventDefault();
+    mutate(formData);
+    setFormData(initialState);
+  };
   return (
     <div className="w-full">
       <form
@@ -75,5 +72,5 @@ export default function Form() {
         </div>
       </form>
     </div>
-  )
+  );
 }

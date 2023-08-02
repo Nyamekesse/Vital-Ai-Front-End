@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import { Link } from 'react-router-dom';
 import DisplayAppointments from './components/DisplayAppointments';
 import { useGetAllAppointments } from './hooks/useGetAllAppointments';
-import EmptyResults from '../../../EmptyResponse/EmptyResults';
+import EmptyResults from '../../../../components/EmptyResponse/EmptyResults';
 
 export default function AppointmentsHistoryView() {
   const appointments = useGetAllAppointments();

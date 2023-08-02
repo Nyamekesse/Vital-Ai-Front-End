@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom'
-import Chip from '@mui/material/Chip/Chip'
-import Typography from '@mui/material/Typography/Typography'
-import { useOrganizations } from '../../hooks/useOrganizations'
-import { Organization } from '../../../../types'
+import { Link } from 'react-router-dom';
+import Chip from '@mui/material/Chip/Chip';
+import Typography from '@mui/material/Typography/Typography';
+import { useOrganizations } from './hooks/useOrganizations';
+import { Organization } from '../../../../types';
 
 export default function OrganizationSection() {
-  const organizations = useOrganizations()
+  const organizations = useOrganizations();
 
   return (
     <div className="flex flex-col mt-4 w-full">
@@ -31,9 +31,9 @@ export default function OrganizationSection() {
                 />
               </Link>
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }

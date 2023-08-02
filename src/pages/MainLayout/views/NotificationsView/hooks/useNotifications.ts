@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from 'react-query';
-import axiosInstance from '../../../axios-instance';
-import { queryKeys } from '../../../react-query/constants';
+import axiosInstance from '../../../../../axios-instance';
+import { queryKeys } from '../../../../../react-query/constants';
 
 interface Notifications {
   id: string;
