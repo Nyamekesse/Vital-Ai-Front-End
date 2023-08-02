@@ -10,11 +10,11 @@ import About from './components/About';
 import Card from './components/Card';
 import ReviewCard from './components/ReviewCard';
 import WorkingTime from './components/WorkingTime';
-import AppointmentDialog from './components/AppointmentDialog';
 import { useHealthProfessionalDetails } from './hooks/useHealthProfessionalDetails';
 import EmptyResponse from '../../../../components/EmptyResponse/NotFoundHealthProInfo';
 import Credentials from './components/Credentials';
 import { useAddHealthProfessional } from './hooks/useAddHealthProfessionalConnection';
+import BookAppointmentView from '../BookAppointmentView';
 
 export default function HealthProfessionalDetailsView() {
   const { id = '' } = useParams();
@@ -98,10 +98,11 @@ export default function HealthProfessionalDetailsView() {
           )}
         </div>
       </div>
-      <AppointmentDialog
+      <BookAppointmentView
         open={open}
         handleClose={handleClose}
         fullScreen={fullScreen}
+        healthProfessionalID={id}
         openTime={details.organization.openTime}
         closeTime={details.organization.closeTime}
       />

@@ -31,12 +31,11 @@ export interface HealthProfessional {
 
 export interface Appointment {
   id: string;
-  date: Date | string;
-  time: Date | string;
+  scheduledTime: Date | string;
   purpose: string;
-  status: Status;
+  status?: Status;
   careRecipientID: string;
-  healthProfessional: HealthProfessional;
+  healthProfessionalID: string;
 }
 
 export interface Organization {

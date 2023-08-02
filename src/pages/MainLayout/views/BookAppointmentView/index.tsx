@@ -7,9 +7,14 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import dayjs from 'dayjs';
-import { getAvailableTimes } from '../../../../../utils/openHoursTimeDisplay';
+import { toast } from 'react-toastify';
+import Typography from '@mui/material/Typography/Typography';
+import Chip from '@mui/material/Chip/Chip';
+import { getAvailableTimes } from '../../../../utils/openHoursTimeDisplay';
+import { useAddAppointment } from './hooks/useBookAppointment';
 
 type Props = {
+  healthProfessionalID: string;
   fullScreen: boolean;
   open: boolean;
   openTime: string | Date;
@@ -17,7 +22,8 @@ type Props = {
   handleClose: () => void;
 };
 
-export default function AppointmentDialog({
+export default function BookAppointmentView({
+  healthProfessionalID,
   fullScreen,
   open,
   handleClose,
@@ -25,16 +31,19 @@ export default function AppointmentDialog({
   closeTime,
 }: Props) {
   const appointmentInitialState = {
-    appointmentDate: '',
-    appointmentTime: '',
-    patientProblem: '',
+    healthProfessionalID: '',
+    scheduledTime: '',
+    purpose: '',
   };
   const [formData, setFormData] = useState(appointmentInitialState);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
-  const [, setDate] = useState<Date | null>(null);
-
-  const allTimes = getAvailableTimes(openTime.toString(), closeTime.toString());
-  allTimes.map((time) => console.log(dayjs(time).format('HH::A')));
+  const { mutate } = useAddAppointment();
+  const availableOpenHours = getAvailableTimes(
+    openTime.toString(),
+    closeTime.toString(),
+  );
 
   const handleCancel = () => {
     setFormData(appointmentInitialState);
@@ -42,17 +51,34 @@ export default function AppointmentDialog({
   };
 
   const handleDateChange = (date: Date | null) => {
-    formData.appointmentDate = dayjs(date).format('YYYY-MM-DD');
-    setDate(null);
+    const formattedDate = dayjs(date).format('YYYY-MM-DD');
+    setSelectedDate(formattedDate);
   };
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
   const handleSubmit = () => {
-    setFormData(appointmentInitialState);
-    handleClose();
+    if (!selectedDate || !selectedTime || !formData.purpose) {
+      toast.error('All fields are required');
+    } else {
+      formData.scheduledTime = `${selectedDate}T${selectedTime}`;
+      formData.healthProfessionalID = healthProfessionalID;
+      mutate(formData);
+      setFormData(appointmentInitialState);
+      setSelectedDate(null);
+      setSelectedTime(null);
+      handleClose();
+    }
   };
+  const handleSelectTime = (event: React.MouseEvent<HTMLDivElement>) => {
+    const formattedTime = dayjs(
+      event.currentTarget.textContent,
+      'h:mm:A',
+    ).format('HH:mm:ss');
+    setSelectedTime(formattedTime);
+  };
+
   return (
     <div>
       <Dialog
@@ -82,20 +108,37 @@ export default function AppointmentDialog({
               onChange={handleDateChange}
             />
           </div>
-
-          <div className="w-full">
+          <div className="flex flex-col p-2 w-full">
+            <Typography
+              alignContent="flex-start"
+              fontWeight={700}
+              variant="h5"
+              fontSize="1rem"
+            >
+              Select Hour
+            </Typography>
+            <div className="flex flex-wrap items-center justify-normal">
+              {availableOpenHours.map((time) => (
+                <Chip
+                  sx={{ margin: '0.5rem' }}
+                  key={time}
+                  label={dayjs(time).format('HH:mm:A')}
+                  onClick={handleSelectTime}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="w-full h-[100px]">
             <TextField
               sx={{ width: '100%' }}
               margin="dense"
-              name="patientProblem"
+              name="purpose"
               placeholder="Please provide a brief description of problem"
               type="text"
-              multiline
-              minRows={2}
               maxRows={4}
               onChange={handleInputChange}
-              value={formData.patientProblem}
-              key="patientProblem"
+              value={formData.purpose}
+              key="purpose"
             />
           </div>
         </DialogContent>

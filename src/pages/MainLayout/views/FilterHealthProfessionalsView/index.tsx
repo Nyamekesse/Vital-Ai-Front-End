@@ -27,20 +27,6 @@ export default function FilterHealthProfessionals() {
   }, [id, setFilter]);
   return (
     <div className="py-3 px-3 flex flex-col justify-center items-center">
-      <div className="flex flex-wrap mb-2">
-        {chipData.map((chip) => {
-          return (
-            <div key={chip.key}>
-              <Chip
-                variant="outlined"
-                color="primary"
-                label={chip.label}
-                sx={{ margin: 0.5 }}
-              />
-            </div>
-          );
-        })}
-      </div>
       {/* DISPLAY RESULTS */}
       <div className="flex flex-col justify-center items-center">
         {!healthProfessionals.length ? (
