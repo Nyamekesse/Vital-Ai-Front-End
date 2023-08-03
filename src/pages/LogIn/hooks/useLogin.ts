@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../axios-instance';
 import { setStoredUser } from '../../../user-storage';
 import { SERVER_ERROR } from '../../../shared/constants';
+import { socketServerConnection } from '../../../sockets/clientSocket';
 
 interface FormData {
   email: string;
@@ -47,6 +48,7 @@ export function useAuthLogin() {
       await getUserDetails();
       toast.success('Login Successful');
       navigate('/', { replace: true });
+      socketServerConnection();
     },
   });
 

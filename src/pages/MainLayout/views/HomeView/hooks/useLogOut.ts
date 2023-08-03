@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../../../axios-instance';
 import { queryKeys } from '../../../../../react-query/constants';
 import { clearStoredUser } from '../../../../../user-storage';
+import { socketServerDisConnection } from '../../../../../sockets/clientSocket';
 
 export function useLogout() {
   const queryClient = useQueryClient();
@@ -29,7 +30,7 @@ export function useLogout() {
           queryKeys.organization,
           queryKeys.user,
         ]);
-
+        socketServerDisConnection();
         navigate('/log-in', { replace: true, relative: 'route' });
         setIsActive(false);
       },
