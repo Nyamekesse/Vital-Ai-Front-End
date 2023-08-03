@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../axios-instance';
 import { setStoredUser } from '../../../user-storage';
 import { SERVER_ERROR } from '../../../shared/constants';
-import { socketServerConnection } from '../../../sockets/clientSocket';
 
 interface FormData {
   email: string;
@@ -43,12 +42,12 @@ async function getUserDetails() {
 
 export function useAuthLogin() {
   const navigate = useNavigate();
+
   const { mutate } = useMutation((data: FormData) => signin(data), {
     onSuccess: async () => {
       await getUserDetails();
       toast.success('Login Successful');
       navigate('/', { replace: true });
-      socketServerConnection();
     },
   });
 

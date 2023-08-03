@@ -1,9 +1,14 @@
 import { io, Socket } from 'socket.io-client';
-import { toast } from 'react-toastify';
 
 let socket: Socket | null = null;
-export const socketServerConnection = () => {
-  socket = io('http://localhost:5000');
+export const socketServerConnection = (token: string) => {
+  socket = io('http://localhost:5000', {
+    withCredentials: true,
+    path: '/s',
+    auth: {
+      token,
+    },
+  });
   socket.on('connect', () => {
     console.log(socket?.id);
   });
