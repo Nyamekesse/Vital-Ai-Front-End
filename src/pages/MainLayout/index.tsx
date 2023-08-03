@@ -9,11 +9,19 @@ import { socketServerConnection } from '../../sockets/clientSocket';
 
 export default function MainLayout() {
   const navigate = useNavigate();
-  const [cookies] = useCookies(['vital_ai_token']);
+  const [vitalAiToken, setVitalAiToken] = useState('');
   const [storedUser, setStoredUser] = useState<InfoResponse>(getStoredUser());
   const [bottomNavHeight, setBottomNavHeight] = useState(0);
   const [topNavHeight, setTopNavHeight] = useState(0);
   useEffect(() => {
+    const token = document.cookie
+      .split(';')
+      .find((cookie) => cookie.startsWith('vital_ai_token='));
+    if (token) {
+      const value = token.substring(15);
+      setVitalAiToken(value);
+      socketServerConnection(vitalAiToken);
+    }
     setBottomNavHeight(
       (document.querySelector('.bottom-nav') as HTMLElement)?.offsetHeight,
     );
@@ -23,13 +31,8 @@ export default function MainLayout() {
     if (!storedUser) {
       setStoredUser(getStoredUser());
     }
-    if (!cookies.vital_ai_token) {
-      navigate('/log-in');
-    } else {
-      socketServerConnection(cookies.vital_ai_token);
-    }
-  }, [cookies.vital_ai_token, navigate, storedUser]);
-  return cookies.vital_ai_token && storedUser ? (
+  }, [vitalAiToken, navigate, storedUser, setVitalAiToken]);
+  return vitalAiToken && storedUser ? (
     <div className="flex flex-col overflow-x-hidden">
       <div className="top-nav fixed left-0 right-0 z-30">
         <TopBar
