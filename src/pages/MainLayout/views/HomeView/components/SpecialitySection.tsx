@@ -9,7 +9,7 @@ import {
   Optometrist,
   Pediatric,
   Radiologist,
-} from '../../../../assets/customIcons';
+} from '../../../../../assets/customIcons';
 
 export default function SpecialitySection() {
   const specializationType = [

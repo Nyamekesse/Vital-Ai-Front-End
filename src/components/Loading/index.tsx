@@ -1,11 +1,11 @@
-import { useIsFetching, useIsMutating } from 'react-query'
-import Backdrop from '@mui/material/Backdrop'
-import CircularProgress from '@mui/material/CircularProgress'
+import { useIsFetching, useIsMutating } from 'react-query';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Loading() {
-  const isFetching = useIsFetching() // for now, just don't display
-  const isMutating = useIsMutating()
-  const showLoading = !!(isFetching || isMutating)
+  const isFetching = useIsFetching();
+  const isMutating = useIsMutating();
+  const showLoading = !!(isFetching || isMutating);
   return (
     <div>
       <Backdrop
@@ -15,5 +15,5 @@ export default function Loading() {
         <CircularProgress color="inherit" />
       </Backdrop>
     </div>
-  )
+  );
 }

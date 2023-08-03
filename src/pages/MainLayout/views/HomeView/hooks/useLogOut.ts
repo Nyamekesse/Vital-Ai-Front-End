@@ -7,7 +7,6 @@ import { clearStoredUser } from '../../../../../user-storage';
 
 export function useLogout() {
   const queryClient = useQueryClient();
-
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState(false);
   const logout = () => {
@@ -32,6 +31,7 @@ export function useLogout() {
         ]);
 
         navigate('/log-in', { replace: true, relative: 'route' });
+        setIsActive(false);
       },
     },
   );

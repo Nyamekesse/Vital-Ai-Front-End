@@ -1,5 +1,4 @@
 import Avatar from '@mui/material/Avatar';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Typography from '@mui/material/Typography/Typography';
 import Divider from '@mui/material/Divider';
 import dayjs from 'dayjs';
@@ -21,7 +20,7 @@ export default function Card({
   connectedOn,
 }: Props) {
   return (
-    <div className="flex p-4 shadow-lg rounded-lg w-[340px] min-w-full ">
+    <div className="flex p-4 shadow-lg rounded-lg max-w-sm min-w-full ">
       <div className="">
         <Avatar
           alt={firstName}
@@ -40,7 +39,6 @@ export default function Card({
           >
             Dr. {firstName} {lastName}
           </Typography>
-          <FavoriteBorderIcon color="primary" />
         </div>
         <hr />
         <div className="mt-3">

@@ -81,79 +81,69 @@ export default function BookAppointmentView({
   };
 
   return (
-    <div>
-      <Dialog
-        fullScreen={fullScreen}
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
-      >
-        <DialogTitle id="responsive-dialog-title">Appointment</DialogTitle>
-        <DialogContent
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            overflowX: 'hidden',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <div className="">
-            <StaticDatePicker
-              disablePast
-              slotProps={{
-                actionBar: {
-                  actions: [],
-                },
-              }}
-              onChange={handleDateChange}
-            />
+    <Dialog
+      fullScreen={fullScreen}
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="responsive-dialog-title"
+    >
+      <DialogTitle id="responsive-dialog-title">Appointment</DialogTitle>
+      <DialogContent sx={{}}>
+        <div className="">
+          <StaticDatePicker
+            disablePast
+            slotProps={{
+              actionBar: {
+                actions: [],
+              },
+            }}
+            onChange={handleDateChange}
+          />
+        </div>
+        <div className="flex flex-col p-2 w-full">
+          <Typography
+            alignContent="flex-start"
+            fontWeight={700}
+            variant="h5"
+            fontSize="1rem"
+          >
+            Select Hour : {selectedTime}
+          </Typography>
+          <div className="flex flex-wrap items-center justify-normal">
+            {availableOpenHours.map((time, index) => (
+              <Chip
+                sx={{ margin: '0.5rem' }}
+                key={index}
+                label={dayjs(time).format('HH:mm:A')}
+                onClick={handleSelectTime}
+                color="primary"
+                variant="outlined"
+              />
+            ))}
           </div>
-          <div className="flex flex-col p-2 w-full">
-            <Typography
-              alignContent="flex-start"
-              fontWeight={700}
-              variant="h5"
-              fontSize="1rem"
-            >
-              Select Hour : {selectedTime}
-            </Typography>
-            <div className="flex flex-wrap items-center justify-normal">
-              {availableOpenHours.map((time, index) => (
-                <Chip
-                  sx={{ margin: '0.5rem' }}
-                  key={index}
-                  label={dayjs(time).format('HH:mm:A')}
-                  onClick={handleSelectTime}
-                  color="primary"
-                  variant="outlined"
-                />
-              ))}
-            </div>
-          </div>
-          <div className="w-full h-[100px]">
-            <TextField
-              sx={{ width: '100%' }}
-              margin="dense"
-              name="purpose"
-              placeholder="Please provide a brief description of problem"
-              type="text"
-              maxRows={4}
-              onChange={handleInputChange}
-              value={formData.purpose}
-              key="purpose"
-            />
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleCancel}>
-            Cancel
-          </Button>
-          <Button autoFocus onClick={handleSubmit}>
-            Done
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+        </div>
+        <div className="w-full h-[100px]">
+          <TextField
+            sx={{ width: '100%' }}
+            margin="dense"
+            name="purpose"
+            placeholder="Please provide a brief description of problem"
+            type="text"
+            maxRows={4}
+            onChange={handleInputChange}
+            value={formData.purpose}
+            key="purpose"
+          />
+        </div>
+      </DialogContent>
+      <DialogActions>
+        <Button autoFocus onClick={handleCancel}>
+          Cancel
+        </Button>
+        <Button autoFocus onClick={handleSubmit}>
+          Done
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }

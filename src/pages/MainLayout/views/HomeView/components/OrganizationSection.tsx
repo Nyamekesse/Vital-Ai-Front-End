@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import Chip from '@mui/material/Chip/Chip';
 import Typography from '@mui/material/Typography/Typography';
-import { useOrganizations } from './hooks/useOrganizations';
-import { Organization } from '../../../../types';
+import { useOrganizations } from '../hooks/useOrganizations';
+import { Organization } from '../../../../../types';
 
 export default function OrganizationSection() {
   const organizations = useOrganizations();
