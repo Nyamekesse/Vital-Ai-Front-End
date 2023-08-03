@@ -10,15 +10,4 @@ const config: AxiosRequestConfig = {
 
 const axiosInstance = axios.create(config);
 
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response && error.response.status === 401) {
-      toast.error('Session has expired. Please log in again.');
-    }
-    // return Promise.reject(error);
-    return redirect('/log-in');
-  },
-);
-
 export default axiosInstance;
