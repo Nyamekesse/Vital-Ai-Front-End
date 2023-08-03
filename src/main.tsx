@@ -12,7 +12,7 @@ import './index.css';
 import { queryClient } from './react-query';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -34,5 +34,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       pauseOnHover={false}
       theme="light"
     />
-  </React.StrictMode>,
+  </>,
 );
