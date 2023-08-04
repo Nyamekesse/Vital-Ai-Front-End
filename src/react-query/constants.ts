@@ -4,4 +4,5 @@ export const queryKeys = {
   healthProfessional: 'health-professional',
   notifications: 'notifications',
   organization: 'organization',
-}
+  organizationTeams: 'organization-teams',
+};

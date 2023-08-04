@@ -41,6 +41,16 @@ export interface Appointment {
   healthProfessional: HealthProfessional;
 }
 
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  userType: UserType;
+  createdAt?: Date | string;
+  updatedAt: Date | string;
+}
+
 export interface Organization {
   id: string;
   name: string;
@@ -101,10 +111,12 @@ export interface InfoResponse {
   displayPicture: string;
   firstName: string;
   gender: string;
+  user: User;
   healthBackground: string;
   lastName: string;
   location: string;
   Connection: Connection[];
+  organization?: Organization;
 }
 
 export enum Status {

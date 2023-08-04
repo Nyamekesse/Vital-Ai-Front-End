@@ -7,13 +7,20 @@ import Badge from '@mui/material/Badge';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import MobileMenu from './MobileMenu';
 import NotificationsView from '../views/NotificationsView';
+import { UserType } from '../../../types';
 
 type Props = {
   firstName: string;
   lastName: string;
   displayPicture: string;
+  userType: string;
 };
-export default function TopBar({ firstName, lastName, displayPicture }: Props) {
+export default function TopBar({
+  firstName,
+  lastName,
+  displayPicture,
+  userType,
+}: Props) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -43,14 +50,17 @@ export default function TopBar({ firstName, lastName, displayPicture }: Props) {
         <div>
           <Typography variant="caption">Good Morning</Typography>
           <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-            {firstName} {lastName}
+            {userType === UserType.HEALTH_PROFESSIONAL && 'Dr.'} {firstName}{' '}
+            {lastName}
           </Typography>
         </div>
       </div>
       <div className="flex justify-between items-center mr-[5%] w-[60px]">
-        <IconButton>
-          <LocationOnIcon />
-        </IconButton>
+        {userType !== UserType.HEALTH_PROFESSIONAL && (
+          <IconButton>
+            <LocationOnIcon />
+          </IconButton>
+        )}
         <IconButton onClick={handleClickOpen}>
           <Badge badgeContent={4} color="primary">
             <NotificationsIcon />

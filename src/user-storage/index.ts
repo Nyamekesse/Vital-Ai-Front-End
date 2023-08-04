@@ -1,4 +1,3 @@
-import { useQueryClient } from 'react-query';
 import { CareRecipient, HealthProfessional, InfoResponse } from '../types';
 
 const USER_LOCAL_STORAGE_KEY = 'vital_ai_user';

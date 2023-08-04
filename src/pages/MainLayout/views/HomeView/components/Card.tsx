@@ -7,16 +7,16 @@ type Props = {
   firstName: string;
   lastName: string;
   displayPicture: string;
-  specialization: string;
-  organization: string;
+  location: string;
+  age: string;
   connectedOn: string | Date | undefined;
 };
 export default function Card({
   firstName,
   lastName,
   displayPicture,
-  organization,
-  specialization,
+  location,
+  age,
   connectedOn,
 }: Props) {
   return (
@@ -37,7 +37,7 @@ export default function Card({
             noWrap
             align="center"
           >
-            Dr. {firstName} {lastName}
+            {firstName} {lastName}
           </Typography>
         </div>
         <hr />
@@ -49,7 +49,7 @@ export default function Card({
               noWrap
               align="center"
             >
-              {specialization}
+              Location: &nbsp; {location}
             </Typography>
             <Divider
               orientation="vertical"
@@ -60,9 +60,8 @@ export default function Card({
               sx={{ fontWeight: 500, width: 100, textTransform: 'capitalize' }}
               variant="caption"
               noWrap
-              align="center"
             >
-              {organization}
+              Age: &nbsp;{age}
             </Typography>
           </div>
         </div>
