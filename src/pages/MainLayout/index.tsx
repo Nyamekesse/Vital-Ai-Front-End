@@ -12,9 +12,9 @@ export default function MainLayout() {
   const [vitalAiToken] = useState(fetchCookie());
   const [storedUser, setStoredUser] = useState<InfoResponse>(getStoredUser());
 
-  const userType: string = storedUser.user.userType;
-  const organizationId: string | undefined = storedUser.organization?.id;
-  const organizationName: string | undefined = storedUser.organization?.name;
+  // const userType: string = storedUser.user?.userType;
+  // const organizationId: string | undefined = storedUser.organization?.id;
+  // const organizationName: string | undefined = storedUser.organization?.name;
 
   const [bottomNavHeight, setBottomNavHeight] = useState(0);
   const [topNavHeight, setTopNavHeight] = useState(0);
@@ -38,12 +38,12 @@ export default function MainLayout() {
         <TopBar
           firstName={storedUser?.firstName}
           lastName={storedUser?.lastName}
-          displayPicture={storedUser!.displayPicture}
-          userType={userType}
+          displayPicture={storedUser?.displayPicture}
+          userType={storedUser?.user?.userType}
         />
       </div>
       <div style={{ marginBottom: bottomNavHeight, marginTop: topNavHeight }}>
-        <Outlet context={[userType, organizationId, organizationName]} />
+        <Outlet context={{ storedUser }} />
       </div>
 
       <div className="bottom-nav fixed bottom-0 left-0 right-0 z-30">

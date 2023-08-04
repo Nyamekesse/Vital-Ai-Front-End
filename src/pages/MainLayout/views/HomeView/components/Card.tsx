@@ -7,8 +7,10 @@ type Props = {
   firstName: string;
   lastName: string;
   displayPicture: string;
-  location: string;
-  age: string;
+  location?: string | undefined;
+  age?: string | undefined;
+  organization?: string | undefined;
+  specialization?: string | undefined;
   connectedOn: string | Date | undefined;
 };
 export default function Card({
@@ -17,6 +19,8 @@ export default function Card({
   displayPicture,
   location,
   age,
+  specialization,
+  organization,
   connectedOn,
 }: Props) {
   return (
@@ -49,7 +53,7 @@ export default function Card({
               noWrap
               align="center"
             >
-              Location: &nbsp; {location}
+              {location || specialization}
             </Typography>
             <Divider
               orientation="vertical"
@@ -61,7 +65,7 @@ export default function Card({
               variant="caption"
               noWrap
             >
-              Age: &nbsp;{age}
+              {age || organization}
             </Typography>
           </div>
         </div>
@@ -80,3 +84,10 @@ export default function Card({
     </div>
   );
 }
+
+Card.defaultProps = {
+  location: '',
+  age: '',
+  organization: '',
+  specialization: '',
+};
