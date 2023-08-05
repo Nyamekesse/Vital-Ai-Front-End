@@ -5,18 +5,20 @@ import dayjs from 'dayjs';
 import StatusLabels from './StatusLabels';
 
 type Props = {
-  healthProfessionalImage: string;
+  displayImage: string;
   firstName: string;
   lastName: string;
   status: string;
+  healthProfessional?: boolean;
   scheduledTime: Date | string;
 };
 
 export default function AppointmentInfoCard({
-  healthProfessionalImage,
+  displayImage,
   firstName,
   lastName,
   status,
+  healthProfessional,
   scheduledTime,
 }: Props) {
   return (
@@ -24,7 +26,7 @@ export default function AppointmentInfoCard({
       <div className="">
         <Avatar
           alt={firstName}
-          src={`${healthProfessionalImage}`}
+          src={`${displayImage}`}
           variant="rounded"
           sx={{ width: 80, height: 80 }}
         />
@@ -37,7 +39,7 @@ export default function AppointmentInfoCard({
             noWrap
             align="center"
           >
-            Dr. {firstName} {lastName}
+            {healthProfessional === true && 'Dr.'} {firstName} {lastName}
           </Typography>
         </div>
         <hr />
@@ -73,3 +75,7 @@ export default function AppointmentInfoCard({
     </div>
   );
 }
+
+AppointmentInfoCard.defaultProps = {
+  healthProfessional: false,
+};

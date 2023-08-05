@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import { useGetAllAppointments } from './hooks/useGetAllAppointments';
 import EmptyResults from '../../../../components/EmptyResponse/EmptyResults';
 import AppointmentInfoCard from './components/AppointmentInfoCard';
+import { ContextType, UserType } from '../../../../types';
 
 export default function AppointmentsHistoryView() {
+  const { storedUser } = useOutletContext<ContextType>();
+  const { user } = storedUser;
   const [value, setValue] = useState(0);
   const [filter, setFilter] = useState('pending');
   const { appointments, setStatusFilter } = useGetAllAppointments(filter);
@@ -62,15 +65,24 @@ export default function AppointmentsHistoryView() {
               key={appointment.id}
               to={`/appointment/${appointment.id}/details`}
             >
-              <AppointmentInfoCard
-                firstName={appointment.healthProfessional.firstName}
-                lastName={appointment.healthProfessional.lastName}
-                healthProfessionalImage={
-                  appointment.healthProfessional.displayPicture
-                }
-                status={appointment.status}
-                scheduledTime={appointment.scheduledTime}
-              />
+              {user.userType === UserType.CARE_RECIPIENT ? (
+                <AppointmentInfoCard
+                  firstName={appointment.healthProfessional.firstName}
+                  lastName={appointment.healthProfessional.lastName}
+                  displayImage={appointment.healthProfessional.displayPicture}
+                  status={appointment.status}
+                  scheduledTime={appointment.scheduledTime}
+                  healthProfessional
+                />
+              ) : (
+                <AppointmentInfoCard
+                  firstName={appointment.careRecipient.firstName}
+                  lastName={appointment.careRecipient.lastName}
+                  displayImage={appointment.careRecipient.displayPicture}
+                  status={appointment.status}
+                  scheduledTime={appointment.scheduledTime}
+                />
+              )}
             </Link>
           ))
         ) : (

@@ -4,11 +4,9 @@ import { Carousel } from '../../../../components';
 import ConnectionsListDisplay from './components/ConnectionsDisplay';
 import SpecialitySection from './components/SpecialitySection';
 import OrganizationSection from './components/OrganizationSection';
-import { InfoResponse, UserType } from '../../../../types';
+import { ContextType, UserType } from '../../../../types';
 import OrganizationTeam from './components/OrganizationTeam';
 import ConnectionsListDisplayH from './components/ConnectionsDisplayH';
-
-type ContextType = { storedUser: InfoResponse };
 
 export default function HomeScreen() {
   const { storedUser } = useOutletContext<ContextType>();
@@ -25,7 +23,7 @@ export default function HomeScreen() {
           </div>
         </div>
       ) : (
-        <div className="mt-8">
+        <div className="mt-8 flex flex-col ">
           <Typography
             variant="h5"
             mb={1}

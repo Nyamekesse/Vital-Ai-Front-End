@@ -1,3 +1,7 @@
+export interface ContextType {
+  storedUser: InfoResponse;
+}
+
 export interface CareRecipient {
   firstName: string;
   lastName: string;
@@ -37,6 +41,7 @@ export interface Appointment {
   purpose: string;
   status: Status;
   careRecipientID: string;
+  careRecipient: CareRecipient;
   healthProfessionalID: string;
   healthProfessional: HealthProfessional;
 }

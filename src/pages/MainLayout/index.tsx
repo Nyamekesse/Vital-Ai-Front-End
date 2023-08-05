@@ -11,11 +11,6 @@ import { fetchCookie } from '../../utils/fetchCookie';
 export default function MainLayout() {
   const [vitalAiToken] = useState(fetchCookie());
   const [storedUser, setStoredUser] = useState<InfoResponse>(getStoredUser());
-
-  // const userType: string = storedUser.user?.userType;
-  // const organizationId: string | undefined = storedUser.organization?.id;
-  // const organizationName: string | undefined = storedUser.organization?.name;
-
   const [bottomNavHeight, setBottomNavHeight] = useState(0);
   const [topNavHeight, setTopNavHeight] = useState(0);
   useEffect(() => {

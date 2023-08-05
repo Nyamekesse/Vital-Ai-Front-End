@@ -11,23 +11,9 @@ import { SERVER_ERROR } from '../../../../../shared/constants';
 
 interface AppointmentDetails {
   id: string;
-  careRecipient: {
-    firstName: string;
-    lastName: string;
-    gender: string;
-  };
+  careRecipient: CareRecipient;
   scheduledTime: string;
-  healthProfessional: {
-    firstName: string;
-    lastName: string;
-    displayPicture: string;
-    specialization: {
-      name: string;
-    };
-    organization: {
-      name: string;
-    };
-  };
+  healthProfessional: HealthProfessional;
   purpose: string;
 }
 

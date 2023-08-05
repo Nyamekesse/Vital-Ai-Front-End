@@ -5,8 +5,8 @@ type Props = {
   image: string;
   firstName: string;
   lastName: string;
-  specialization: string;
-  organization: string;
+  specialization?: string;
+  organization?: string;
 };
 
 export default function ProfileCard({
@@ -34,7 +34,7 @@ export default function ProfileCard({
             noWrap
             align="center"
           >
-            Dr. {firstName} {lastName}
+            {specialization && 'Dr.'} {firstName} {lastName}
           </Typography>
         </div>
         <hr />
@@ -63,3 +63,8 @@ export default function ProfileCard({
     </div>
   );
 }
+
+ProfileCard.defaultProps = {
+  specialization: '',
+  organization: '',
+};

@@ -17,7 +17,7 @@ export default function ConnectionsListDisplayH() {
       >
         Connected CareRecipients
       </Typography>
-      <div className="flex flex-wrap items-center justify-center">
+      <div className="flex flex-col flex-wrap items-center justify-center">
         {storedUser.Connection.length ? (
           storedUser.Connection.map((connection, index) => (
             <div key={index}>
