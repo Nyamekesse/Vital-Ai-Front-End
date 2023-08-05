@@ -42,7 +42,7 @@ export default function MainLayout() {
       </div>
 
       <div className="bottom-nav fixed bottom-0 left-0 right-0 z-30">
-        <BottomBar />
+        <BottomBar userType={storedUser && storedUser.user.userType} />
       </div>
     </div>
   ) : (
