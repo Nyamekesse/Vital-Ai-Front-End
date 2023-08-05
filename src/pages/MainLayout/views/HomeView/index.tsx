@@ -34,7 +34,10 @@ export default function HomeScreen() {
           <Typography variant="subtitle1" mb={1} sx={{}}>
             {storedUser.organization?.name}
           </Typography>
-          <OrganizationTeam organizationId={storedUser.organization!.id} />
+          <OrganizationTeam
+            userName={storedUser.firstName}
+            organizationId={storedUser.organization!.id}
+          />
           <ConnectionsListDisplayH />
         </div>
       )}

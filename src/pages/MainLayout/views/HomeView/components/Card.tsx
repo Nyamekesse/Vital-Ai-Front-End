@@ -53,7 +53,10 @@ export default function Card({
               noWrap
               align="center"
             >
-              {location || specialization}
+              {location && <>Location:&nbsp;&nbsp; {`${location}`}</>}
+              {specialization && (
+                <>Specialization:&nbsp;&nbsp; {`${specialization}`}</>
+              )}
             </Typography>
             <Divider
               orientation="vertical"
@@ -65,7 +68,8 @@ export default function Card({
               variant="caption"
               noWrap
             >
-              {age || organization}
+              {age && <>Age:&nbsp;&nbsp; {`${age}`}</>}
+              {organization && organization}
             </Typography>
           </div>
         </div>

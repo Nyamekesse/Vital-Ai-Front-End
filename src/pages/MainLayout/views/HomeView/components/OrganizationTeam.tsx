@@ -7,9 +7,11 @@ import { HealthProfessional } from '../../../../../types';
 import { useOrganizationTeam } from '../hooks/useOrganizationTeam';
 
 export default function OrganizationTeam({
+  userName,
   organizationId,
 }: {
   organizationId: string;
+  userName: string;
 }) {
   const organizationTeams = useOrganizationTeam(organizationId);
 
@@ -24,6 +26,9 @@ export default function OrganizationTeam({
       </Typography>
       <div className="flex flex-wrap items-center justify-stretch">
         {organizationTeams.map((member: HealthProfessional) => {
+          if (member.firstName === userName) {
+            return null;
+          }
           return (
             <div key={member.userID}>
               <Link to={`/details/health-professional/${member.userID}`}>
