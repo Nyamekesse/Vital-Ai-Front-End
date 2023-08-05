@@ -15,7 +15,7 @@ export default function ConnectionsListDisplay() {
         mb={1}
         sx={{ fontWeight: 700, fontSize: '1.2rem' }}
       >
-        Connected Doctors
+        Favorite Doctors
       </Typography>
       <div className="flex flex-wrap items-center justify-center">
         {storedUser.Connection.length ? (

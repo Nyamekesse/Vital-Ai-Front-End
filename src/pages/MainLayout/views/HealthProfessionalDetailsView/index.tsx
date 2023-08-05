@@ -1,10 +1,10 @@
 import { useTheme } from '@mui/material/styles';
-import { useParams } from 'react-router-dom';
+import { useOutletContext, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton/IconButton';
 import About from './components/About';
 import Card from './components/Card';
@@ -15,8 +15,11 @@ import EmptyResponse from '../../../../components/EmptyResponse/NotFoundHealthPr
 import Credentials from './components/Credentials';
 import { useAddHealthProfessional } from './hooks/useAddHealthProfessionalConnection';
 import BookAppointmentView from '../BookAppointmentView';
+import { ContextType, UserType } from '../../../../types';
 
 export default function HealthProfessionalDetailsView() {
+  const { storedUser } = useOutletContext<ContextType>();
+  const { user } = storedUser;
   const { id = '' } = useParams();
   const details = useHealthProfessionalDetails(id);
   const { mutate } = useAddHealthProfessional(id);
@@ -57,21 +60,25 @@ export default function HealthProfessionalDetailsView() {
           closeTime={details.organization.closeTime}
         />
         <div className="my-3">
-          <Button
-            sx={{ textTransform: 'initial', marginRight: '1rem' }}
-            variant="contained"
-            onClick={handleClickOpen}
-            size="small"
-          >
-            Book Appointment
-          </Button>
-          <IconButton
-            color="primary"
-            aria-label="add connection"
-            onClick={() => mutate(id)}
-          >
-            <PersonAddAlt1Icon />
-          </IconButton>
+          {user.userType === UserType.CARE_RECIPIENT && (
+            <>
+              <Button
+                sx={{ textTransform: 'initial', marginRight: '1rem' }}
+                variant="contained"
+                onClick={handleClickOpen}
+                size="small"
+              >
+                Book Appointment
+              </Button>
+              <IconButton
+                color="primary"
+                aria-label="add connection"
+                onClick={() => mutate(id)}
+              >
+                <FavoriteBorderIcon />
+              </IconButton>
+            </>
+          )}
         </div>
         <Typography
           variant="h5"

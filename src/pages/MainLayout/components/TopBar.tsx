@@ -4,7 +4,7 @@ import { IconButton, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MobileMenu from './MobileMenu';
 import NotificationsView from '../views/NotificationsView';
 import { UserType } from '../../../types';
@@ -58,7 +58,7 @@ export default function TopBar({
       <div className="flex justify-between items-center mr-[5%] w-[60px]">
         {userType !== UserType.HEALTH_PROFESSIONAL && (
           <IconButton>
-            <LocationOnIcon />
+            <FavoriteBorderIcon color="primary" />
           </IconButton>
         )}
         <IconButton onClick={handleClickOpen}>

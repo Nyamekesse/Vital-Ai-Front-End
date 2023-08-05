@@ -42,6 +42,8 @@ export default function AppointmentDetails() {
           firstName={appointmentDetails.careRecipient.firstName}
           lastName={appointmentDetails.careRecipient.lastName}
           image={appointmentDetails.careRecipient.displayPicture}
+          age="45"
+          location={appointmentDetails.careRecipient.location}
         />
       )}
       <ScheduleAbout scheduledTime={appointmentDetails.scheduledTime} />
