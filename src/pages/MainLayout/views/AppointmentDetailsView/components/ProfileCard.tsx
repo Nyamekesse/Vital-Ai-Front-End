@@ -5,6 +5,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useOutletContext } from 'react-router-dom';
 import { ContextType, UserType } from '../../../../../types';
+import { useAccept } from '../hooks/useAcceptAppointment';
+import { useReject } from '../hooks/useRejectAppointment';
 
 type Props = {
   image: string;
@@ -14,6 +16,7 @@ type Props = {
   organization?: string;
   age?: string;
   location?: string;
+  id?: string;
 };
 
 export default function ProfileCard({
@@ -24,9 +27,12 @@ export default function ProfileCard({
   organization,
   age,
   location,
+  id,
 }: Props) {
   const { storedUser } = useOutletContext<ContextType>();
   const { user } = storedUser;
+  const { acceptMutate } = useAccept(id);
+  const { rejectMutate } = useReject(id);
   return (
     <div className="flex  p-4 shadow-md rounded-lg">
       <div className="">
@@ -77,10 +83,18 @@ export default function ProfileCard({
           </div>
           {user.userType === UserType.HEALTH_PROFESSIONAL && (
             <div>
-              <IconButton color="success" aria-label="accept appointment">
+              <IconButton
+                color="success"
+                aria-label="accept appointment"
+                onClick={() => acceptMutate()}
+              >
                 <CheckIcon />
               </IconButton>
-              <IconButton color="error" aria-label="reject appointment">
+              <IconButton
+                color="error"
+                aria-label="reject appointment"
+                onClick={() => rejectMutate()}
+              >
                 <ClearIcon />
               </IconButton>
             </div>
@@ -92,6 +106,7 @@ export default function ProfileCard({
 }
 
 ProfileCard.defaultProps = {
+  id: '',
   specialization: '',
   organization: '',
   age: '',

@@ -46,7 +46,7 @@ export function useGetAllAppointments(status: string): UseAppointments {
     queryKeys.appointments,
     getAllAppointments,
     {
-      select: filter !== 'pending' ? selectFn : undefined,
+      select: selectFn,
     },
   );
   return { appointments, setStatusFilter, filter };
