@@ -45,6 +45,7 @@ export default function AppointmentDetails() {
           age="45"
           location={appointmentDetails.careRecipient.location}
           id={id}
+          appointmentStatus={appointmentDetails.status}
         />
       )}
       <ScheduleAbout scheduledTime={appointmentDetails.scheduledTime} />

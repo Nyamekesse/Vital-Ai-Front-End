@@ -15,11 +15,10 @@ interface AppointmentDetails {
   scheduledTime: string;
   healthProfessional: HealthProfessional;
   purpose: string;
+  sta;
 }
 
-async function fetchAppointmentDetailsById(
-  id: string,
-): Promise<AppointmentDetails> {
+async function fetchAppointmentDetailsById(id: string): Promise<Appointment> {
   try {
     const { data } = await axiosInstance.get(`/appointment/${id}/details`);
     return data;
@@ -32,9 +31,7 @@ async function fetchAppointmentDetailsById(
   }
 }
 
-export function useGetAppointmentDetails(
-  id: string,
-): AppointmentDetails | undefined {
+export function useGetAppointmentDetails(id: string): Appointment | undefined {
   const { data: details } = useQuery([queryKeys.appointments, id], () =>
     fetchAppointmentDetailsById(id),
   );

@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography/Typography';
 import dayjs from 'dayjs';
 
 type Props = {
-  scheduledTime: string;
+  scheduledTime: string | Date;
 };
 
 export default function ScheduleAbout({ scheduledTime }: Props) {
