@@ -5,6 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import dayjs from 'dayjs';
 import MobileMenu from './MobileMenu';
 import NotificationsView from '../views/NotificationsView';
 import { UserType } from '../../../types';
@@ -23,6 +24,16 @@ export default function TopBar({
 }: Props) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const now = dayjs();
+  const hour = now.hour();
+  let greeting;
+  if (hour >= 5 && hour < 12) {
+    greeting = 'Good morning';
+  } else if (hour >= 12 && hour < 18) {
+    greeting = 'Good afternoon';
+  } else {
+    greeting = 'Good evening';
+  }
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -48,7 +59,9 @@ export default function TopBar({
           />
         </div>
         <div>
-          <Typography variant="caption">Good Morning</Typography>
+          <Typography variant="caption" fontSize="0.8rem">
+            {greeting}
+          </Typography>
           <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
             {userType === UserType.HEALTH_PROFESSIONAL && 'Dr.'} {firstName}{' '}
             {lastName}
