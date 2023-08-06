@@ -1,28 +1,45 @@
-import { useState } from 'react'
-import { Button, TextField, Typography } from '@mui/material'
-import Avatar from '@mui/material/Avatar'
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
+import { useState } from 'react';
+import {
+  Button,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Typography,
+} from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { getStoredUser } from '../../../../../user-storage';
+import { HealthProfessional } from '../../../../../types';
 
-export default function HealthProfessional() {
-  const initialState = {
-    firstName: '',
-    lastName: '',
-    specialization: '',
-    medicalLicenseNumber: '',
-    contactInfo: '',
-  }
-  const [formData, setFormData] = useState(initialState)
+export default function HealthProfessionalView() {
+  const [userDetails, setUserDetails] = useState<HealthProfessional>(
+    getStoredUser(),
+  );
+  const [formData, setFormData] = useState({
+    firstName: userDetails.firstName,
+    lastName: userDetails.lastName,
+    experience: userDetails.experience,
+    medicalLicenseNumber: userDetails.medicalLicenseNumber,
+    gender: userDetails.gender,
+    contactInfo: userDetails.contactInfo,
+    specialization: userDetails.specialization.name,
+    displayPicture: userDetails.displayPicture,
+    about: userDetails.about,
+  });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setFormData({ ...formData, [name]: value })
-  }
-
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleGender = (event: SelectChangeEvent) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(formData)
-    setFormData(initialState)
-  }
+    event.preventDefault();
+    console.log(formData);
+  };
   return (
     <div className="flex pt-3 flex-col items-center">
       <Typography variant="h6" mb={2}>
@@ -37,8 +54,8 @@ export default function HealthProfessional() {
           />
         </div>
         <Avatar
-          alt="Remy Sharp"
-          src="https://i.pinimg.com/originals/07/33/ba/0733ba760b29378474dea0fdbcb97107.png"
+          alt={formData.firstName}
+          src={formData.displayPicture}
           sx={{ width: 150, height: 150 }}
         />
       </div>
@@ -55,7 +72,7 @@ export default function HealthProfessional() {
           type="text"
           onChange={handleInputChange}
           size="small"
-          value={formData.firstName}
+          defaultValue={userDetails.firstName}
           key="firstName"
         />
         <TextField
@@ -66,7 +83,7 @@ export default function HealthProfessional() {
           type="text"
           onChange={handleInputChange}
           size="small"
-          value={formData.lastName}
+          defaultValue={userDetails.lastName}
           key="lastname"
         />
         <TextField
@@ -77,7 +94,7 @@ export default function HealthProfessional() {
           type="text"
           onChange={handleInputChange}
           size="small"
-          value={formData.specialization}
+          defaultValue={userDetails.specialization.name}
           key="specialization"
         />
         <TextField
@@ -88,8 +105,19 @@ export default function HealthProfessional() {
           type="text"
           onChange={handleInputChange}
           size="small"
-          value={formData.medicalLicenseNumber}
+          defaultValue={userDetails.medicalLicenseNumber}
           key="medicalLicenseNumber"
+        />
+        <TextField
+          margin="dense"
+          name="experience"
+          label="Experience"
+          placeholder="Contact Info"
+          defaultValue={userDetails.experience}
+          type="text"
+          onChange={handleInputChange}
+          size="small"
+          key="experience"
         />
         <TextField
           margin="dense"
@@ -99,10 +127,44 @@ export default function HealthProfessional() {
           type="text"
           onChange={handleInputChange}
           size="small"
-          value={formData.contactInfo}
+          defaultValue={userDetails.contactInfo}
           key="contactInfo"
         />
-
+        <div className="my-3">
+          <Select
+            id="select-gender"
+            defaultValue={userDetails.gender}
+            label="Gender"
+            name="gender"
+            displayEmpty
+            input={<OutlinedInput />}
+            onChange={handleGender}
+            fullWidth
+            size="small"
+            margin="dense"
+            renderValue={(selected) => {
+              if (!selected) {
+                return 'Gender';
+              }
+              return selected;
+            }}
+          >
+            <MenuItem value="MALE">Male</MenuItem>
+            <MenuItem value="FEMALE">Female</MenuItem>
+          </Select>
+        </div>
+        <TextField
+          defaultValue={userDetails.about}
+          margin="dense"
+          name="healthBio"
+          placeholder="Please tell us about your educational background"
+          type="text"
+          multiline
+          minRows={2}
+          maxRows={4}
+          onChange={handleInputChange}
+          key="about"
+        />
         <div className="mx-auto w-1/2 mt-6">
           <Button
             sx={{ textTransform: 'initial' }}
@@ -115,5 +177,5 @@ export default function HealthProfessional() {
         </div>
       </form>
     </div>
-  )
+  );
 }

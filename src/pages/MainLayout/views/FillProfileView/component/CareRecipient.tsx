@@ -8,19 +8,12 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { getStoredUser } from '../../../../../user-storage';
+import { CareRecipient } from '../../../../../types';
 
-interface UserDetails {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  gender: string;
-  contactInfo: string;
-  location: string;
-  displayPicture: string;
-  healthBackground: string;
-}
 export default function CareRecipientView() {
-  const [userDetails, setUserDetails] = useState<UserDetails>(getStoredUser());
+  const [userDetails, setUserDetails] = useState<CareRecipient>(
+    getStoredUser(),
+  );
   const [formData, setFormData] = useState({
     firstName: userDetails.firstName,
     lastName: userDetails.lastName,

@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import CareRecipient from './component/CareRecipient';
-import HealthProfessional from './component/HealthProfessional';
+import HealthProfessionalView from './component/HealthProfessional';
+import { ContextType, UserType } from '../../../../types';
 
 export default function FillProfile() {
-  const [userType] = useState('PATIENT');
+  const { storedUser } = useOutletContext<ContextType>();
   return (
     <div>
-      {userType === 'PATIENT' ? <CareRecipient /> : <HealthProfessional />}
+      {storedUser.user.userType === UserType.CARE_RECIPIENT ? (
+        <CareRecipient />
+      ) : (
+        <HealthProfessionalView />
+      )}
     </div>
   );
 }
