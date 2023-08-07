@@ -110,6 +110,16 @@ export interface Specialization {
   name: string;
 }
 
+export interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  isRead: boolean;
+  userID: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+}
+
 export interface InfoResponse {
   contactInfo: string;
   dateOfBirth: string;

@@ -1,12 +1,12 @@
-import AppBar from '@mui/material/AppBar/AppBar'
-import IconButton from '@mui/material/IconButton/IconButton'
-import Toolbar from '@mui/material/Toolbar/Toolbar'
-import Typography from '@mui/material/Typography/Typography'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import AppBar from '@mui/material/AppBar/AppBar';
+import IconButton from '@mui/material/IconButton/IconButton';
+import Toolbar from '@mui/material/Toolbar/Toolbar';
+import Typography from '@mui/material/Typography/Typography';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 type Props = {
-  handleClose: () => void
-}
+  handleClose: () => void;
+};
 
 export default function TopBar({ handleClose }: Props) {
   return (
@@ -31,5 +31,5 @@ export default function TopBar({ handleClose }: Props) {
         </div>
       </Toolbar>
     </AppBar>
-  )
+  );
 }

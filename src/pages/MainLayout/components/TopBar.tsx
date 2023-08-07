@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import MobileMenu from './MobileMenu';
 import NotificationsView from '../views/NotificationsView';
 import { UserType } from '../../../types';
+import { useNotifications } from '../views/NotificationsView/hooks/useNotifications';
 
 type Props = {
   firstName: string;
@@ -47,6 +48,7 @@ export default function TopBar({
   const handleNotificationClose = () => {
     setNotificationOpen(false);
   };
+  const { unreadNotification } = useNotifications();
   return (
     <div className="flex justify-between items-center px-2 py-3 shadow-md bg-white z-40 ">
       <div className="flex w-full">
@@ -75,7 +77,7 @@ export default function TopBar({
           </IconButton>
         )}
         <IconButton onClick={handleClickOpen}>
-          <Badge badgeContent={4} color="primary">
+          <Badge badgeContent={unreadNotification} color="primary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
