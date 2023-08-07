@@ -1,12 +1,11 @@
-/* eslint-disable prefer-destructuring */
 import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
 import { getStoredUser } from '../../user-storage';
 import { InfoResponse } from '../../types';
-import { socketServerConnection } from '../../sockets/clientSocket';
 import { fetchCookie } from '../../utils/fetchCookie';
+import { socketServerConnection } from '../../sockets/clientSocket';
 
 export default function MainLayout() {
   const [vitalAiToken] = useState(fetchCookie());
@@ -23,9 +22,7 @@ export default function MainLayout() {
     if (!storedUser) {
       setStoredUser(getStoredUser());
     }
-    // if (vitalAiToken) {
-    //   socketServerConnection(vitalAiToken);
-    // }
+    !!vitalAiToken && socketServerConnection(vitalAiToken);
   }, [vitalAiToken, storedUser]);
   return vitalAiToken && storedUser ? (
     <div className="flex flex-col overflow-x-hidden">
