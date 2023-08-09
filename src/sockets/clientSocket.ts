@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import { io, Socket } from 'socket.io-client';
 import jwt_decode from 'jwt-decode';
-import { fetchCookie } from '../utils/fetchCookie';
 
 let socket: Socket | null = null;
 export const socketServerConnection = async (token) => {

@@ -5,5 +5,5 @@ export default function TextMessageSender({ text }: { text: string }) {
       laudantium pariatur id eum ab fugiat veniam neque quisquam cumque, hic
       assumenda accusamus ullam possimus sequi illo. Esse, cupiditate molestiae?
     </div>
-  )
+  );
 }

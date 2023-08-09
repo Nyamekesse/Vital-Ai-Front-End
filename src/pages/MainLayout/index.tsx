@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import TopBar from './components/TopBar';
-import BottomBar from './components/BottomBar';
 import { getStoredUser } from '../../user-storage';
 import { InfoResponse } from '../../types';
 import { fetchCookie } from '../../utils/fetchCookie';
-import { socketServerConnection } from '../../sockets/clientSocket';
+import {
+  socketServerConnection,
+  socketServerDisConnection,
+} from '../../sockets/clientSocket';
+import TopBar from './components/TopBar';
+import BottomBar from './components/BottomBar';
 
 export default function MainLayout() {
   const [vitalAiToken] = useState(fetchCookie());
@@ -22,7 +25,9 @@ export default function MainLayout() {
     if (!storedUser) {
       setStoredUser(getStoredUser());
     }
-    !!vitalAiToken && socketServerConnection(vitalAiToken);
+    vitalAiToken
+      ? socketServerConnection(vitalAiToken)
+      : socketServerDisConnection();
   }, [vitalAiToken, storedUser]);
   return vitalAiToken && storedUser ? (
     <div className="flex flex-col overflow-x-hidden">

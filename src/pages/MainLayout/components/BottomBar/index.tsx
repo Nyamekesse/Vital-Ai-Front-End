@@ -4,10 +4,10 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import HomeIcon from '@mui/icons-material/Home';
-import AiIcon from '../../../components/AiIcon/AiIcon';
-import MessageIconFilled from '../../../components/MessageIconFilled';
-import ChatSessionView from '../views/ChatSessionView';
-import { UserType } from '../../../types';
+import { UserType } from '../../../../types';
+import AiIcon from '../../../../components/AiIcon/AiIcon';
+import MessageIconFilled from '../../../../components/MessageIconFilled';
+import ChatSessionView from '../ChatSessionView';
 
 type NavigationValue = string;
 

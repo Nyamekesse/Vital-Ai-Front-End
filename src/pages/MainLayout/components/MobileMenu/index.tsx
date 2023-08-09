@@ -1,7 +1,7 @@
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
-import { useLogout } from '../views/HomeView/hooks/useLogOut';
+import { useLogout } from '../../views/HomeView/hooks/useLogOut';
 
 type Props = {
   open: boolean;

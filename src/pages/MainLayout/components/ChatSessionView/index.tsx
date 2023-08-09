@@ -1,38 +1,38 @@
 /* eslint-disable prefer-arrow-callback */
-import { ChangeEvent, forwardRef, useState } from 'react'
-import Dialog from '@mui/material/Dialog'
-import Slide from '@mui/material/Slide'
-import { TransitionProps } from '@mui/material/transitions'
-import TopBar from './components/TopBar'
-import TextMessageSender from './components/TextMessageSender'
-import TextMessageUser from './components/TextMessageUser'
-import Send from '../../../../assets/vector/send.svg'
+import { ChangeEvent, forwardRef, useState } from 'react';
+import Dialog from '@mui/material/Dialog';
+import Slide from '@mui/material/Slide';
+import { TransitionProps } from '@mui/material/transitions';
+import TopBar from './components/TopBar';
+import TextMessageSender from './components/TextMessageSender';
+import TextMessageUser from './components/TextMessageUser';
+import Send from '../../../../assets/vector/send.svg';
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
-    children: React.ReactElement
+    children: React.ReactElement;
   },
   ref: React.Ref<unknown>,
 ) {
-  return <Slide direction="up" ref={ref} {...props} />
-})
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 type Props = {
-  open: boolean
-  handleClose: () => void
-}
+  open: boolean;
+  handleClose: () => void;
+};
 const initialState = {
   text: '',
-}
+};
 export default function ChatSessionView({ open, handleClose }: Props) {
-  const [query, setQuery] = useState(initialState)
+  const [query, setQuery] = useState(initialState);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setQuery({ ...query, [name]: value })
-  }
+    const { name, value } = event.target;
+    setQuery({ ...query, [name]: value });
+  };
   const handleSubmit = () => {
-    console.log(query)
-    setQuery(initialState)
-  }
+    console.log(query);
+    setQuery(initialState);
+  };
   return (
     <div>
       <Dialog
@@ -75,5 +75,5 @@ export default function ChatSessionView({ open, handleClose }: Props) {
         </div>
       </Dialog>
     </div>
-  )
+  );
 }

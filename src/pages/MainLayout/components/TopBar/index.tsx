@@ -6,10 +6,10 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import dayjs from 'dayjs';
-import MobileMenu from './MobileMenu';
-import NotificationsView from '../views/NotificationsView';
-import { UserType } from '../../../types';
-import { useNotifications } from '../views/NotificationsView/hooks/useNotifications';
+import { UserType } from '../../../../types';
+import MobileMenu from '../MobileMenu';
+import NotificationsView from '../../views/NotificationsView';
+import { useNotifications } from '../../views/NotificationsView/hooks/useNotifications';
 
 type Props = {
   firstName: string;

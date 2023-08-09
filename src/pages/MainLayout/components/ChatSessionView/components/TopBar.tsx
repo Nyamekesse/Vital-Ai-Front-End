@@ -1,15 +1,15 @@
-import AppBar from '@mui/material/AppBar/AppBar'
-import IconButton from '@mui/material/IconButton/IconButton'
-import Typography from '@mui/material/Typography/Typography'
-import Avatar from '@mui/material/Avatar/Avatar'
-import Toolbar from '@mui/material/Toolbar/Toolbar'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import { StyledBadge } from './StyledBadge'
+import AppBar from '@mui/material/AppBar/AppBar';
+import IconButton from '@mui/material/IconButton/IconButton';
+import Typography from '@mui/material/Typography/Typography';
+import Avatar from '@mui/material/Avatar/Avatar';
+import Toolbar from '@mui/material/Toolbar/Toolbar';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { StyledBadge } from './StyledBadge';
 
 type Props = {
-  name?: string
-  handleClose: () => void
-}
+  name?: string;
+  handleClose: () => void;
+};
 
 export default function TopBar({ handleClose, name }: Props) {
   return (
@@ -48,9 +48,9 @@ export default function TopBar({ handleClose, name }: Props) {
         </div>
       </Toolbar>
     </AppBar>
-  )
+  );
 }
 
 TopBar.defaultProps = {
   name: '',
-}
+};
