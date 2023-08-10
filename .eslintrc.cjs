@@ -52,6 +52,8 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'operator-linebreak': 'off',
     'react/jsx-one-expression-per-line': 'off',
+    'prefer-arrow-callback': 'off',
+    'no-underscore-dangle': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

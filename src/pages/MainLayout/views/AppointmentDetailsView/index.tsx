@@ -99,6 +99,7 @@ export default function AppointmentDetails() {
         </Button>
       </div>
       <ChatSessionView
+        chatId=""
         open={open}
         handleClose={handleClose}
         currentUser={currentUser}
