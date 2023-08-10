@@ -7,6 +7,7 @@ import TopBar from './components/TopBar';
 import TextMessageSender from './components/TextMessageSender';
 import TextMessageUser from './components/TextMessageUser';
 import Send from '../../../../assets/vector/send.svg';
+import { CareRecipient, HealthProfessional } from '../../../../types';
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -18,12 +19,17 @@ const Transition = forwardRef(function Transition(
 });
 type Props = {
   open: boolean;
+  currentUser?: CareRecipient | HealthProfessional | null;
   handleClose: () => void;
 };
 const initialState = {
   text: '',
 };
-export default function ChatSessionView({ open, handleClose }: Props) {
+export default function ChatSessionView({
+  open,
+  handleClose,
+  currentUser,
+}: Props) {
   const [query, setQuery] = useState(initialState);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -33,6 +39,7 @@ export default function ChatSessionView({ open, handleClose }: Props) {
     console.log(query);
     setQuery(initialState);
   };
+
   return (
     <div>
       <Dialog
@@ -42,7 +49,7 @@ export default function ChatSessionView({ open, handleClose }: Props) {
         TransitionComponent={Transition}
       >
         <div className="flex flex-col relative">
-          <TopBar handleClose={handleClose} />
+          <TopBar currentUser={currentUser} handleClose={handleClose} />
           <div className="flex flex-col mt-16 mb-16 w-full p-3">
             <TextMessageSender text="" />
             <TextMessageUser text="" />
@@ -77,3 +84,7 @@ export default function ChatSessionView({ open, handleClose }: Props) {
     </div>
   );
 }
+
+ChatSessionView.defaultProps = {
+  currentUser: null,
+};

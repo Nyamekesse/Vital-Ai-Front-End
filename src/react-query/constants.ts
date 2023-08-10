@@ -5,4 +5,5 @@ export const queryKeys = {
   notifications: 'notifications',
   organization: 'organization',
   organizationTeams: 'organization-teams',
+  chats: 'chats',
 };

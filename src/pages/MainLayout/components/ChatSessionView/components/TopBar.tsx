@@ -5,13 +5,14 @@ import Avatar from '@mui/material/Avatar/Avatar';
 import Toolbar from '@mui/material/Toolbar/Toolbar';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { StyledBadge } from './StyledBadge';
+import { CareRecipient, HealthProfessional } from '../../../../../types';
 
 type Props = {
-  name?: string;
+  currentUser: HealthProfessional | CareRecipient | null | undefined;
   handleClose: () => void;
 };
 
-export default function TopBar({ handleClose, name }: Props) {
+export default function TopBar({ handleClose, currentUser }: Props) {
   return (
     <AppBar position="fixed" color="default" sx={{ height: 60 }}>
       <Toolbar>
@@ -31,8 +32,8 @@ export default function TopBar({ handleClose, name }: Props) {
               variant="dot"
             >
               <Avatar
-                alt="Remy Sharp"
-                src="https://i.pinimg.com/originals/07/33/ba/0733ba760b29378474dea0fdbcb97107.png"
+                alt={currentUser?.firstName}
+                src={currentUser?.displayPicture}
               />
             </StyledBadge>
           </div>
@@ -42,7 +43,9 @@ export default function TopBar({ handleClose, name }: Props) {
               variant="h4"
               component="div"
             >
-              {name || 'Vital Ai'}
+              {currentUser
+                ? `${currentUser.firstName} ${currentUser.lastName}`
+                : 'Vital Ai'}
             </Typography>
           </div>
         </div>
@@ -50,7 +53,3 @@ export default function TopBar({ handleClose, name }: Props) {
     </AppBar>
   );
 }
-
-TopBar.defaultProps = {
-  name: '',
-};

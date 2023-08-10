@@ -8,6 +8,7 @@ import { UserType } from '../../../../types';
 import AiIcon from '../../../../components/AiIcon/AiIcon';
 import MessageIconFilled from '../../../../components/MessageIconFilled';
 import ChatSessionView from '../ChatSessionView';
+import ChatListView from '../ChatListView';
 
 type NavigationValue = string;
 
@@ -16,11 +17,18 @@ export default function BottomBar({ userType }: { userType: string }) {
   const [value, setValue] = useState('home');
   const [isActive, setIsActive] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openChatLists, setOpenChatLists] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleChatListsOpen = () => {
+    setOpenChatLists(true);
+  };
+  const handleChatListClose = () => {
+    setOpenChatLists(false);
   };
   const handleChange = (value: NavigationValue) => {
     setValue(value);
@@ -56,7 +64,7 @@ export default function BottomBar({ userType }: { userType: string }) {
           <BottomNavigationAction
             value="chat"
             icon={<MessageIconFilled isActive={isActive} />}
-            onClick={handleClickOpen}
+            onClick={handleChatListsOpen}
           />
         )}
 
@@ -67,6 +75,10 @@ export default function BottomBar({ userType }: { userType: string }) {
         />
       </BottomNavigation>
       <ChatSessionView open={open} handleClose={handleClose} />
+      <ChatListView
+        openChatLists={openChatLists}
+        handleChatListClose={handleChatListClose}
+      />
     </>
   );
 }
