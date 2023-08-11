@@ -51,7 +51,7 @@ export default function NotificationsView({
                     onClick={() => markAsRead(id)}
                     onKeyDown={(event) => {
                       if (event.key === 'Enter' || event.key === ' ') {
-                        console.log('hello');
+                        markAsRead(id);
                       }
                     }}
                   >

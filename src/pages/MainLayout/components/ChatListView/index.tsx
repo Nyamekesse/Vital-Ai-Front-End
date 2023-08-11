@@ -62,7 +62,7 @@ export default function ChatListView({
                   tabIndex={index}
                   onKeyDown={(event) => {
                     if (event.key === 'Enter' || event.key === ' ') {
-                      console.log('hi');
+                      handleClickOpen('kknojn4');
                     }
                   }}
                 >

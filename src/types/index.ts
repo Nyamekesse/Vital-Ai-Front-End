@@ -134,6 +134,18 @@ export interface InfoResponse {
   organization?: Organization;
 }
 
+export interface UseMessagesById {
+  messages: SingleChatDetails[];
+  participants: string[];
+}
+
+export interface SingleChatDetails {
+  _id: string;
+  content: string;
+  author: string;
+  date: string;
+}
+
 export enum Status {
   PENDING = 'PENDING',
   UPCOMING = 'UPCOMING',

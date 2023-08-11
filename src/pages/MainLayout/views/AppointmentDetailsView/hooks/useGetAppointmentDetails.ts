@@ -15,7 +15,7 @@ interface AppointmentDetails {
   scheduledTime: string;
   healthProfessional: HealthProfessional;
   purpose: string;
-  sta;
+  status: string;
 }
 
 async function fetchAppointmentDetailsById(id: string): Promise<Appointment> {

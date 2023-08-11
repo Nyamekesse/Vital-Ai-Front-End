@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { url } from '../shared/constants';
 
@@ -14,8 +13,6 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response.status === 401) {
-      const navigate = useNavigate();
-      navigate('/log-in');
       toast.warning('Session expired please log in again');
     }
     return Promise.reject(error);
