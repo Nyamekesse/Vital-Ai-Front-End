@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { LocalizationProvider } from '@mui/x-date-pickers';

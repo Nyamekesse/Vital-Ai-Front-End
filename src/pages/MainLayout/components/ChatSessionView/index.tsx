@@ -13,11 +13,7 @@ import {
   UseMessagesById,
 } from '../../../../types';
 import EmptyResults from '../../../../components/EmptyResponse/EmptyResults';
-import {
-  getDirectHistory,
-  sendDirectMessage,
-  socket,
-} from '../../../../sockets/clientSocket';
+import { sendDirectMessage, socket } from '../../../../sockets/clientSocket';
 import { useGetChatById } from './hooks/useGetChatsInfoById';
 
 const Transition = forwardRef(function Transition(

@@ -1,7 +1,6 @@
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import axiosInstance from '../../../../../axios-instance';
 import { queryKeys } from '../../../../../react-query/constants';
-import { countUnreadChats } from '../../../../../utils/countUnreadChats';
 import { CareRecipient, HealthProfessional } from '../../../../../types';
 
 interface ConversationResponse {

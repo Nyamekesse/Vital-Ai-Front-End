@@ -92,7 +92,7 @@ export default function AppointmentDetails() {
           variant="contained"
           startIcon={<MessagingIcon />}
           onClick={handleClickOpen}
-          // disabled={!isSameDate || isAfterTime}
+          disabled={!isSameDate || isAfterTime}
         >
           Appointment starts at{' '}
           {dayjs(appointmentDetails.scheduledTime).format('hh:mm A')}

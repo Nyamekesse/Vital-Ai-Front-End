@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable prefer-arrow-callback */
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
@@ -9,12 +9,7 @@ import ChatInfoCard from './components/ChatInfoCard';
 import { useChats } from './hooks/useChats';
 import EmptyResults from '../../../../components/EmptyResponse/EmptyResults';
 import ChatSessionView from '../ChatSessionView';
-import {
-  CareRecipient,
-  HealthProfessional,
-  UseMessagesById,
-} from '../../../../types';
-import { socket } from '../../../../sockets/clientSocket';
+import { CareRecipient, HealthProfessional } from '../../../../types';
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
