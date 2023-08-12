@@ -31,22 +31,25 @@ const Transition = forwardRef(function Transition(
 
 type Props = {
   open: boolean;
-  chatId: string;
   currentUser?: CareRecipient | HealthProfessional | null;
   handleClose: () => void;
 };
 
 export default function ChatSessionView({
   open,
-  chatId,
   handleClose,
   currentUser,
 }: Props) {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<SingleChatDetails[] | null>(null);
-
   useGetChatById(currentUser?.userID);
-
+  useEffect(() => {
+    socket &&
+      socket.on('direct-chat-history', (data: UseMessagesById) => {
+        const { messages } = data;
+        setMessages(messages);
+      });
+  });
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setMessage(value);
@@ -60,13 +63,6 @@ export default function ChatSessionView({
       });
     }
   };
-  useEffect(() => {
-    socket &&
-      socket.on('direct-chat-history', (data: UseMessagesById) => {
-        const { messages } = data;
-        setMessages(messages);
-      });
-  }, []);
 
   return (
     <div>

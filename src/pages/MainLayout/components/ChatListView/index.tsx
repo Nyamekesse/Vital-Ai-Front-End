@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-curly-newline */
 /* eslint-disable prefer-arrow-callback */
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
@@ -8,7 +9,12 @@ import ChatInfoCard from './components/ChatInfoCard';
 import { useChats } from './hooks/useChats';
 import EmptyResults from '../../../../components/EmptyResponse/EmptyResults';
 import ChatSessionView from '../ChatSessionView';
-import { CareRecipient } from '../../../../types';
+import {
+  CareRecipient,
+  HealthProfessional,
+  UseMessagesById,
+} from '../../../../types';
+import { socket } from '../../../../sockets/clientSocket';
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -27,13 +33,17 @@ export default function ChatListView({
   openChatLists,
   handleChatListClose,
 }: Props) {
-  const { dummyChats } = useChats();
-  const [currentUser, setCurrentUser] = useState<CareRecipient | null>(null);
+  const { chats } = useChats();
+
+  const [currentUser, setCurrentUser] = useState<
+    CareRecipient | HealthProfessional | null
+  >(null);
   const [open, setOpen] = useState(false);
-  const [chatId, setChatId] = useState('');
-  const handleClickOpen = (id: string) => {
-    setChatId(id);
+  const handleClickOpen = (
+    participant: CareRecipient | HealthProfessional | null,
+  ) => {
     setOpen(true);
+    setCurrentUser(participant);
   };
   const handleClose = () => {
     setOpen(false);
@@ -51,25 +61,26 @@ export default function ChatListView({
           <TopBar handleClose={handleChatListClose} />
         </div>
         <div className="flex flex-col items-start justify-center mt-16 mb-16 p-3">
-          {dummyChats.length ? (
-            dummyChats.map((chat, index) => {
+          {chats.length ? (
+            chats.map((chat, index) => {
+              const participant = chat.participant[0];
               return (
                 <div
                   key={index}
                   className="w-full"
-                  onClick={() => handleClickOpen('kknojn4')}
+                  onClick={() => handleClickOpen(participant)}
                   role="button"
                   tabIndex={index}
                   onKeyDown={(event) => {
                     if (event.key === 'Enter' || event.key === ' ') {
-                      handleClickOpen('kknojn4');
+                      handleClickOpen(participant);
                     }
                   }}
                 >
                   <ChatInfoCard
-                    displayPicture="https://api.multiavatar.com/enmxb2qen6.svg?apikey=LFTk59wNposvr3"
-                    firstName="Samuel"
-                    lastName="Nyamekesse"
+                    displayPicture={participant.displayPicture}
+                    firstName={participant.firstName}
+                    lastName={participant.lastName}
                   />
                 </div>
               );
@@ -79,7 +90,11 @@ export default function ChatListView({
           )}
         </div>
       </Dialog>
-      <ChatSessionView open={open} chatId={chatId} handleClose={handleClose} />
+      <ChatSessionView
+        open={open}
+        currentUser={currentUser}
+        handleClose={handleClose}
+      />
     </div>
   );
 }
