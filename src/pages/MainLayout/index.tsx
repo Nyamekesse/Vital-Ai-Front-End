@@ -22,9 +22,9 @@ export default function MainLayout() {
       (document.querySelector('.top-nav') as HTMLElement)?.offsetHeight,
     );
 
-    vitalAiToken
-      ? socketServerConnection(vitalAiToken)
-      : socketServerDisConnection();
+    // vitalAiToken
+    //   ? socketServerConnection(vitalAiToken)
+    //   : socketServerDisConnection();
   }, [vitalAiToken]);
   return vitalAiToken ? (
     <div className="flex flex-col overflow-x-hidden">

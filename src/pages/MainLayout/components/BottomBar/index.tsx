@@ -74,7 +74,7 @@ export default function BottomBar({ userType }: { userType: string }) {
           icon={<BookmarkIcon />}
         />
       </BottomNavigation>
-      <ChatSessionView open={open} chatId="" handleClose={handleClose} />
+      <ChatSessionView open={open} handleClose={handleClose} />
       <ChatListView
         openChatLists={openChatLists}
         handleChatListClose={handleChatListClose}

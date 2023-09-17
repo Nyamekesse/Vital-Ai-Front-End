@@ -16,10 +16,10 @@ export default function ConnectionsListDisplay() {
       </Typography>
       <div className="flex flex-wrap items-center justify-center">
         {storedUser?.Connection.length ? (
-          storedUser.Connection.map((connection, index) => (
-            <div key={index}>
+          storedUser.Connection.map((connection) => (
+            <div key={connection.healthProfessional.userID}>
               <Card
-                key={connection.id}
+                key={connection.healthProfessional.userID}
                 firstName={connection.healthProfessional.firstName}
                 lastName={connection.healthProfessional.lastName}
                 displayPicture={connection.healthProfessional.displayPicture}

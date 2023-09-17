@@ -1,12 +1,12 @@
 import { useOutletContext } from 'react-router-dom';
 import Typography from '@mui/material/Typography/Typography';
 import { Carousel } from '../../../../components';
-import ConnectionsListDisplay from './components/ConnectionsDisplay';
 import SpecialitySection from './components/SpecialitySection';
 import OrganizationSection from './components/OrganizationSection';
 import { ContextType, UserType } from '../../../../types';
 import OrganizationTeam from './components/OrganizationTeam';
 import ConnectionsListDisplayH from './components/ConnectionsDisplayH';
+import ConnectionsListDisplay from './components/ConnectionsDisplay';
 
 export default function HomeScreen() {
   const { storedUser } = useOutletContext<ContextType>();

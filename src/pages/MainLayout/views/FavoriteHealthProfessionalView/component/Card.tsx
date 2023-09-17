@@ -4,8 +4,10 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Typography from '@mui/material/Typography/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton/IconButton';
+import { useRemoveConnection } from '../hooks/useRemoveHealthProfessional';
 
 type Props = {
+  id: string;
   firstName: string;
   lastName: string;
   displayPicture: string;
@@ -13,12 +15,14 @@ type Props = {
   organization: string;
 };
 export default function Card({
+  id,
   firstName,
   lastName,
   displayPicture,
   organization,
   specialization,
 }: Props) {
+  const { mutate } = useRemoveConnection();
   return (
     <div className="flex p-4 shadow-lg rounded-lg w-[330px]">
       <div className="">
@@ -39,7 +43,7 @@ export default function Card({
           >
             Dr. {firstName} {lastName}
           </Typography>
-          <IconButton onClick={() => console.log('hi')}>
+          <IconButton onClick={() => mutate(id)}>
             <DeleteForeverIcon color="error" />
           </IconButton>
         </div>

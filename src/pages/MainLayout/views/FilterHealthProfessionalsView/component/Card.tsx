@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import Avatar from '@mui/material/Avatar';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Typography from '@mui/material/Typography/Typography';
 import Divider from '@mui/material/Divider';
 
@@ -38,7 +37,6 @@ export default function Card({
           >
             Dr. {firstName} {lastName}
           </Typography>
-          <FavoriteBorderIcon color="primary" />
         </div>
         <hr />
         <div className="mt-3">

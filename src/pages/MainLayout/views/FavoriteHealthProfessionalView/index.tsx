@@ -13,8 +13,9 @@ export default function FavoriteHealthProfessionalView() {
         ) : (
           storedUser?.Connection.map((staff) => (
             <Card
-              firstName={staff.healthProfessional.firstName}
               key={staff.healthProfessional.userID}
+              id={staff.healthProfessional.userID}
+              firstName={staff.healthProfessional.firstName}
               lastName={staff.healthProfessional.lastName}
               displayPicture={staff.healthProfessional.displayPicture}
               specialization={staff.healthProfessional.specialization.name}
