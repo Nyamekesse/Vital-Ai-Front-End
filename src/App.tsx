@@ -8,6 +8,7 @@ import FillProfile from './pages/MainLayout/views/FillProfileView';
 import HomeScreen from './pages/MainLayout/views/HomeView';
 import PageNotFound from './pages/404 page';
 import HealthProfessionalDetailsView from './pages/MainLayout/views/HealthProfessionalDetailsView';
+import FavoriteHealthProfessionalView from './pages/MainLayout/views/FavoriteHealthProfessionalView';
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
           <Route
             path="/appointment/:id/details"
             element={<AppointmentDetails />}
+          />
+          <Route
+            path="/favorite/health-professionals"
+            element={<FavoriteHealthProfessionalView />}
           />
           <Route path="/profile/me" element={<FillProfile />} />
         </Route>

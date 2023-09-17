@@ -6,6 +6,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 import { UserType } from '../../../../types';
 import MobileMenu from '../MobileMenu';
 import NotificationsView from '../../views/NotificationsView';
@@ -49,6 +50,7 @@ export default function TopBar({
     setNotificationOpen(false);
   };
   const { unreadNotification } = useNotifications();
+  const navigate = useNavigate();
   return (
     <div className="flex justify-between items-center px-2 py-3 shadow-md bg-white z-40 ">
       <div className="flex w-full">
@@ -72,7 +74,9 @@ export default function TopBar({
       </div>
       <div className="flex justify-between items-center mr-[5%] w-[60px]">
         {userType !== UserType.HEALTH_PROFESSIONAL && (
-          <IconButton>
+          <IconButton
+            onClick={() => navigate('/favorite/health-professionals')}
+          >
             <FavoriteBorderIcon color="primary" />
           </IconButton>
         )}

@@ -1,9 +1,9 @@
-import { Typography, Box, Button } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
-import PageNotFoundImage from '../../assets/vector/page_not_found_re_e9o6.svg'
+import { Typography, Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import PageNotFoundImage from '../../assets/vector/page_not_found_re_e9o6.svg';
 
 export default function PageNotFound() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="w-full h-screen max-w-7xl ">
       <div className="flex justify-center h-full flex-col items-center w-[80%] mx-auto text-center">
@@ -39,5 +39,5 @@ export default function PageNotFound() {
         </Button>
       </div>
     </div>
-  )
+  );
 }

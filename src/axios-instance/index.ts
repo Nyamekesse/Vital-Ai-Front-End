@@ -13,10 +13,8 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response.status === 401) {
+      window.location.reload();
       toast.warning('Session expired please log in again');
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
     }
     return Promise.reject(error);
   },
