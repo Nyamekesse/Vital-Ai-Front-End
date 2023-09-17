@@ -14,7 +14,6 @@ export default function OrganizationTeam({
   userName: string;
 }) {
   const organizationTeams = useOrganizationTeam(organizationId);
-
   return (
     <div className="flex flex-col mt-4 w-full">
       <Typography
