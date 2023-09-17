@@ -1,10 +1,11 @@
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import axios from 'axios';
 import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import axiosInstance from '../../../../../axios-instance';
 import { queryKeys } from '../../../../../react-query/constants';
 import { Appointment } from '../../../../../types';
 import { SERVER_ERROR } from '../../../../../shared/constants';
+import { queryClient } from '../../../../../react-query';
 
 interface UseAppointments {
   appointments: Appointment[];
@@ -53,6 +54,5 @@ export function useGetAllAppointments(status: string): UseAppointments {
 }
 
 export function usePrefetchAllAppointment(): void {
-  const queryClient = useQueryClient();
   queryClient.prefetchQuery(queryKeys.appointments, getAllAppointments);
 }

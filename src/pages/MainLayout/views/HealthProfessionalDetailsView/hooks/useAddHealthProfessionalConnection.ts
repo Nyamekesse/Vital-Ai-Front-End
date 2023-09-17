@@ -1,9 +1,10 @@
 import { toast } from 'react-toastify';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import axios from 'axios';
 import axiosInstance from '../../../../../axios-instance';
 import { SERVER_ERROR } from '../../../../../shared/constants';
 import { queryKeys } from '../../../../../react-query/constants';
+import { queryClient } from '../../../../../react-query';
 
 async function addHealthProfessional(id: string) {
   try {
@@ -18,7 +19,6 @@ async function addHealthProfessional(id: string) {
 }
 
 export function useAddHealthProfessional(id: string) {
-  const queryClient = useQueryClient();
   const { mutate } = useMutation((id: string) => addHealthProfessional(id), {
     onSuccess: async () => {
       queryClient.invalidateQueries([queryKeys.healthProfessional, id]);

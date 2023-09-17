@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import axiosInstance from '../../../../../axios-instance';
 import { SERVER_ERROR } from '../../../../../shared/constants';
 import { queryKeys } from '../../../../../react-query/constants';
+import { queryClient } from '../../../../../react-query';
 
 async function markNotificationRead(id: string | undefined) {
   try {
@@ -17,7 +18,6 @@ async function markNotificationRead(id: string | undefined) {
 }
 
 export function useNotificationUpdate() {
-  const queryClient = useQueryClient();
   const { mutate: markAsRead } = useMutation(
     (id: string) => markNotificationRead(id),
     {
