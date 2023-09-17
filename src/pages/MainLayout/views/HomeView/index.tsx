@@ -14,7 +14,7 @@ export default function HomeScreen() {
   return (
     <div className="py-3 px-3">
       <Carousel />
-      {storedUser.user.userType === UserType.CARE_RECIPIENT ? (
+      {storedUser?.user.userType === UserType.CARE_RECIPIENT ? (
         <div className="mt-8 flex flex-col items-center justify-start">
           <div>
             <OrganizationSection />
@@ -32,11 +32,11 @@ export default function HomeScreen() {
             Current Organization
           </Typography>
           <Typography variant="subtitle1" mb={1} sx={{}}>
-            {storedUser.organization?.name}
+            {storedUser?.organization?.name}
           </Typography>
           <OrganizationTeam
-            userName={storedUser.firstName}
-            organizationId={storedUser.organization!.id}
+            userName={storedUser?.firstName}
+            organizationId={storedUser?.organization?.id}
           />
           <ConnectionsListDisplayH />
         </div>

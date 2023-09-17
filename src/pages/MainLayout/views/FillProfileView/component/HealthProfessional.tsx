@@ -10,23 +10,20 @@ import {
 } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { getStoredUser } from '../../../../../user-storage';
-import { HealthProfessional } from '../../../../../types';
+import { useUserInfo } from '../../../../LogIn/hooks/useUserInfo';
 
 export default function HealthProfessionalView() {
-  const [userDetails, setUserDetails] = useState<HealthProfessional>(
-    getStoredUser(),
-  );
+  const userDetails = useUserInfo();
   const [formData, setFormData] = useState({
-    firstName: userDetails.firstName,
-    lastName: userDetails.lastName,
-    experience: userDetails.experience,
-    medicalLicenseNumber: userDetails.medicalLicenseNumber,
-    gender: userDetails.gender,
-    contactInfo: userDetails.contactInfo,
-    specialization: userDetails.specialization.name,
-    displayPicture: userDetails.displayPicture,
-    about: userDetails.about,
+    firstName: userDetails?.firstName,
+    lastName: userDetails?.lastName,
+    experience: userDetails?.experience,
+    medicalLicenseNumber: userDetails?.medicalLicenseNumber,
+    gender: userDetails?.gender,
+    contactInfo: userDetails?.contactInfo,
+    specialization: userDetails?.specialization.name,
+    displayPicture: userDetails?.displayPicture,
+    about: userDetails?.about,
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

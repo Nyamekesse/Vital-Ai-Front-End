@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import { Typography } from '@mui/material';
-import { InfoResponse } from '../../../../../types';
-import { getStoredUser } from '../../../../../user-storage';
 import EmptyResults from '../../../../../components/EmptyResponse/EmptyResults';
 import Card from './Card';
+import { useUserInfo } from '../../../../LogIn/hooks/useUserInfo';
 
 export default function ConnectionsListDisplayH() {
-  const [storedUser] = useState<InfoResponse>(getStoredUser());
-  const { user } = storedUser;
+  const storedUser = useUserInfo();
 
   return (
     <div className="flex flex-col mt-6 w-full ">
@@ -19,7 +16,7 @@ export default function ConnectionsListDisplayH() {
         Connected CareRecipients
       </Typography>
       <div className="flex flex-col flex-wrap items-center justify-center">
-        {storedUser.Connection.length ? (
+        {storedUser?.Connection.length ? (
           storedUser.Connection.map((connection, index) => {
             return (
               <div key={index}>

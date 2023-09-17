@@ -10,7 +10,7 @@ export default function OrganizationTeam({
   userName,
   organizationId,
 }: {
-  organizationId: string;
+  organizationId: string | undefined;
   userName: string;
 }) {
   const organizationTeams = useOrganizationTeam(organizationId);

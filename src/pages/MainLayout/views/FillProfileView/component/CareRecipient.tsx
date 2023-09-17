@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
@@ -7,27 +7,20 @@ import { DateField } from '@mui/x-date-pickers/DateField';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { getStoredUser } from '../../../../../user-storage';
-import { CareRecipient } from '../../../../../types';
+import { useUserInfo } from '../../../../LogIn/hooks/useUserInfo';
 
 export default function CareRecipientView() {
-  const [userDetails, setUserDetails] = useState<CareRecipient>(
-    getStoredUser(),
-  );
+  const userDetails = useUserInfo();
   const [formData, setFormData] = useState({
-    firstName: userDetails.firstName,
-    lastName: userDetails.lastName,
-    dateOfBirth: dayjs(userDetails.dateOfBirth).toString(),
-    gender: userDetails.gender,
-    contactInfo: userDetails.contactInfo,
-    location: userDetails.location,
-    displayPicture: userDetails.displayPicture,
-    healthBackground: userDetails.healthBackground,
+    firstName: userDetails?.firstName,
+    lastName: userDetails?.lastName,
+    dateOfBirth: dayjs(userDetails?.dateOfBirth).toString(),
+    gender: userDetails?.gender,
+    contactInfo: userDetails?.contactInfo,
+    location: userDetails?.location,
+    displayPicture: userDetails?.displayPicture,
+    healthBackground: userDetails?.healthBackground,
   });
-
-  useEffect(() => {
-    setUserDetails(getStoredUser());
-  }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
