@@ -120,18 +120,8 @@ export interface Notification {
   updatedAt: Date | string;
 }
 
-export interface InfoResponse {
-  contactInfo: string;
-  dateOfBirth: string;
-  displayPicture: string;
-  firstName: string;
-  gender: string;
+export interface InfoResponse extends CareRecipient, HealthProfessional {
   user: User;
-  healthBackground: string;
-  lastName: string;
-  location: string;
-  Connection: Connection[];
-  organization?: Organization;
 }
 
 export interface UseMessagesById {

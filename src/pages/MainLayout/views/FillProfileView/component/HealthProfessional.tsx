@@ -10,10 +10,15 @@ import {
 } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { useUserInfo } from '../../../../LogIn/hooks/useUserInfo';
+import { InfoResponse } from '../../../../../types';
+import { useUpdateProfileDetails } from '../hooks/useUpDateProfile';
 
-export default function HealthProfessionalView() {
-  const userDetails = useUserInfo();
+type Props = {
+  userDetails: InfoResponse;
+};
+
+export default function HealthProfessionalView({ userDetails }: Props) {
+  const { mutate } = useUpdateProfileDetails();
   const [formData, setFormData] = useState({
     firstName: userDetails?.firstName,
     lastName: userDetails?.lastName,
@@ -35,7 +40,7 @@ export default function HealthProfessionalView() {
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(formData);
+    mutate(formData);
   };
   return (
     <div className="flex pt-3 flex-col items-center">
@@ -91,6 +96,7 @@ export default function HealthProfessionalView() {
           type="text"
           onChange={handleInputChange}
           size="small"
+          disabled
           defaultValue={userDetails.specialization.name}
           key="specialization"
         />
@@ -153,7 +159,7 @@ export default function HealthProfessionalView() {
         <TextField
           defaultValue={userDetails.about}
           margin="dense"
-          name="healthBio"
+          name="about"
           placeholder="Please tell us about your educational background"
           type="text"
           multiline

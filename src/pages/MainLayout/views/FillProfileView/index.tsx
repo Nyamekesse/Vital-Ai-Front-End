@@ -5,12 +5,13 @@ import { ContextType, UserType } from '../../../../types';
 
 export default function FillProfile() {
   const { storedUser } = useOutletContext<ContextType>();
+
   return (
     <div>
-      {storedUser.user.userType === UserType.CARE_RECIPIENT ? (
-        <CareRecipient />
+      {storedUser?.user.userType === UserType.CARE_RECIPIENT ? (
+        <CareRecipient userDetails={storedUser} />
       ) : (
-        <HealthProfessionalView />
+        <HealthProfessionalView userDetails={storedUser} />
       )}
     </div>
   );

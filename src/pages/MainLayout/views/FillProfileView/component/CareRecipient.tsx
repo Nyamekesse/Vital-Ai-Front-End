@@ -7,14 +7,18 @@ import { DateField } from '@mui/x-date-pickers/DateField';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { useUserInfo } from '../../../../LogIn/hooks/useUserInfo';
+import { InfoResponse } from '../../../../../types';
+import { useUpdateProfileDetails } from '../hooks/useUpDateProfile';
 
-export default function CareRecipientView() {
-  const userDetails = useUserInfo();
+type Props = {
+  userDetails: InfoResponse;
+};
+export default function CareRecipientView({ userDetails }: Props) {
+  const { mutate } = useUpdateProfileDetails();
   const [formData, setFormData] = useState({
     firstName: userDetails?.firstName,
     lastName: userDetails?.lastName,
-    dateOfBirth: dayjs(userDetails?.dateOfBirth).toString(),
+    dateOfBirth: userDetails?.dateOfBirth,
     gender: userDetails?.gender,
     contactInfo: userDetails?.contactInfo,
     location: userDetails?.location,
@@ -37,6 +41,7 @@ export default function CareRecipientView() {
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    mutate(formData);
   };
 
   return (
@@ -140,14 +145,14 @@ export default function CareRecipientView() {
         <TextField
           defaultValue={userDetails.healthBackground}
           margin="dense"
-          name="healthBio"
+          name="healthBackground"
           placeholder="Please tell us about your health Bio"
           type="text"
           multiline
           minRows={2}
           maxRows={4}
           onChange={handleInputChange}
-          key="healthBio"
+          key="healthBackground"
         />
         <div className="mx-auto w-1/2 mt-6">
           <Button
