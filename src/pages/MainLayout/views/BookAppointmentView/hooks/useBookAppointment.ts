@@ -7,7 +7,7 @@ import { queryKeys } from '../../../../../react-query/constants';
 import { queryClient } from '../../../../../react-query';
 
 interface InputData {
-  healthProfessionalID: string;
+  healthProfessionalID: string | undefined;
   scheduledTime: string;
   purpose: string;
 }

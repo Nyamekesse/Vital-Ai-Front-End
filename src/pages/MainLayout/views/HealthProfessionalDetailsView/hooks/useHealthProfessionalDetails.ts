@@ -26,7 +26,7 @@ interface HealthProfessionalDetails {
 }
 
 async function fetchHealthProfessionalDetailsById(
-  id: string,
+  id: string | undefined,
 ): Promise<HealthProfessionalDetails> {
   try {
     const { data } = await axiosInstance.get(
@@ -42,7 +42,7 @@ async function fetchHealthProfessionalDetailsById(
   }
 }
 
-export function useHealthProfessionalDetails(id: string) {
+export function useHealthProfessionalDetails(id: string | undefined) {
   const { data: details } = useQuery([queryKeys.healthProfessional, id], () =>
     fetchHealthProfessionalDetailsById(id),
   );

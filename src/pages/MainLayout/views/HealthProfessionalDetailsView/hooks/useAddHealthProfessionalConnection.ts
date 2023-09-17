@@ -6,7 +6,7 @@ import { SERVER_ERROR } from '../../../../../shared/constants';
 import { queryKeys } from '../../../../../react-query/constants';
 import { queryClient } from '../../../../../react-query';
 
-async function addHealthProfessional(id: string) {
+async function addHealthProfessional(id: string | undefined) {
   try {
     await axiosInstance.post(`/new/connection/id=${id}`);
   } catch (error) {
@@ -18,13 +18,16 @@ async function addHealthProfessional(id: string) {
   }
 }
 
-export function useAddHealthProfessional(id: string) {
-  const { mutate } = useMutation((id: string) => addHealthProfessional(id), {
-    onSuccess: async () => {
-      queryClient.invalidateQueries([queryKeys.healthProfessional, id]);
-      toast.success('Added Successfully');
+export function useAddHealthProfessional() {
+  const { mutate } = useMutation(
+    (id: string | undefined) => addHealthProfessional(id),
+    {
+      onSuccess: async () => {
+        queryClient.invalidateQueries([queryKeys.user]);
+        toast.success('Added Successfully');
+      },
     },
-  });
+  );
 
   return { mutate };
 }

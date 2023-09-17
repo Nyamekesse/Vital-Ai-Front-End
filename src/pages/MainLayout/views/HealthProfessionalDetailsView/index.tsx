@@ -1,6 +1,6 @@
 import { useTheme } from '@mui/material/styles';
 import { useOutletContext, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -16,13 +16,18 @@ import Credentials from './components/Credentials';
 import { useAddHealthProfessional } from './hooks/useAddHealthProfessionalConnection';
 import BookAppointmentView from '../BookAppointmentView';
 import { ContextType, UserType } from '../../../../types';
+import { checkIfConnectionExists } from '../../../../utils/checkAlreadyConnected';
 
 export default function HealthProfessionalDetailsView() {
   const { storedUser } = useOutletContext<ContextType>();
-  const { user } = storedUser;
-  const { id = '' } = useParams();
+  const { user, Connection } = storedUser;
+
+  const { id } = useParams();
   const details = useHealthProfessionalDetails(id);
-  const { mutate } = useAddHealthProfessional(id);
+  const { mutate } = useAddHealthProfessional();
+  const [isConnected, setIsConnected] = useState(
+    checkIfConnectionExists(id, Connection),
+  );
 
   const [open, setOpen] = useState(false);
   const theme = useTheme();
@@ -34,6 +39,9 @@ export default function HealthProfessionalDetailsView() {
   const handleClose = () => {
     setOpen(false);
   };
+  useEffect(() => {
+    setIsConnected(checkIfConnectionExists(id, Connection));
+  }, [Connection, id, isConnected]);
   return details ? (
     <div>
       <div className="py-2 px-3 flex flex-col justify-start">
@@ -70,13 +78,15 @@ export default function HealthProfessionalDetailsView() {
               >
                 Book Appointment
               </Button>
-              <IconButton
-                color="primary"
-                aria-label="add connection"
-                onClick={() => mutate(id)}
-              >
-                <FavoriteBorderIcon />
-              </IconButton>
+              {!isConnected && (
+                <IconButton
+                  color="primary"
+                  aria-label="add connection"
+                  onClick={() => mutate(id)}
+                >
+                  <FavoriteBorderIcon />
+                </IconButton>
+              )}
             </>
           )}
         </div>

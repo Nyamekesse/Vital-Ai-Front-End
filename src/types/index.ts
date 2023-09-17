@@ -122,6 +122,7 @@ export interface Notification {
 
 export interface InfoResponse extends CareRecipient, HealthProfessional {
   user: User;
+  Connection: Connection[];
 }
 
 export interface UseMessagesById {

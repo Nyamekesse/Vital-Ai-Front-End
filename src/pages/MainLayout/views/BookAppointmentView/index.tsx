@@ -15,12 +15,17 @@ import { getAvailableTimes } from '../../../../utils/openHoursTimeDisplay';
 import { useAddAppointment } from './hooks/useBookAppointment';
 
 type Props = {
-  healthProfessionalID: string;
+  healthProfessionalID: string | undefined;
   fullScreen: boolean;
   open: boolean;
   openTime: string | Date;
   closeTime: string | Date;
   handleClose: () => void;
+};
+type InitialProps = {
+  healthProfessionalID: string | undefined;
+  purpose: string;
+  scheduledTime: string;
 };
 export default function BookAppointmentView({
   healthProfessionalID,
@@ -30,7 +35,7 @@ export default function BookAppointmentView({
   openTime,
   closeTime,
 }: Props) {
-  const appointmentInitialState = {
+  const appointmentInitialState: InitialProps = {
     healthProfessionalID: '',
     scheduledTime: '',
     purpose: '',
