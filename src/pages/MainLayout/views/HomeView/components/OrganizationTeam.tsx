@@ -23,6 +23,7 @@ export default function OrganizationTeam({
       >
         Your Team of Workers
       </Typography>
+
       <div className="flex flex-wrap items-center justify-stretch">
         {organizationTeams.map((member: HealthProfessional) => {
           if (member.firstName === userName) {

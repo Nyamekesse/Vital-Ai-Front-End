@@ -11,7 +11,7 @@ import { queryKeys } from '../../../../../react-query/constants';
 async function updateProfileDetails(formData: any) {
   try {
     await axiosInstance.patch('/user/profile', formData);
-    return;
+    return true;
   } catch (error) {
     const message =
       axios.isAxiosError(error) && error?.response?.data?.message
@@ -25,8 +25,9 @@ export function useUpdateProfileDetails() {
   const { mutate } = useMutation(
     (formData: any) => updateProfileDetails(formData),
     {
-      onSuccess: () => {
+      onSuccess: async () => {
         queryClient.invalidateQueries([queryKeys.user]);
+        queryClient.invalidateQueries([queryKeys.organizationTeams]);
         toast.success('User Profile updated successfully');
       },
     },

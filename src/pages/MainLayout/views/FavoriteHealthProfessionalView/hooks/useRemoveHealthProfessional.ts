@@ -5,6 +5,7 @@ import { SERVER_ERROR } from '../../../../../shared/constants';
 import axiosInstance from '../../../../../axios-instance';
 import { queryClient } from '../../../../../react-query';
 import { queryKeys } from '../../../../../react-query/constants';
+import { getUserDetails } from '../../../../LogIn/hooks/useUserInfo';
 
 async function removeConnection(id: string) {
   try {
@@ -21,6 +22,7 @@ async function removeConnection(id: string) {
 export const useRemoveConnection = () => {
   const { mutate } = useMutation((id: string) => removeConnection(id), {
     onSuccess: async () => {
+      await getUserDetails();
       queryClient.invalidateQueries(queryKeys.user);
       toast.success('Favorite removed');
     },

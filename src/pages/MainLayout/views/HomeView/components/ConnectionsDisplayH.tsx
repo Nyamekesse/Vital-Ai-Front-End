@@ -1,11 +1,11 @@
 import { Typography } from '@mui/material';
+import { useOutletContext } from 'react-router-dom';
 import EmptyResults from '../../../../../components/EmptyResponse/EmptyResults';
 import Card from './Card';
-import { useUserInfo } from '../../../../LogIn/hooks/useUserInfo';
+import { ContextType } from '../../../../../types';
 
 export default function ConnectionsListDisplayH() {
-  const storedUser = useUserInfo();
-
+  const { storedUser } = useOutletContext<ContextType>();
   return (
     <div className="flex flex-col mt-6 w-full ">
       <Typography

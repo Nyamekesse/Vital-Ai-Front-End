@@ -14,6 +14,7 @@ export default function MainLayout() {
   const [bottomNavHeight, setBottomNavHeight] = useState(0);
   const [topNavHeight, setTopNavHeight] = useState(0);
   const storedUser = useUserInfo();
+
   useEffect(() => {
     setBottomNavHeight(
       (document.querySelector('.bottom-nav') as HTMLElement)?.offsetHeight,

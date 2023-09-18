@@ -12,6 +12,7 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       onError: queryErrorHandler,
+      keepPreviousData: true,
       retry: 1,
     },
     mutations: {

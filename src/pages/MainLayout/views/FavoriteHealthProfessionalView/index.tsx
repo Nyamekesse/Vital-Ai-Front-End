@@ -1,9 +1,10 @@
+import { useOutletContext } from 'react-router-dom';
 import Card from './component/Card';
 import EmptyResults from '../../../../components/EmptyResponse/EmptyResults';
-import { useUserInfo } from '../../../LogIn/hooks/useUserInfo';
+import { ContextType } from '../../../../types';
 
 export default function FavoriteHealthProfessionalView() {
-  const storedUser = useUserInfo();
+  const { storedUser } = useOutletContext<ContextType>();
 
   return (
     <div className="py-3 px-3 flex flex-col justify-center items-center">
