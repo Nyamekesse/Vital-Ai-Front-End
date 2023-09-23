@@ -1,12 +1,10 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { toast } from 'react-toastify';
-import { url } from '../shared/constants';
 
 const config: AxiosRequestConfig = {
-  baseURL: url,
+  baseURL: import.meta.env.VITE_REACT_APP_SERVER_URL_1,
   withCredentials: true,
 };
-
 const axiosInstance = axios.create(config);
 
 axiosInstance.interceptors.response.use(

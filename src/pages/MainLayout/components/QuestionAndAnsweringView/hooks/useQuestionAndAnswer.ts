@@ -2,14 +2,13 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import { SERVER_ERROR } from '../../../../../shared/constants';
 
+const url = import.meta.env.VITE_REACT_APP_SERVER_URL_2;
+
 async function sendChat(query) {
   try {
-    const { data } = await axios.post(
-      'http://127.0.0.1:8005/api/query-answer',
-      {
-        query,
-      },
-    );
+    const { data } = await axios.post(`${url}/query-answer`, {
+      query,
+    });
     return data.result;
   } catch (error) {
     const message =

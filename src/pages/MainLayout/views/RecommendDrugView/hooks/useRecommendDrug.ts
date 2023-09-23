@@ -4,12 +4,11 @@ import { useMutation } from 'react-query';
 import axios from 'axios';
 import { SERVER_ERROR } from '../../../../../shared/constants';
 
+const url = import.meta.env.VITE_REACT_APP_SERVER_URL_2;
+
 async function updateProfileDetails(formData: any) {
   try {
-    const { data } = await axios.post(
-      'http://localhost:8005/api/recommend-drug',
-      formData,
-    );
+    const { data } = await axios.post(`${url}/recommend-drug`, formData);
     return data.result;
   } catch (error) {
     const message =
