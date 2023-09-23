@@ -6,7 +6,6 @@ import axiosInstance from '../../../axios-instance';
 import { SERVER_ERROR } from '../../../shared/constants';
 import { queryClient } from '../../../react-query';
 import { queryKeys } from '../../../react-query/constants';
-import { getUserDetails } from './useUserInfo';
 
 interface FormData {
   email: string;

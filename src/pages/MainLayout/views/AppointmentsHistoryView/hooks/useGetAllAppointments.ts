@@ -5,7 +5,6 @@ import axiosInstance from '../../../../../axios-instance';
 import { queryKeys } from '../../../../../react-query/constants';
 import { Appointment } from '../../../../../types';
 import { SERVER_ERROR } from '../../../../../shared/constants';
-import { queryClient } from '../../../../../react-query';
 
 interface UseAppointments {
   appointments: Appointment[];

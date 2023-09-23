@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
-import axiosInstance from '../../../../../axios-instance';
 import { SERVER_ERROR } from '../../../../../shared/constants';
 
 async function sendChat(query) {

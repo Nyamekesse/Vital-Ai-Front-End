@@ -17,7 +17,6 @@ import { useAddHealthProfessional } from './hooks/useAddHealthProfessionalConnec
 import BookAppointmentView from '../BookAppointmentView';
 import { ContextType, UserType } from '../../../../types';
 import { checkIfConnectionExists } from '../../../../utils/checkAlreadyConnected';
-import { useUserInfo } from '../../../LogIn/hooks/useUserInfo';
 
 export default function HealthProfessionalDetailsView() {
   // const storedUser = useUserInfo();

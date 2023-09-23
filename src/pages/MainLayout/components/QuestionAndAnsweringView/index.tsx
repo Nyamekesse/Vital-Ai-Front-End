@@ -7,11 +7,7 @@ import TopBar from './components/TopBar';
 import TextMessageSender from './components/TextMessageSender';
 import TextMessageUser from './components/TextMessageUser';
 import Send from '../../../../assets/vector/send.svg';
-import {
-  CareRecipient,
-  HealthProfessional,
-  SingleChatDetails,
-} from '../../../../types';
+import { CareRecipient, HealthProfessional } from '../../../../types';
 import EmptyResults from '../../../../components/EmptyResponse/EmptyResults';
 import { useSubmitQuery } from './hooks/useQuestionAndAnswer';
 
@@ -30,6 +26,16 @@ type Props = {
   handleClose: () => void;
 };
 
+type Query = {
+  _id: string;
+  author: {
+    role: string;
+    display_picture: string | undefined;
+  };
+  content: string;
+  date: string;
+};
+
 export default function QuestionAndAnsweringView({
   open,
   handleClose,
@@ -37,7 +43,7 @@ export default function QuestionAndAnsweringView({
 }: Props) {
   const { isLoading, mutate } = useSubmitQuery();
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState<SingleChatDetails[] | null>([]);
+  const [messages, setMessages] = useState<Query[]>([]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -88,7 +94,7 @@ export default function QuestionAndAnsweringView({
           <TopBar handleClose={handleClose} />
           <div className="flex flex-col mt-16 mb-16 w-full p-3">
             {messages?.length ? (
-              messages.map((chat: SingleChatDetails) => {
+              messages.map((chat: Query) => {
                 if (chat.author?.role === 'User') {
                   return <TextMessageUser key={chat._id} text={chat.content} />;
                 }

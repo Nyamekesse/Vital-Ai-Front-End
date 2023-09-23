@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Card from './component/Card';
 import { useHealthProfessionals } from './hooks/useHealthProfessionals';
 import { HealthProfessionalResponse } from '../../../../types';
