@@ -74,7 +74,7 @@ export default function HealthProfessionalView({ userDetails }: Props) {
           type="text"
           onChange={handleInputChange}
           size="small"
-          defaultValue={userDetails.firstName}
+          defaultValue={userDetails?.firstName}
           key="firstName"
         />
         <TextField
@@ -85,7 +85,7 @@ export default function HealthProfessionalView({ userDetails }: Props) {
           type="text"
           onChange={handleInputChange}
           size="small"
-          defaultValue={userDetails.lastName}
+          defaultValue={userDetails?.lastName}
           key="lastname"
         />
         <TextField
@@ -97,7 +97,7 @@ export default function HealthProfessionalView({ userDetails }: Props) {
           onChange={handleInputChange}
           size="small"
           disabled
-          defaultValue={userDetails.specialization.name}
+          defaultValue={userDetails?.specialization.name}
           key="specialization"
         />
         <TextField
@@ -108,7 +108,7 @@ export default function HealthProfessionalView({ userDetails }: Props) {
           type="text"
           onChange={handleInputChange}
           size="small"
-          defaultValue={userDetails.medicalLicenseNumber}
+          defaultValue={userDetails?.medicalLicenseNumber}
           key="medicalLicenseNumber"
         />
         <TextField
@@ -116,7 +116,7 @@ export default function HealthProfessionalView({ userDetails }: Props) {
           name="experience"
           label="Experience"
           placeholder="Contact Info"
-          defaultValue={userDetails.experience}
+          defaultValue={userDetails?.experience}
           type="text"
           onChange={handleInputChange}
           size="small"
@@ -130,13 +130,13 @@ export default function HealthProfessionalView({ userDetails }: Props) {
           type="text"
           onChange={handleInputChange}
           size="small"
-          defaultValue={userDetails.contactInfo}
+          defaultValue={userDetails?.contactInfo}
           key="contactInfo"
         />
         <div className="my-3">
           <Select
             id="select-gender"
-            defaultValue={userDetails.gender}
+            defaultValue={userDetails?.gender}
             label="Gender"
             name="gender"
             displayEmpty
@@ -157,7 +157,7 @@ export default function HealthProfessionalView({ userDetails }: Props) {
           </Select>
         </div>
         <TextField
-          defaultValue={userDetails.about}
+          defaultValue={userDetails?.about}
           margin="dense"
           name="about"
           placeholder="Please tell us about your educational background"
