@@ -7,8 +7,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import { UserType } from '../../../../types';
 import AiIcon from '../../../../components/AiIcon/AiIcon';
 import MessageIconFilled from '../../../../components/MessageIconFilled';
-import ChatSessionView from '../ChatSessionView';
 import ChatListView from '../ChatListView';
+import QuestionAndAnsweringView from '../QuestionAndAnsweringView';
 
 type NavigationValue = string;
 
@@ -74,8 +74,9 @@ export default function BottomBar({ userType }: { userType: string }) {
           icon={<BookmarkIcon />}
         />
       </BottomNavigation>
-      <ChatSessionView open={open} handleClose={handleClose} />
+      <QuestionAndAnsweringView open={open} handleClose={handleClose} />
       <ChatListView
+        userType={userType}
         openChatLists={openChatLists}
         handleChatListClose={handleChatListClose}
       />

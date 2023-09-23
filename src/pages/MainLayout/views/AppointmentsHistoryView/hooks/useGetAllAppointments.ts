@@ -52,7 +52,3 @@ export function useGetAllAppointments(status: string): UseAppointments {
   );
   return { appointments, setStatusFilter, filter };
 }
-
-export function usePrefetchAllAppointment(): void {
-  queryClient.prefetchQuery(queryKeys.appointments, getAllAppointments);
-}

@@ -33,8 +33,8 @@ export function useAuthLogin() {
   const navigate = useNavigate();
   const { mutate } = useMutation((data: FormData) => signin(data), {
     onSuccess: () => {
-      queryClient.prefetchQuery(queryKeys.user, getUserDetails);
-      // queryClient.invalidateQueries([queryKeys.user]);
+      // queryClient.prefetchQuery(queryKeys.user, getUserDetails);
+      queryClient.invalidateQueries([queryKeys.user]);
       toast.success('Login Successful');
       navigate('/', { replace: true });
     },

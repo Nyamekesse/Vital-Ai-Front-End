@@ -44,7 +44,7 @@ export default function AppointmentDetails() {
     appointmentDetails?.scheduledTime,
     'day',
   );
-  const isAfterTime = currentDate.isBefore(
+  const isAfterTime = currentDate.isAfter(
     appointmentDetails?.scheduledTime,
     'hour',
   );
@@ -94,8 +94,9 @@ export default function AppointmentDetails() {
           onClick={handleClickOpen}
           disabled={!isSameDate || isAfterTime}
         >
-          Appointment starts at{' '}
-          {dayjs(appointmentDetails.scheduledTime).format('hh:mm A')}
+          {isAfterTime
+            ? 'Appointment Ended'
+            : `Appointment Starts: ${dayjs(appointmentDetails.scheduledTime)}`}
         </Button>
       </div>
       <ChatSessionView

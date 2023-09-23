@@ -17,8 +17,10 @@ async function getAllChats(): Promise<ConversationResponse[]> {
   return data;
 }
 
-export function useChats(): UseChats {
-  const { data: chats = [] } = useQuery(queryKeys.chats, getAllChats);
+export function useChats(currentUser: string): UseChats {
+  const { data: chats = [] } = useQuery(queryKeys.chats, getAllChats, {
+    enabled: currentUser === 'HEALTH_PROFESSIONAL',
+  });
   //   const unreadChats = countUnreadChats(chats);
   return { chats };
 }

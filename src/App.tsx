@@ -9,6 +9,8 @@ import HomeScreen from './pages/MainLayout/views/HomeView';
 import PageNotFound from './pages/404 page';
 import HealthProfessionalDetailsView from './pages/MainLayout/views/HealthProfessionalDetailsView';
 import FavoriteHealthProfessionalView from './pages/MainLayout/views/FavoriteHealthProfessionalView';
+import PredictDiseaseView from './pages/MainLayout/views/PredictDiseaseView';
+import RecommendDrugView from './pages/MainLayout/views/RecommendDrugView';
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
             element={<FavoriteHealthProfessionalView />}
           />
           <Route path="/profile/me" element={<FillProfile />} />
+          <Route path="/predict-disease" element={<PredictDiseaseView />} />
+          <Route path="/recommend-drug" element={<RecommendDrugView />} />
         </Route>
         <Route path="/log-in" element={<LogInPage />} />
         <Route path="/register-new-user" element={<SignUpPage />} />

@@ -1,8 +1,11 @@
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable react/jsx-curly-newline */
 /* eslint-disable react/jsx-one-expression-per-line */
 import { useState } from 'react';
 import { IconButton, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import QuizIcon from '@mui/icons-material/Quiz';
 import Badge from '@mui/material/Badge';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import dayjs from 'dayjs';
@@ -72,7 +75,7 @@ export default function TopBar({
           </Typography>
         </div>
       </div>
-      <div className="flex justify-between items-center mr-[5%] w-[60px]">
+      <div className="flex justify-between items-center px-4 w-auto">
         {userType !== UserType.HEALTH_PROFESSIONAL && (
           <IconButton
             onClick={() => navigate('/favorite/health-professionals')}
@@ -80,6 +83,15 @@ export default function TopBar({
             <FavoriteBorderIcon color="primary" />
           </IconButton>
         )}
+        <IconButton
+          onClick={() =>
+            userType === UserType.HEALTH_PROFESSIONAL
+              ? navigate('/recommend-drug')
+              : navigate('/predict-disease')
+          }
+        >
+          <QuizIcon color="primary" />
+        </IconButton>
         <IconButton onClick={handleClickOpen}>
           <Badge badgeContent={unreadNotification} color="primary">
             <NotificationsIcon />

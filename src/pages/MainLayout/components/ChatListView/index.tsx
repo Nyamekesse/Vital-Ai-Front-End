@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable prefer-arrow-callback */
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
@@ -20,19 +20,21 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 type Props = {
+  userType: string;
   openChatLists: boolean;
   handleChatListClose: () => void;
 };
 
 export default function ChatListView({
+  userType,
   openChatLists,
   handleChatListClose,
 }: Props) {
-  const { chats } = useChats();
-
   const [currentUser, setCurrentUser] = useState<
     CareRecipient | HealthProfessional | null
   >(null);
+  const { chats } = useChats(userType);
+
   const [open, setOpen] = useState(false);
   const handleClickOpen = (
     participant: CareRecipient | HealthProfessional | null,
