@@ -4,8 +4,6 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../axios-instance';
 import { SERVER_ERROR } from '../../../shared/constants';
-// import { queryClient } from '../../../react-query';
-// import { queryKeys } from '../../../react-query/constants';
 
 interface FormData {
   email: string;
@@ -32,8 +30,6 @@ export function useAuthLogin() {
   const navigate = useNavigate();
   const { mutate } = useMutation((data: FormData) => signin(data), {
     onSuccess: () => {
-      // queryClient.prefetchQuery(queryKeys.user, getUserDetails);
-      // queryClient.invalidateQueries([queryKeys.user]);
       toast.success('Login Successful');
       navigate('/', { replace: true });
     },
