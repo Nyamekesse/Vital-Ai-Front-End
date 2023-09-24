@@ -29,8 +29,8 @@ async function signin({ email, password }: FormData) {
 export function useAuthLogin() {
   const navigate = useNavigate();
   const { mutate } = useMutation((data: FormData) => signin(data), {
-    onSuccess: () => {
-      toast.success('Login Successful');
+    onSuccess: async () => {
+      await toast.success('Login Successful');
       navigate('/', { replace: true });
     },
   });
