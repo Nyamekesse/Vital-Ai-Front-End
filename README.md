@@ -14,7 +14,6 @@ Welcome to the frontend repository of VitalAI, a cutting-edge healthcare platfor
 - [Google Collaboratory Notebooks](#google-collaboratory-notebooks)
 - [Screenshots Demo](#screenshots-demo)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
@@ -110,11 +109,5 @@ This section displays some of the screens of the project:
 ## Contributing
 
 We welcome contributions to improve VitalAI! Feel free to open issues, submit pull requests, or provide feedback to help us enhance our platform.
-
-## License
-
-VitalAI is released under the [MIT License](https://opensource.org/licenses/MIT).
-
----
 
 For more information about the backend of VitalAI, please visit the [backend repository]('https://github.com/Vital-Ai-GH/backend-server'). If you have any questions or need support, contact us at [nyamekessesamuel@duck.com](mailto:nyamekessesamuel@duck.com). Thank you for being a part of the VitalAI community!
