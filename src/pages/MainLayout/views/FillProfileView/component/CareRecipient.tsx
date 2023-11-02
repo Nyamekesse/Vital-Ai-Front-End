@@ -21,11 +21,12 @@ export default function CareRecipientView({ userDetails }: Props) {
     dateOfBirth: userDetails?.dateOfBirth,
     gender: userDetails?.gender,
     contactInfo: userDetails?.contactInfo,
-    location: userDetails?.location,
+    location: userDetails?.location.split(',')[0],
     displayPicture: userDetails?.displayPicture,
     healthBackground: userDetails?.healthBackground,
   });
-
+  // console.log(userDetails?.location.split(',')[1]);
+  // console.log(userDetails?.location.split(',')[2].trim());
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });

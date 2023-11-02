@@ -78,7 +78,9 @@ export default function ProfileCard({
               noWrap
               align="center"
             >
-              {location && <>Location:&nbsp;&nbsp;{`${location}`}</>}
+              {location && (
+                <>Location:&nbsp;&nbsp;{`${location.split(',')[0]}`}</>
+              )}
               {organization && (
                 <>Organization:&nbsp;&nbsp;{`${organization}`}</>
               )}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-destructuring */
 import { useEffect, useState } from 'react';
 import ReactMapGl, {
@@ -8,10 +9,19 @@ import ReactMapGl, {
   Layer,
   NavigationControl,
 } from 'react-map-gl';
+import { useSearchParams, useLocation } from 'react-router-dom';
 
 export function MapView() {
-  const [start, setStart] = useState([-73, 42]);
-  const [end, setEnd] = useState([-73, 42.4]);
+  const location = useLocation();
+  const userLoc = location.state.start;
+  const [searchParams] = useSearchParams();
+  const careRecipientLong = Number(searchParams.get('lng'));
+  const careRecipientLat = Number(searchParams.get('lat'));
+  const [end, setEnd] = useState<number[]>([
+    careRecipientLong,
+    careRecipientLat,
+  ]);
+
   const [coords, setCoords] = useState([]);
   const [steps, setSteps] = useState([]);
   const [viewState, setViewState] = useState({
@@ -19,25 +29,27 @@ export function MapView() {
     latitude: 5.614818,
     zoom: 7.5,
   });
+
   useEffect(() => {
     const getRoute = async () => {
-      const response = await fetch(
-        `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${
-          start[1]
-        };${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${
-          import.meta.env.VITE_REACT_APP_MAP_BOX_TOKEN
-        }`,
-      );
-      const data = await response.json();
+      if (userLoc.length > 0) {
+        const response = await fetch(
+          `https://api.mapbox.com/directions/v5/mapbox/driving/${userLoc[0]},${
+            userLoc[1]
+          };${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${
+            import.meta.env.VITE_REACT_APP_MAP_BOX_TOKEN
+          }`,
+        );
+        const data = await response.json();
 
-      const coords = data.routes[0].geometry.coordinates;
-      setCoords(coords);
-      const steps = data.routes[0].legs[0].steps;
-      setSteps(steps);
+        const coords = await data.routes[0].geometry.coordinates;
+        setCoords(coords);
+        const steps = await data.routes[0].legs[0].steps;
+        setSteps(steps);
+      }
     };
-
     getRoute();
-  }, [end, start]);
+  }, [userLoc, end]);
 
   const geojson = {
     type: 'FeatureCollection',
@@ -110,12 +122,15 @@ export function MapView() {
         <Source id="routeSource" type="geojson" data={geojson}>
           <Layer {...lineStyle} />
         </Source>
+        <Source id="end" type="geojson" data={endPoint}>
+          <Layer {...layerEndpoint} />
+        </Source>
 
         <GeolocateControl />
         <FullscreenControl />
         <NavigationControl />
 
-        <Marker longitude={start[0]} latitude={start[1]} />
+        <Marker longitude={userLoc[0]} latitude={userLoc[1]} />
       </ReactMapGl>
     </div>
   );

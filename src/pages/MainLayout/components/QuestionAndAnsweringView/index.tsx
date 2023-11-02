@@ -104,7 +104,11 @@ export default function QuestionAndAnsweringView({
             ) : (
               <EmptyResults message="There are currently no chats with Vital Ai Bot" />
             )}
-            {isLoading && <LoadingBubbles />}
+            {isLoading && (
+              <div className="self-start">
+                <LoadingBubbles />
+              </div>
+            )}
           </div>
 
           <div className="flex items-center border h-16 fixed left-0 right-0 bottom-0 w-full bg-current border-gray-300 rounded-tl-lg rounded-tr-lg px-4">

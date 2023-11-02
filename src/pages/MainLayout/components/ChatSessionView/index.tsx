@@ -1,7 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable prefer-destructuring */
+
 import { ChangeEvent, forwardRef, useEffect, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
+import { IconButton } from '@mui/material';
+import NavigationIcon from '@mui/icons-material/Navigation';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import TopBar from './components/TopBar';
 import TextMessageSender from './components/TextMessageSender';
 import TextMessageUser from './components/TextMessageUser';
@@ -11,6 +18,7 @@ import {
   HealthProfessional,
   SingleChatDetails,
   UseMessagesById,
+  UserType,
 } from '../../../../types';
 import EmptyResults from '../../../../components/EmptyResponse/EmptyResults';
 import { sendDirectMessage, socket } from '../../../../sockets/clientSocket';
@@ -28,6 +36,8 @@ const Transition = forwardRef(function Transition(
 type Props = {
   open: boolean;
   currentUser?: CareRecipient | HealthProfessional | null;
+  userType: UserType;
+  location?: number[];
   handleClose: () => void;
 };
 
@@ -35,17 +45,43 @@ export default function ChatSessionView({
   open,
   handleClose,
   currentUser,
+  userType,
+  location,
 }: Props) {
+  const navigate = useNavigate();
   const [message, setMessage] = useState('');
+  const [start, setStart] = useState<number[]>([]);
+  // const [end, setEnd] = useState<number[]>(location);
   const [messages, setMessages] = useState<SingleChatDetails[] | null>(null);
   useGetChatById(currentUser?.userID);
+
   useEffect(() => {
+    const getPosition = () => {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+    };
+
+    const setCoordinates = async () => {
+      try {
+        const position: any = await getPosition();
+
+        setStart([
+          Number(position.coords.longitude),
+          Number(position.coords.latitude),
+        ]);
+      } catch (error) {
+        toast.error('An error occurred while fetching location');
+      }
+    };
+    setCoordinates();
     socket &&
       socket.on('direct-chat-history', (data: UseMessagesById) => {
         const { messages } = data;
         setMessages(messages);
       });
   });
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setMessage(value);
@@ -56,6 +92,13 @@ export default function ChatSessionView({
       sendDirectMessage({
         receiverId: currentUser?.userID,
         message,
+      });
+    }
+  };
+  const handleNavigation = () => {
+    if (location) {
+      navigate(`/map?lng=${location[0]}&lat=${location[1]}`, {
+        state: { start },
       });
     }
   };
@@ -95,10 +138,15 @@ export default function ChatSessionView({
             <button
               onClick={handleSubmit}
               type="button"
-              className="text-white  rounded-full w-8 h-8 flex items-center justify-center"
+              className="text-white rounded-full w-8 h-8 flex items-center justify-center"
             >
               <img src={Send} alt="send button" />
             </button>
+            {userType === UserType.HEALTH_PROFESSIONAL && (
+              <IconButton color="primary" onClick={handleNavigation}>
+                <NavigationIcon fontSize="large" />
+              </IconButton>
+            )}
           </div>
         </div>
       </Dialog>
@@ -108,4 +156,5 @@ export default function ChatSessionView({
 
 ChatSessionView.defaultProps = {
   currentUser: null,
+  location: [0, 0],
 };
