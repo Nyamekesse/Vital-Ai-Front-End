@@ -11,6 +11,8 @@ import HealthProfessionalDetailsView from './pages/MainLayout/views/HealthProfes
 import FavoriteHealthProfessionalView from './pages/MainLayout/views/FavoriteHealthProfessionalView';
 import PredictDiseaseView from './pages/MainLayout/views/PredictDiseaseView';
 import RecommendDrugView from './pages/MainLayout/views/RecommendDrugView';
+import { MapView } from './pages/MainLayout/views/MapView';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function App() {
             path="/favorite/health-professionals"
             element={<FavoriteHealthProfessionalView />}
           />
+          <Route path="/map" element={<MapView />} />
           <Route path="/profile/me" element={<FillProfile />} />
           <Route path="/predict-disease" element={<PredictDiseaseView />} />
           <Route path="/recommend-drug" element={<RecommendDrugView />} />

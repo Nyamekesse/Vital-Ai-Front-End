@@ -28,7 +28,7 @@ export default function ConnectionsListDisplay() {
                 specialization={
                   connection.healthProfessional.specialization.name
                 }
-                connectedOn={connection.healthProfessional.createdAt}
+                connectedOn={connection.createdAt}
               />
             </div>
           ))

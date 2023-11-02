@@ -35,6 +35,7 @@ export default function ProfileCard({
   const { user } = storedUser;
   const { acceptMutate } = useAccept(id);
   const { rejectMutate } = useReject(id);
+
   return (
     <div className="flex  p-4 shadow-md rounded-lg">
       <div className="">
@@ -77,7 +78,9 @@ export default function ProfileCard({
               noWrap
               align="center"
             >
-              {location && <>Location:&nbsp;&nbsp;{`${location}`}</>}
+              {location && (
+                <>Location:&nbsp;&nbsp;{`${location.split(',')[0]}`}</>
+              )}
               {organization && (
                 <>Organization:&nbsp;&nbsp;{`${organization}`}</>
               )}

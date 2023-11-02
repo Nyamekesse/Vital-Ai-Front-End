@@ -19,9 +19,11 @@ import ChatSessionView from '../../components/ChatSessionView';
 export default function AppointmentDetails() {
   const { storedUser } = useOutletContext<ContextType>();
   const { user } = storedUser;
+
   const { id = '' } = useParams();
   const appointmentDetails = useGetAppointmentDetails(id);
   const [open, setOpen] = useState(false);
+  const [end, setEnd] = useState<number[]>([]);
   const [currentUser, setCurrentUser] = useState<
     CareRecipient | HealthProfessional | null
   >(null);
@@ -31,6 +33,11 @@ export default function AppointmentDetails() {
     }
     if (appointmentDetails && user.userType === UserType.HEALTH_PROFESSIONAL) {
       setCurrentUser(appointmentDetails.careRecipient);
+
+      setEnd([
+        Number(appointmentDetails.careRecipient.location.split(',')[1].trim()),
+        Number(appointmentDetails.careRecipient.location.split(',')[2].trim()),
+      ]);
     }
     setOpen(true);
   };
@@ -92,7 +99,7 @@ export default function AppointmentDetails() {
           variant="contained"
           startIcon={<MessagingIcon />}
           onClick={handleClickOpen}
-          disabled={!isSameDate || isAfterTime}
+          // disabled={!isSameDate || isAfterTime}
         >
           {isAfterTime
             ? 'Appointment Ended'
@@ -103,6 +110,8 @@ export default function AppointmentDetails() {
         open={open}
         handleClose={handleClose}
         currentUser={currentUser}
+        userType={user.userType}
+        location={end}
       />
     </>
   ) : (

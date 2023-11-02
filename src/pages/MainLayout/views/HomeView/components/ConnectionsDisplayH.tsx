@@ -25,7 +25,7 @@ export default function ConnectionsListDisplayH() {
                   firstName={connection.careRecipient.firstName}
                   lastName={connection.careRecipient.lastName}
                   displayPicture={connection.careRecipient.displayPicture}
-                  connectedOn={connection.careRecipient.createdAt}
+                  connectedOn={connection.createdAt}
                   age="45"
                   location={connection.careRecipient.location}
                 />
