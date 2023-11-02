@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-destructuring */
 import { useEffect, useState } from 'react';
-import ReactMapGl, {
+import Map, {
   FullscreenControl,
   Marker,
   GeolocateControl,
@@ -9,6 +9,8 @@ import ReactMapGl, {
   Layer,
   NavigationControl,
 } from 'react-map-gl';
+import type { LineLayer, CircleLayer } from 'react-map-gl';
+import type { FeatureCollection, Feature, Point } from 'geojson';
 import { useSearchParams, useLocation } from 'react-router-dom';
 
 export function MapView() {
@@ -21,6 +23,22 @@ export function MapView() {
     careRecipientLong,
     careRecipientLat,
   ]);
+
+  const point: Point = {
+    type: 'Point',
+    coordinates: end,
+  };
+
+  const feature: Feature<Point> = {
+    type: 'Feature',
+    properties: {},
+    geometry: point,
+  };
+
+  const featureCollection: FeatureCollection<Point> = {
+    type: 'FeatureCollection',
+    features: [feature],
+  };
 
   const [coords, setCoords] = useState([]);
   const [, setSteps] = useState([]);
@@ -51,11 +69,12 @@ export function MapView() {
     getRoute();
   }, [userLoc, end]);
 
-  const geojson = {
+  const geojson: FeatureCollection = {
     type: 'FeatureCollection',
     features: [
       {
-        type: 'feature',
+        type: 'Feature',
+        properties: {},
         geometry: {
           type: 'LineString',
           coordinates: [...coords],
@@ -64,9 +83,10 @@ export function MapView() {
     ],
   };
   // Route styles
-  const lineStyle = {
+  const lineStyle: LineLayer = {
     id: 'roadLayer',
     type: 'line',
+    source: 'mapbox',
     layout: {
       'line-join': 'round',
       'line-cap': 'round',
@@ -79,11 +99,12 @@ export function MapView() {
   };
 
   // 3. endPoint
-  const endPoint = {
+  const endPoint: FeatureCollection = {
     type: 'FeatureCollection',
     features: [
       {
-        type: 'feature',
+        type: 'Feature',
+        properties: {},
         geometry: {
           type: 'Point',
           coordinates: [...end],
@@ -92,26 +113,26 @@ export function MapView() {
     ],
   };
 
-  const layerEndpoint = {
+  const layerEndpoint: CircleLayer = {
     id: 'end',
     type: 'circle',
     source: {
       type: 'geojson',
-      data: end,
+      data: featureCollection,
     },
     paint: {
       'circle-radius': 10,
       'circle-color': '#f30',
     },
   };
-  const handleClick = (e) => {
+  const handleClick = (e: mapboxgl.MapLayerMouseEvent) => {
     const newEnd = e.lngLat;
-    const endPoint = Object.keys(newEnd).map((item, i) => newEnd[item]);
+    const endPoint = Object.keys(newEnd).map((item, _) => newEnd[item]);
     setEnd(endPoint);
   };
   return (
     <div className="mt-[3%] py-3 px-3 flex flex-col justify-center items-center">
-      <ReactMapGl
+      <Map
         {...viewState}
         onClick={handleClick}
         onMove={(evt) => setViewState(evt.viewState)}
@@ -131,7 +152,7 @@ export function MapView() {
         <NavigationControl />
 
         <Marker longitude={userLoc[0]} latitude={userLoc[1]} />
-      </ReactMapGl>
+      </Map>
     </div>
   );
 }
