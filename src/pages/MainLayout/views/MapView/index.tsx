@@ -23,7 +23,7 @@ export function MapView() {
   ]);
 
   const [coords, setCoords] = useState([]);
-  const [steps, setSteps] = useState([]);
+  const [, setSteps] = useState([]);
   const [viewState, setViewState] = useState({
     longitude: -0.205874,
     latitude: 5.614818,
@@ -44,8 +44,8 @@ export function MapView() {
 
         const coords = await data.routes[0].geometry.coordinates;
         setCoords(coords);
-        const steps = await data.routes[0].legs[0].steps;
-        setSteps(steps);
+        const calculatedSteps = await data.routes[0].legs[0].steps;
+        setSteps(calculatedSteps);
       }
     };
     getRoute();

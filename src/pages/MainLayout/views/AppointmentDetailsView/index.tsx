@@ -99,7 +99,7 @@ export default function AppointmentDetails() {
           variant="contained"
           startIcon={<MessagingIcon />}
           onClick={handleClickOpen}
-          // disabled={!isSameDate || isAfterTime}
+          disabled={!isSameDate || isAfterTime}
         >
           {isAfterTime
             ? 'Appointment Ended'

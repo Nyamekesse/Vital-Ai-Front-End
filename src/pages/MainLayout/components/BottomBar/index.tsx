@@ -12,7 +12,7 @@ import QuestionAndAnsweringView from '../QuestionAndAnsweringView';
 
 type NavigationValue = string;
 
-export default function BottomBar({ userType }: { userType: string }) {
+export default function BottomBar({ userType }: { userType: UserType }) {
   const navigate = useNavigate();
   const [value, setValue] = useState('home');
   const [isActive, setIsActive] = useState(false);

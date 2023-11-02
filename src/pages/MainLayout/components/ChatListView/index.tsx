@@ -9,7 +9,7 @@ import ChatInfoCard from './components/ChatInfoCard';
 import { useChats } from './hooks/useChats';
 import EmptyResults from '../../../../components/EmptyResponse/EmptyResults';
 import ChatSessionView from '../ChatSessionView';
-import { CareRecipient, HealthProfessional } from '../../../../types';
+import { CareRecipient, HealthProfessional, UserType } from '../../../../types';
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -20,7 +20,7 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 type Props = {
-  userType: string;
+  userType: UserType;
   openChatLists: boolean;
   handleChatListClose: () => void;
 };
@@ -88,6 +88,7 @@ export default function ChatListView({
         </div>
       </Dialog>
       <ChatSessionView
+        userType={userType}
         open={open}
         currentUser={currentUser}
         handleClose={handleClose}
