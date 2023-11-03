@@ -10,7 +10,9 @@ import BottomBar from './components/BottomBar';
 import { useUserInfo } from '../LogIn/hooks/useUserInfo';
 
 export default function MainLayout() {
-  const [vitalAiToken] = useState(fetchCookie());
+  const vitalAiToken = fetchCookie();
+  console.log(vitalAiToken);
+
   const [bottomNavHeight, setBottomNavHeight] = useState(0);
   const [topNavHeight, setTopNavHeight] = useState(0);
   const storedUser = useUserInfo();
