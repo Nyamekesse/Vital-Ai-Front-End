@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { fetchCookie } from '../../utils/fetchCookie';
 import {
   socketServerConnection,
@@ -27,7 +27,7 @@ export default function MainLayout() {
       ? socketServerConnection(vitalAiToken)
       : socketServerDisConnection();
   }, [vitalAiToken]);
-  return (
+  return vitalAiToken ? (
     <div className="flex flex-col overflow-x-hidden">
       <div className="top-nav fixed left-0 right-0 z-30">
         <TopBar
@@ -45,7 +45,7 @@ export default function MainLayout() {
         <BottomBar userType={storedUser && storedUser?.user.userType} />
       </div>
     </div>
+  ) : (
+    <Navigate to="/log-in" replace />
   );
-  //   <Navigate to="/log-in" replace />
-  // );
 }
