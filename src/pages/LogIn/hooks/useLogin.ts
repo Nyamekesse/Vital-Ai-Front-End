@@ -2,9 +2,10 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { useContext } from 'react';
 import axiosInstance from '../../../axios-instance';
 import { SERVER_ERROR } from '../../../shared/constants';
+import { AuthContext } from '../../../AuthContext';
 
 interface FormData {
   email: string;
@@ -17,9 +18,8 @@ async function signin({ email, password }: FormData) {
       email,
       password,
     });
-    Cookies.set('token', data.token, { expires: 7, secure: true });
 
-    return data.message;
+    return { message: data.message, token: data.token };
   } catch (error) {
     const message =
       axios.isAxiosError(error) && error?.response?.data?.message
@@ -31,8 +31,11 @@ async function signin({ email, password }: FormData) {
 
 export function useAuthLogin() {
   const navigate = useNavigate();
-  const { mutate } = useMutation((data: FormData) => signin(data), {
+  const { setLogin, setToken } = useContext(AuthContext);
+  const { mutate, data } = useMutation((data: FormData) => signin(data), {
     onSuccess: async () => {
+      setLogin(true);
+      setToken(data?.token);
       navigate('/', { replace: true });
       toast.success('Login Successful');
     },
