@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import axiosInstance from '../../../axios-instance';
 import { SERVER_ERROR } from '../../../shared/constants';
 
@@ -16,6 +17,8 @@ async function signin({ email, password }: FormData) {
       email,
       password,
     });
+    Cookies.set('token', data.token, { expires: 7, secure: true });
+
     return data.message;
   } catch (error) {
     const message =
