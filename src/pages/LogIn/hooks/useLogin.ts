@@ -18,7 +18,6 @@ async function signin({ email, password }: FormData) {
       email,
       password,
     });
-
     return { message: data.message, token: data.token };
   } catch (error) {
     const message =
@@ -32,10 +31,10 @@ async function signin({ email, password }: FormData) {
 export function useAuthLogin() {
   const navigate = useNavigate();
   const { setLogin, setToken } = useContext(AuthContext);
-  const { mutate, data } = useMutation((data: FormData) => signin(data), {
-    onSuccess: async () => {
+  const { mutate } = useMutation((data: FormData) => signin(data), {
+    onSuccess: async (data) => {
       setLogin(true);
-      setToken(data?.token);
+      setToken(data.token);
       navigate('/', { replace: true });
       toast.success('Login Successful');
     },

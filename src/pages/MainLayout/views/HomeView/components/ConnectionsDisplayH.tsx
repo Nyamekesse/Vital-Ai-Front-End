@@ -1,11 +1,11 @@
 import { Typography } from '@mui/material';
-import { useOutletContext } from 'react-router-dom';
 import EmptyResults from '../../../../../components/EmptyResponse/EmptyResults';
 import Card from './Card';
-import { ContextType } from '../../../../../types';
+import { useConnections } from '../hooks/useConnectionList';
+import LoadingSpinner from '../../../../../components/LoadingCircle';
 
 export default function ConnectionsListDisplayH() {
-  const { storedUser } = useOutletContext<ContextType>();
+  const { data: connections, isLoading } = useConnections();
   return (
     <div className="flex flex-col mt-6 w-full ">
       <Typography
@@ -16,22 +16,22 @@ export default function ConnectionsListDisplayH() {
         Connected CareRecipients
       </Typography>
       <div className="flex flex-col flex-wrap items-center justify-center">
-        {storedUser?.Connection.length ? (
-          storedUser.Connection.map((connection, index) => {
-            return (
-              <div key={index}>
-                <Card
-                  key={connection.careRecipient.firstName}
-                  firstName={connection.careRecipient.firstName}
-                  lastName={connection.careRecipient.lastName}
-                  displayPicture={connection.careRecipient.displayPicture}
-                  connectedOn={connection.createdAt}
-                  age="45"
-                  location={connection.careRecipient.location}
-                />
-              </div>
-            );
-          })
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : connections.length ? (
+          connections.map((connection) => (
+            <div key={connection.careRecipient.userID}>
+              <Card
+                key={connection.careRecipient.firstName}
+                firstName={connection.careRecipient.firstName}
+                lastName={connection.careRecipient.lastName}
+                displayPicture={connection.careRecipient.displayPicture}
+                connectedOn={connection.createdAt}
+                age="45"
+                location={connection.careRecipient.location}
+              />
+            </div>
+          ))
         ) : (
           <div>
             <EmptyResults message="Not made any connections yet" />

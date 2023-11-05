@@ -1,11 +1,12 @@
 import { Typography } from '@mui/material';
-import { useOutletContext } from 'react-router-dom';
 import EmptyResults from '../../../../../components/EmptyResponse/EmptyResults';
 import Card from './Card';
-import { ContextType } from '../../../../../types';
+import { useConnections } from '../hooks/useConnectionList';
+import LoadingSpinner from '../../../../../components/LoadingCircle';
 
 export default function ConnectionsListDisplay() {
-  const { storedUser } = useOutletContext<ContextType>();
+  const { data: connections, isLoading } = useConnections();
+
   return (
     <div className="flex flex-col mt-6 w-full ">
       <Typography
@@ -16,8 +17,10 @@ export default function ConnectionsListDisplay() {
         Favorite Doctors
       </Typography>
       <div className="flex flex-wrap items-center justify-center">
-        {storedUser?.Connection.length ? (
-          storedUser.Connection.map((connection) => (
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : connections.length ? (
+          connections.map((connection) => (
             <div key={connection.healthProfessional.userID}>
               <Card
                 key={connection.healthProfessional.userID}

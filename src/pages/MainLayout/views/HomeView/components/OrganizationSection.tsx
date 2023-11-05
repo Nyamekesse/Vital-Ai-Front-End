@@ -3,9 +3,10 @@ import Chip from '@mui/material/Chip/Chip';
 import Typography from '@mui/material/Typography/Typography';
 import { useOrganizations } from '../hooks/useOrganizations';
 import { Organization } from '../../../../../types';
+import LoadingSpinner from '../../../../../components/LoadingCircle';
 
 export default function OrganizationSection() {
-  const organizations = useOrganizations();
+  const { data: organizations, isLoading } = useOrganizations();
 
   return (
     <div className="flex flex-col mt-4 w-full">
@@ -17,22 +18,26 @@ export default function OrganizationSection() {
         Partnered Organizations
       </Typography>
       <div className="flex flex-wrap items-center justify-stretch">
-        {organizations.map((organization: Organization) => {
-          return (
-            <div key={organization.id}>
-              <Link
-                to={`/organizations/${organization.id}/health-professionals`}
-              >
-                <Chip
-                  variant="outlined"
-                  color="primary"
-                  label={organization.name}
-                  sx={{ margin: 0.5 }}
-                />
-              </Link>
-            </div>
-          );
-        })}
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          organizations.map((organization: Organization) => {
+            return (
+              <div key={organization.id}>
+                <Link
+                  to={`/organizations/${organization.id}/health-professionals`}
+                >
+                  <Chip
+                    variant="outlined"
+                    color="primary"
+                    label={organization.name}
+                    sx={{ margin: 0.5 }}
+                  />
+                </Link>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );
