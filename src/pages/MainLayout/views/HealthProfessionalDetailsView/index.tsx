@@ -17,18 +17,19 @@ import { useAddHealthProfessional } from './hooks/useAddHealthProfessionalConnec
 import BookAppointmentView from '../BookAppointmentView';
 import { ContextType, UserType } from '../../../../types';
 import { checkIfConnectionExists } from '../../../../utils/checkAlreadyConnected';
+import { useConnections } from '../HomeView/hooks/useConnectionList';
 
 export default function HealthProfessionalDetailsView() {
   // const storedUser = useUserInfo();
 
   const { storedUser } = useOutletContext<ContextType>();
-  const { user, Connection } = storedUser;
-
+  const { user } = storedUser;
+  const { data: connections } = useConnections();
   const { id } = useParams();
   const details = useHealthProfessionalDetails(id);
   const { mutate } = useAddHealthProfessional();
   const [isConnected, setIsConnected] = useState(
-    checkIfConnectionExists(id, Connection),
+    checkIfConnectionExists(id, connections),
   );
 
   const [open, setOpen] = useState(false);
@@ -42,8 +43,8 @@ export default function HealthProfessionalDetailsView() {
     setOpen(false);
   };
   useEffect(() => {
-    setIsConnected(checkIfConnectionExists(id, Connection));
-  }, [Connection, id, isConnected]);
+    setIsConnected(checkIfConnectionExists(id, connections));
+  }, [connections, id, isConnected]);
   return details ? (
     <div>
       <div className="py-2 px-3 flex flex-col justify-start">
