@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import {
   socketServerConnection,
@@ -7,11 +7,10 @@ import {
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
 import { useUserInfo } from '../LogIn/hooks/useUserInfo';
-import { AuthContext } from '../../AuthContext';
 
 export default function MainLayout() {
-  const { isLogin, token } = useContext(AuthContext);
-  const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+  const [token] = useState(sessionStorage.getItem('token'));
+  const [isLoggedIn] = useState(sessionStorage.getItem('isLoggedIn'));
   const [bottomNavHeight, setBottomNavHeight] = useState(0);
   const [topNavHeight, setTopNavHeight] = useState(0);
   const storedUser = useUserInfo();
@@ -24,8 +23,10 @@ export default function MainLayout() {
       (document.querySelector('.top-nav') as HTMLElement)?.offsetHeight,
     );
 
-    isLogin ? socketServerConnection(token) : socketServerDisConnection();
-  }, [isLogin, token]);
+    isLoggedIn === 'true'
+      ? socketServerConnection(token)
+      : socketServerDisConnection();
+  }, [isLoggedIn, token]);
   return isLoggedIn === 'true' ? (
     <div className="flex flex-col overflow-x-hidden">
       <div className="top-nav fixed left-0 right-0 z-30">

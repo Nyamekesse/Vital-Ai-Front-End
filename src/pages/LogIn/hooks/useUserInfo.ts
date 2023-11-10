@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import { useState } from 'react';
 import { queryKeys } from '../../../react-query/constants';
 import axiosInstance from '../../../axios-instance';
 import { SERVER_ERROR } from '../../../shared/constants';
@@ -18,6 +19,9 @@ export const getUserDetails = async () => {
 };
 
 export const useUserInfo = () => {
-  const { data } = useQuery(queryKeys.user, getUserDetails);
+  const [isLoggedIn] = useState(sessionStorage.getItem('isLoggedIn'));
+  const { data } = useQuery(queryKeys.user, getUserDetails, {
+    enabled: isLoggedIn === 'true',
+  });
   return data;
 };

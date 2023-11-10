@@ -30,11 +30,11 @@ async function signin({ email, password }: FormData) {
 
 export function useAuthLogin() {
   const navigate = useNavigate();
-  const { setLogin, setToken } = useContext(AuthContext);
+  const { setToken } = useContext(AuthContext);
   const { mutate } = useMutation((data: FormData) => signin(data), {
     onSuccess: async (data) => {
-      setLogin(true);
       sessionStorage.setItem('isLoggedIn', 'true');
+      sessionStorage.setItem('token', data.token);
       setToken(data.token);
       navigate('/', { replace: true });
       toast.success('Login Successful');

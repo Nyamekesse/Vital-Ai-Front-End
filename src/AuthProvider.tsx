@@ -6,13 +6,9 @@ type AuthProviderProps = {
 };
 
 export default function AuthProvider({ children }: AuthProviderProps) {
-  const [isLogin, setIsLogin] = useState(false);
   const [token, setToken] = useState(null);
 
-  const value = useMemo(
-    () => ({ isLogin, token, setLogin: setIsLogin, setToken }),
-    [isLogin, token],
-  );
+  const value = useMemo(() => ({ token, setToken }), [token]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
