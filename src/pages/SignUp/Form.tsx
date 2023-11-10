@@ -1,6 +1,7 @@
 import Button from '@mui/material/Button/Button';
 import TextField from '@mui/material/TextField/TextField';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuthSignUp } from './hooks/useSignup';
 
 export default function Form() {
@@ -69,6 +70,14 @@ export default function Form() {
           >
             Sign up
           </Button>
+        </div>
+        <div className="mt-3">
+          <p>
+            Already have an account?{' '}
+            <Link to="/log-in" className="text-blue-400">
+              Sign in
+            </Link>
+          </p>
         </div>
       </form>
     </div>

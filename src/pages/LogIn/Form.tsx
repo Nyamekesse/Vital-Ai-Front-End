@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button/Button';
 import TextField from '@mui/material/TextField/TextField';
+import { Link } from 'react-router-dom';
 import { useAuthLogin } from './hooks/useLogin';
 
 export default function Form() {
@@ -20,7 +21,7 @@ export default function Form() {
     setFormData(initialState);
   };
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col items-center">
       <form
         onSubmit={handleSubmit}
         className="mt-5 py-4 w-11/12 mx-auto flex flex-col justify-center"
@@ -57,6 +58,14 @@ export default function Form() {
           >
             Sign in
           </Button>
+        </div>
+        <div className="mt-3">
+          <p>
+            Don&apos;t have an account?{' '}
+            <Link to="/register-new-user" className="text-blue-400">
+              Sign up
+            </Link>
+          </p>
         </div>
       </form>
     </div>
