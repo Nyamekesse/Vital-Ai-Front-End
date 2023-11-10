@@ -34,6 +34,7 @@ export function useAuthLogin() {
   const { mutate } = useMutation((data: FormData) => signin(data), {
     onSuccess: async (data) => {
       setLogin(true);
+      sessionStorage.setItem('isLoggedIn', 'true');
       setToken(data.token);
       navigate('/', { replace: true });
       toast.success('Login Successful');

@@ -23,6 +23,7 @@ export function useLogout() {
     {
       enabled: isActive,
       onSuccess: () => {
+        sessionStorage.clear();
         setLogin(false);
         setToken(null);
         clearStoredUser();

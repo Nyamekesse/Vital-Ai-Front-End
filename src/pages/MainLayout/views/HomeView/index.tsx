@@ -10,7 +10,7 @@ import ConnectionsListDisplay from './components/ConnectionsDisplay';
 
 export default function HomeScreen() {
   const { storedUser } = useOutletContext<ContextType>();
-
+  // Vada_Wyman4@hotmail.com
   return (
     <div className="py-3 px-3">
       <Carousel />

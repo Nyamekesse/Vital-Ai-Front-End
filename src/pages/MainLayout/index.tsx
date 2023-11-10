@@ -11,6 +11,7 @@ import { AuthContext } from '../../AuthContext';
 
 export default function MainLayout() {
   const { isLogin, token } = useContext(AuthContext);
+  const isLoggedIn = sessionStorage.getItem('isLoggedIn');
   const [bottomNavHeight, setBottomNavHeight] = useState(0);
   const [topNavHeight, setTopNavHeight] = useState(0);
   const storedUser = useUserInfo();
@@ -25,7 +26,7 @@ export default function MainLayout() {
 
     isLogin ? socketServerConnection(token) : socketServerDisConnection();
   }, [isLogin, token]);
-  return isLogin ? (
+  return isLoggedIn === 'true' ? (
     <div className="flex flex-col overflow-x-hidden">
       <div className="top-nav fixed left-0 right-0 z-30">
         <TopBar
