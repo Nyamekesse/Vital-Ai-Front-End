@@ -10,25 +10,23 @@ import {
 } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { InfoResponse } from '../../../../../types';
 import { useUpdateProfileDetails } from '../hooks/useUpDateProfile';
+import { useUserInfo } from '../../../../LogIn/hooks/useUserInfo';
+import LoadingSpinner from '../../../../../components/LoadingCircle';
 
-type Props = {
-  userDetails: InfoResponse;
-};
-
-export default function HealthProfessionalView({ userDetails }: Props) {
+export default function HealthProfessionalView() {
+  const { data: user, isLoading } = useUserInfo();
   const { mutate } = useUpdateProfileDetails();
   const [formData, setFormData] = useState({
-    firstName: userDetails?.firstName,
-    lastName: userDetails?.lastName,
-    experience: userDetails?.experience,
-    medicalLicenseNumber: userDetails?.medicalLicenseNumber,
-    gender: userDetails?.gender,
-    contactInfo: userDetails?.contactInfo,
-    specialization: userDetails?.specialization.name,
-    displayPicture: userDetails?.displayPicture,
-    about: userDetails?.about,
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    experience: user?.experience,
+    medicalLicenseNumber: user?.medicalLicenseNumber,
+    gender: user?.gender,
+    contactInfo: user?.contactInfo,
+    specialization: user?.specialization.name,
+    displayPicture: user?.displayPicture,
+    about: user?.about,
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,141 +42,147 @@ export default function HealthProfessionalView({ userDetails }: Props) {
   };
   return (
     <div className="flex pt-3 flex-col items-center">
-      <Typography variant="h6" mb={2}>
-        Fill Your Profile
-      </Typography>
-      <div className="relative">
-        <div className="absolute right-3 bottom-4 z-30">
-          <AddAPhotoIcon
-            fontSize="large"
-            color="primary"
-            onClick={() => console.log('add photo')}
-          />
-        </div>
-        <Avatar
-          alt={formData.firstName}
-          src={formData.displayPicture}
-          sx={{ width: 150, height: 150 }}
-        />
-      </div>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <Typography variant="h6" mb={2}>
+            Fill Your Profile
+          </Typography>
+          <div className="relative">
+            <div className="absolute right-3 bottom-4 z-30">
+              <AddAPhotoIcon
+                fontSize="large"
+                color="primary"
+                onClick={() => console.log('add photo')}
+              />
+            </div>
+            <Avatar
+              alt={formData.firstName}
+              src={formData.displayPicture}
+              sx={{ width: 150, height: 150 }}
+            />
+          </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="mt-3 py-4 w-11/12 mx-auto flex flex-col justify-center"
-      >
-        <TextField
-          margin="dense"
-          name="firstName"
-          label="First Name"
-          placeholder="Enter firstname..."
-          type="text"
-          onChange={handleInputChange}
-          size="small"
-          defaultValue={userDetails?.firstName}
-          key="firstName"
-        />
-        <TextField
-          margin="dense"
-          name="lastName"
-          label="Last Name"
-          placeholder="Enter lastname..."
-          type="text"
-          onChange={handleInputChange}
-          size="small"
-          defaultValue={userDetails?.lastName}
-          key="lastname"
-        />
-        <TextField
-          margin="dense"
-          name="specialization"
-          label="Specialization"
-          placeholder="Specialization"
-          type="text"
-          onChange={handleInputChange}
-          size="small"
-          disabled
-          defaultValue={userDetails?.specialization.name}
-          key="specialization"
-        />
-        <TextField
-          margin="dense"
-          name="medicalLicenseNumber"
-          label="Medical License Number"
-          placeholder="Your medical LicenseNumber"
-          type="text"
-          onChange={handleInputChange}
-          size="small"
-          defaultValue={userDetails?.medicalLicenseNumber}
-          key="medicalLicenseNumber"
-        />
-        <TextField
-          margin="dense"
-          name="experience"
-          label="Experience"
-          placeholder="Contact Info"
-          defaultValue={userDetails?.experience}
-          type="text"
-          onChange={handleInputChange}
-          size="small"
-          key="experience"
-        />
-        <TextField
-          margin="dense"
-          name="contactInfo"
-          label="Contact Info"
-          placeholder="Contact Info"
-          type="text"
-          onChange={handleInputChange}
-          size="small"
-          defaultValue={userDetails?.contactInfo}
-          key="contactInfo"
-        />
-        <div className="my-3">
-          <Select
-            id="select-gender"
-            defaultValue={userDetails?.gender}
-            label="Gender"
-            name="gender"
-            displayEmpty
-            input={<OutlinedInput />}
-            onChange={handleGender}
-            fullWidth
-            size="small"
-            margin="dense"
-            renderValue={(selected) => {
-              if (!selected) {
-                return 'Gender';
-              }
-              return selected;
-            }}
+          <form
+            onSubmit={handleSubmit}
+            className="mt-3 py-4 w-11/12 mx-auto flex flex-col justify-center"
           >
-            <MenuItem value="MALE">Male</MenuItem>
-            <MenuItem value="FEMALE">Female</MenuItem>
-          </Select>
-        </div>
-        <TextField
-          defaultValue={userDetails?.about}
-          margin="dense"
-          name="about"
-          placeholder="Please tell us about your educational background"
-          type="text"
-          multiline
-          minRows={2}
-          maxRows={4}
-          onChange={handleInputChange}
-          key="about"
-        />
-        <div className="mx-auto w-1/2 mt-6">
-          <Button
-            sx={{ textTransform: 'initial' }}
-            variant="contained"
-            type="submit"
-            fullWidth
-          >
-            Update
-          </Button>
-        </div>
-      </form>
+            <TextField
+              margin="dense"
+              name="firstName"
+              label="First Name"
+              placeholder="Enter firstname..."
+              type="text"
+              onChange={handleInputChange}
+              size="small"
+              defaultValue={user?.firstName}
+              key="firstName"
+            />
+            <TextField
+              margin="dense"
+              name="lastName"
+              label="Last Name"
+              placeholder="Enter lastname..."
+              type="text"
+              onChange={handleInputChange}
+              size="small"
+              defaultValue={user?.lastName}
+              key="lastname"
+            />
+            <TextField
+              margin="dense"
+              name="specialization"
+              label="Specialization"
+              placeholder="Specialization"
+              type="text"
+              onChange={handleInputChange}
+              size="small"
+              disabled
+              defaultValue={user?.specialization.name}
+              key="specialization"
+            />
+            <TextField
+              margin="dense"
+              name="medicalLicenseNumber"
+              label="Medical License Number"
+              placeholder="Your medical LicenseNumber"
+              type="text"
+              onChange={handleInputChange}
+              size="small"
+              defaultValue={user?.medicalLicenseNumber}
+              key="medicalLicenseNumber"
+            />
+            <TextField
+              margin="dense"
+              name="experience"
+              label="Experience"
+              placeholder="Contact Info"
+              defaultValue={user?.experience}
+              type="text"
+              onChange={handleInputChange}
+              size="small"
+              key="experience"
+            />
+            <TextField
+              margin="dense"
+              name="contactInfo"
+              label="Contact Info"
+              placeholder="Contact Info"
+              type="text"
+              onChange={handleInputChange}
+              size="small"
+              defaultValue={user?.contactInfo}
+              key="contactInfo"
+            />
+            <div className="my-3">
+              <Select
+                id="select-gender"
+                defaultValue={user?.gender}
+                label="Gender"
+                name="gender"
+                displayEmpty
+                input={<OutlinedInput />}
+                onChange={handleGender}
+                fullWidth
+                size="small"
+                margin="dense"
+                renderValue={(selected) => {
+                  if (!selected) {
+                    return 'Gender';
+                  }
+                  return selected;
+                }}
+              >
+                <MenuItem value="MALE">Male</MenuItem>
+                <MenuItem value="FEMALE">Female</MenuItem>
+              </Select>
+            </div>
+            <TextField
+              defaultValue={user?.about}
+              margin="dense"
+              name="about"
+              placeholder="Please tell us about your educational background"
+              type="text"
+              multiline
+              minRows={2}
+              maxRows={4}
+              onChange={handleInputChange}
+              key="about"
+            />
+            <div className="mx-auto w-1/2 mt-6">
+              <Button
+                sx={{ textTransform: 'initial' }}
+                variant="contained"
+                type="submit"
+                fullWidth
+              >
+                Update
+              </Button>
+            </div>
+          </form>
+        </>
+      )}
     </div>
   );
 }
