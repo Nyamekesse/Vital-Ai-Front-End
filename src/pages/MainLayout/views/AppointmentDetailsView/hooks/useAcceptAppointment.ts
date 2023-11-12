@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import { useMutation } from 'react-query';
 import axiosInstance from '../../../../../axios-instance';
 import { SERVER_ERROR } from '../../../../../shared/constants';
+import { queryClient } from '../../../../../react-query';
+import { queryKeys } from '../../../../../react-query/constants';
 
 async function acceptAppointment(id: string | undefined) {
   try {
@@ -19,6 +21,7 @@ async function acceptAppointment(id: string | undefined) {
 export function useAccept(id: string | undefined) {
   const { mutate: acceptMutate } = useMutation(() => acceptAppointment(id), {
     onSuccess: async () => {
+      queryClient.invalidateQueries(queryKeys.appointments);
       toast.success('Appointment accepted');
     },
   });

@@ -8,15 +8,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useOutletContext } from 'react-router-dom';
 import { useRecommend } from './hooks/useRecommendDrug';
 import Display from '../../../../components/DisplayModal';
-import { ContextType } from '../../../../types';
+import { UserType } from '../../../../types';
 import { listOfDiseases } from '../../../../shared/constants';
 
 export default function RecommendDrugView() {
-  const { storedUser } = useOutletContext<ContextType>();
-
+  const [userType] = useState(sessionStorage.getItem('userType'));
   const { mutate, data } = useRecommend();
   const [formData, setFormData] = useState({
     sex: '',
@@ -130,7 +128,7 @@ export default function RecommendDrugView() {
           </div>
         </form>
       </div>
-      {data && <Display content={data} userType={storedUser.user.userType} />}
+      {data && <Display content={data} userType={userType as UserType} />}
     </>
   );
 }

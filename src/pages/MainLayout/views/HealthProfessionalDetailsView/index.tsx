@@ -1,5 +1,5 @@
 import { useTheme } from '@mui/material/styles';
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
@@ -15,18 +15,17 @@ import EmptyResponse from '../../../../components/EmptyResponse/NotFoundHealthPr
 import Credentials from './components/Credentials';
 import { useAddHealthProfessional } from './hooks/useAddHealthProfessionalConnection';
 import BookAppointmentView from '../BookAppointmentView';
-import { ContextType, UserType } from '../../../../types';
+import { UserType } from '../../../../types';
 import { checkIfConnectionExists } from '../../../../utils/checkAlreadyConnected';
 import { useConnections } from '../HomeView/hooks/useConnectionList';
+import LoadingSpinner from '../../../../components/LoadingCircle';
 
 export default function HealthProfessionalDetailsView() {
-  // const storedUser = useUserInfo();
+  const [userType] = useState(sessionStorage.getItem('userType'));
 
-  const { storedUser } = useOutletContext<ContextType>();
-  const { user } = storedUser;
   const { data: connections } = useConnections();
   const { id } = useParams();
-  const details = useHealthProfessionalDetails(id);
+  const { data: details, isLoading } = useHealthProfessionalDetails(id);
   const { mutate } = useAddHealthProfessional();
   const [isConnected, setIsConnected] = useState(
     checkIfConnectionExists(id, connections),
@@ -45,89 +44,96 @@ export default function HealthProfessionalDetailsView() {
   useEffect(() => {
     setIsConnected(checkIfConnectionExists(id, connections));
   }, [connections, id, isConnected]);
-  return details ? (
+  return (
     <div>
-      <div className="py-2 px-3 flex flex-col justify-start">
-        <Card
-          firstName={details.firstName}
-          lastname={details.lastName}
-          displayPicture={details.displayPicture as string}
-          organization={details.organization.name}
-          specialization={details.specialization.name}
-        />
-        <Credentials
-          experience={details.experience}
-          numOfReviews={details.Review.length}
-          patients={details.Connection.length}
-          rating={details.Review}
-        />
-        <About
-          firstName={details.firstName}
-          lastname={details.lastName}
-          about={details.about}
-        />
-        <WorkingTime
-          openTime={details.organization.openTime}
-          closeTime={details.organization.closeTime}
-        />
-        <div className="my-3">
-          {user.userType === UserType.CARE_RECIPIENT && (
-            <>
-              <Button
-                sx={{ textTransform: 'initial', marginRight: '1rem' }}
-                variant="contained"
-                onClick={handleClickOpen}
-                size="small"
-              >
-                Book Appointment
-              </Button>
-              {!isConnected && (
-                <IconButton
-                  color="primary"
-                  aria-label="add connection"
-                  onClick={() => mutate(id)}
-                >
-                  <FavoriteBorderIcon />
-                </IconButton>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : details ? (
+        <>
+          <div className="py-2 px-3 flex flex-col justify-start">
+            <Card
+              firstName={details.firstName}
+              lastname={details.lastName}
+              displayPicture={details.displayPicture as string}
+              organization={details.organization.name}
+              specialization={details.specialization.name}
+            />
+            <Credentials
+              experience={details.experience}
+              numOfReviews={details.Review.length}
+              patients={details.Connection.length}
+              rating={details.Review}
+            />
+            <About
+              firstName={details.firstName}
+              lastname={details.lastName}
+              about={details.about}
+            />
+            <WorkingTime
+              openTime={details.organization.openTime}
+              closeTime={details.organization.closeTime}
+            />
+            <div className="my-3">
+              {userType === UserType.CARE_RECIPIENT && (
+                <>
+                  <Button
+                    sx={{ textTransform: 'initial', marginRight: '1rem' }}
+                    variant="contained"
+                    onClick={handleClickOpen}
+                    size="small"
+                  >
+                    Book Appointment
+                  </Button>
+                  {!isConnected && (
+                    <IconButton
+                      color="primary"
+                      aria-label="add connection"
+                      onClick={() => mutate(id)}
+                    >
+                      <FavoriteBorderIcon />
+                    </IconButton>
+                  )}
+                </>
               )}
-            </>
-          )}
-        </div>
-        <Typography
-          variant="h5"
-          mt={3}
-          sx={{ fontSize: '1.25rem', fontWeight: 700, color: '#212121' }}
-        >
-          Reviews
-        </Typography>
-        <div className="flex flex-col">
-          {details.Review.length ? (
-            details.Review.map((review) => (
-              <ReviewCard
-                firstName={review.careRecipient.firstName}
-                lastName={review.careRecipient.lastName}
-                text={review.text}
-                displayPicture={review.careRecipient.displayPicture}
-                key={review.id}
-              />
-            ))
-          ) : (
-            <Typography>
-              Sorry no reviews for {details.firstName} {details.lastName} yet!
+            </div>
+            <Typography
+              variant="h5"
+              mt={3}
+              sx={{ fontSize: '1.25rem', fontWeight: 700, color: '#212121' }}
+            >
+              Reviews
             </Typography>
-          )}
-        </div>
-      </div>
-      <BookAppointmentView
-        open={open}
-        handleClose={handleClose}
-        fullScreen={fullScreen}
-        healthProfessionalID={id}
-        openTime={details.organization.openTime}
-        closeTime={details.organization.closeTime}
-      />
+            <div className="flex flex-col">
+              {details.Review.length ? (
+                details.Review.map((review) => (
+                  <ReviewCard
+                    firstName={review.careRecipient.firstName}
+                    lastName={review.careRecipient.lastName}
+                    text={review.text}
+                    displayPicture={review.careRecipient.displayPicture}
+                    key={review.id}
+                  />
+                ))
+              ) : (
+                <Typography>
+                  Sorry no reviews for {details.firstName} {details.lastName}{' '}
+                  yet!
+                </Typography>
+              )}
+            </div>
+          </div>
+          <BookAppointmentView
+            open={open}
+            handleClose={handleClose}
+            fullScreen={fullScreen}
+            healthProfessionalID={id}
+            openTime={details.organization.openTime}
+            closeTime={details.organization.closeTime}
+          />
+        </>
+      ) : (
+        <EmptyResponse />
+      )}
     </div>
-  ) : (
-    <EmptyResponse />
   );
 }

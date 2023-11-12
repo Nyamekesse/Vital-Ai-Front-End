@@ -19,7 +19,7 @@ type Props = {
   firstName: string;
   lastName: string;
   displayPicture: string;
-  userType: string;
+  userType: string | null;
 };
 export default function TopBar({
   firstName,

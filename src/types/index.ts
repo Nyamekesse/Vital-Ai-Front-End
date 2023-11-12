@@ -32,7 +32,8 @@ export interface HealthProfessional {
   organizationID: string;
   organization: Organization;
   specialization: Specialization;
-  connection: Connection[];
+  Connection: Connection[];
+  Review: Review[];
 }
 
 export interface Appointment {

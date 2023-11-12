@@ -3,8 +3,8 @@ import Typography from '@mui/material/Typography/Typography';
 import IconButton from '@mui/material/IconButton';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
-import { useOutletContext } from 'react-router-dom';
-import { ContextType, Status, UserType } from '../../../../../types';
+import { useState } from 'react';
+import { Status, UserType } from '../../../../../types';
 import { useAccept } from '../hooks/useAcceptAppointment';
 import { useReject } from '../hooks/useRejectAppointment';
 
@@ -31,8 +31,7 @@ export default function ProfileCard({
   id,
   appointmentStatus,
 }: Props) {
-  const { storedUser } = useOutletContext<ContextType>();
-  const { user } = storedUser;
+  const [userType] = useState(sessionStorage.getItem('userType'));
   const { acceptMutate } = useAccept(id);
   const { rejectMutate } = useReject(id);
 
@@ -86,7 +85,7 @@ export default function ProfileCard({
               )}
             </Typography>
           </div>
-          {user.userType === UserType.HEALTH_PROFESSIONAL &&
+          {userType === UserType.HEALTH_PROFESSIONAL &&
             appointmentStatus === Status.PENDING && (
               <div>
                 <IconButton

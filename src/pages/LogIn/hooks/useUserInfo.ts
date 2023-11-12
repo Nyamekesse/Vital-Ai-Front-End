@@ -4,6 +4,12 @@ import { useState } from 'react';
 import { queryKeys } from '../../../react-query/constants';
 import axiosInstance from '../../../axios-instance';
 import { SERVER_ERROR } from '../../../shared/constants';
+import { InfoResponse } from '../../../types';
+
+interface IUseUserInfo {
+  data: InfoResponse;
+  isLoading: boolean;
+}
 
 export const getUserDetails = async () => {
   try {
@@ -18,10 +24,10 @@ export const getUserDetails = async () => {
   }
 };
 
-export const useUserInfo = () => {
+export function useUserInfo(): IUseUserInfo {
   const [isLoggedIn] = useState(sessionStorage.getItem('isLoggedIn'));
-  const { data } = useQuery(queryKeys.user, getUserDetails, {
+  const { data, isLoading } = useQuery(queryKeys.user, getUserDetails, {
     enabled: isLoggedIn === 'true',
   });
-  return data;
-};
+  return { data, isLoading };
+}

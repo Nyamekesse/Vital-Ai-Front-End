@@ -7,14 +7,13 @@ import {
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
-import { useOutletContext } from 'react-router-dom';
 import { usePredict } from './hooks/usePredictDisease';
 import { listOfSymptoms } from '../../../../shared/constants';
-import { ContextType } from '../../../../types';
+import { UserType } from '../../../../types';
 import Display from '../../../../components/DisplayModal';
 
 export default function PredictDiseaseView() {
-  const { storedUser } = useOutletContext<ContextType>();
+  const [userType] = useState(sessionStorage.getItem('userType'));
   const { mutate, data } = usePredict();
   const [formData, setFormData] = useState({
     s1: '',
@@ -214,7 +213,7 @@ export default function PredictDiseaseView() {
         </form>
       </div>
 
-      {data && <Display content={data} userType={storedUser.user.userType} />}
+      {data && <Display content={data} userType={userType as UserType} />}
     </>
   );
 }

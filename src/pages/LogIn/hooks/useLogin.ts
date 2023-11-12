@@ -2,10 +2,9 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import axiosInstance from '../../../axios-instance';
 import { SERVER_ERROR } from '../../../shared/constants';
-import { AuthContext } from '../../../AuthContext';
+import { parseJwt } from '../../../utils/extractUserType';
 
 interface FormData {
   email: string;
@@ -30,12 +29,13 @@ async function signin({ email, password }: FormData) {
 
 export function useAuthLogin() {
   const navigate = useNavigate();
-  const { setToken } = useContext(AuthContext);
+
   const { mutate } = useMutation((data: FormData) => signin(data), {
     onSuccess: async (data) => {
       sessionStorage.setItem('isLoggedIn', 'true');
       sessionStorage.setItem('token', data.token);
-      setToken(data.token);
+      sessionStorage.setItem('userType', parseJwt(data.token).userType);
+
       navigate('/', { replace: true });
       toast.success('Login Successful');
     },

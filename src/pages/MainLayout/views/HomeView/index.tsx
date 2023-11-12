@@ -1,20 +1,22 @@
-import { useOutletContext } from 'react-router-dom';
 import Typography from '@mui/material/Typography/Typography';
+import { useState } from 'react';
 import { Carousel } from '../../../../components';
 import SpecialitySection from './components/SpecialitySection';
 import OrganizationSection from './components/OrganizationSection';
-import { ContextType, UserType } from '../../../../types';
+import { UserType } from '../../../../types';
 import OrganizationTeam from './components/OrganizationTeam';
 import ConnectionsListDisplayH from './components/ConnectionsDisplayH';
 import ConnectionsListDisplay from './components/ConnectionsDisplay';
+import { useUserInfo } from '../../../LogIn/hooks/useUserInfo';
 
 export default function HomeScreen() {
-  const { storedUser } = useOutletContext<ContextType>();
-  // Vada_Wyman4@hotmail.com
+  const { data: user } = useUserInfo();
+  const [userType] = useState(sessionStorage.getItem('userType'));
+
   return (
     <div className="py-3 px-3">
       <Carousel />
-      {storedUser?.user.userType === UserType.CARE_RECIPIENT ? (
+      {userType === UserType.CARE_RECIPIENT ? (
         <div className="mt-8 flex flex-col items-center justify-start">
           <div>
             <OrganizationSection />
@@ -32,11 +34,11 @@ export default function HomeScreen() {
             Current Organization
           </Typography>
           <Typography variant="subtitle1" mb={1} sx={{}}>
-            {storedUser?.organization?.name}
+            {user?.organization?.name}
           </Typography>
           <OrganizationTeam
-            userName={storedUser?.firstName}
-            organizationId={storedUser?.organization?.id}
+            userName={user?.firstName}
+            organizationId={user?.organization?.id}
           />
           <ConnectionsListDisplayH />
         </div>

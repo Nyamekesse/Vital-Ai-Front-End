@@ -23,7 +23,7 @@ export const useRemoveConnection = () => {
   const { mutate } = useMutation((id: string) => removeConnection(id), {
     onSuccess: async () => {
       await getUserDetails();
-      queryClient.invalidateQueries(queryKeys.user);
+      queryClient.invalidateQueries(queryKeys.connections);
       toast.success('Favorite removed');
     },
   });

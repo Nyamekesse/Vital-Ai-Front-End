@@ -1,11 +1,11 @@
-import { useIsFetching, useIsMutating } from 'react-query';
+import { useIsMutating } from 'react-query';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Loading() {
-  const isFetching = useIsFetching();
+  // const isFetching = useIsFetching();
   const isMutating = useIsMutating();
-  const showLoading = !!(isFetching || isMutating);
+  const showLoading = !!isMutating;
   return (
     <div>
       <Backdrop

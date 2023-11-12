@@ -23,7 +23,7 @@ export function useAddHealthProfessional() {
     (id: string | undefined) => addHealthProfessional(id),
     {
       onSuccess: async () => {
-        queryClient.invalidateQueries([queryKeys.user]);
+        queryClient.invalidateQueries([queryKeys.connections]);
         toast.success('Added Successfully');
       },
     },

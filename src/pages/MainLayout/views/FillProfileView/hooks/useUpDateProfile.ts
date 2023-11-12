@@ -27,7 +27,6 @@ export function useUpdateProfileDetails() {
     {
       onSuccess: async () => {
         queryClient.invalidateQueries([queryKeys.user]);
-        queryClient.invalidateQueries([queryKeys.organizationTeams]);
         toast.success('User Profile updated successfully');
       },
     },

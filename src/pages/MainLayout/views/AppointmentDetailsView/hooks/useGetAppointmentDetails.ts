@@ -5,7 +5,12 @@ import { Appointment } from '../../../../../types';
 import { queryKeys } from '../../../../../react-query/constants';
 import { SERVER_ERROR } from '../../../../../shared/constants';
 
-async function fetchAppointmentDetailsById(id: string): Promise<Appointment> {
+interface IUseAppointmentDetailsById {
+  data: Appointment;
+  isLoading: boolean;
+}
+
+async function fetchAppointmentDetailsById(id: string) {
   try {
     const { data } = await axiosInstance.get(`/appointment/${id}/details`);
     return data;
@@ -18,9 +23,11 @@ async function fetchAppointmentDetailsById(id: string): Promise<Appointment> {
   }
 }
 
-export function useGetAppointmentDetails(id: string): Appointment | undefined {
-  const { data: details } = useQuery([queryKeys.appointments, id], () =>
+export function useGetAppointmentDetails(
+  id: string,
+): IUseAppointmentDetailsById {
+  const { data, isLoading } = useQuery([queryKeys.appointments, id], () =>
     fetchAppointmentDetailsById(id),
   );
-  return details;
+  return { data, isLoading };
 }

@@ -2,32 +2,14 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import { queryKeys } from '../../../../../react-query/constants';
 import axiosInstance from '../../../../../axios-instance';
-import {
-  Connection,
-  Gender,
-  Organization,
-  Review,
-  Specialization,
-} from '../../../../../types';
+import { HealthProfessional } from '../../../../../types';
 import { SERVER_ERROR } from '../../../../../shared/constants';
 
-interface HealthProfessionalDetails {
-  firstName: string;
-  lastName: string;
-  contactInfo: string;
-  experience: number;
-  gender: Gender;
-  displayPicture: string;
-  about: string;
-  organization: Organization;
-  specialization: Specialization;
-  Review: Review[];
-  Connection: Connection[];
+interface IUseHealthProfessionalDetailsById {
+  data: HealthProfessional;
+  isLoading: boolean;
 }
-
-async function fetchHealthProfessionalDetailsById(
-  id: string | undefined,
-): Promise<HealthProfessionalDetails> {
+async function fetchHealthProfessionalDetailsById(id: string | undefined) {
   try {
     const { data } = await axiosInstance.get(
       `/details/health-professional/id=${id}`,
@@ -42,9 +24,11 @@ async function fetchHealthProfessionalDetailsById(
   }
 }
 
-export function useHealthProfessionalDetails(id: string | undefined) {
-  const { data: details } = useQuery([queryKeys.healthProfessional, id], () =>
+export function useHealthProfessionalDetails(
+  id: string | undefined,
+): IUseHealthProfessionalDetailsById {
+  const { data, isLoading } = useQuery([queryKeys.healthProfessional, id], () =>
     fetchHealthProfessionalDetailsById(id),
   );
-  return details;
+  return { data, isLoading };
 }
