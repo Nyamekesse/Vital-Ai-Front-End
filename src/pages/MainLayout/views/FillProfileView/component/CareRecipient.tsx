@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
@@ -7,13 +7,28 @@ import { DateField } from '@mui/x-date-pickers/DateField';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { styled } from '@mui/material/styles';
 import { useUpdateProfileDetails } from '../hooks/useUpDateProfile';
 import { useUserInfo } from '../../../../LogIn/hooks/useUserInfo';
 import LoadingSpinner from '../../../../../components/LoadingCircle';
+import { useImageFileUpload } from '../hooks/useImageUpload';
+
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 export default function CareRecipientView() {
   const { data: user, isLoading } = useUserInfo();
   const { mutate } = useUpdateProfileDetails();
+  const { mutate: uploadImage, data } = useImageFileUpload();
   const [formData, setFormData] = useState({
     firstName: user?.firstName,
     lastName: user?.lastName,
@@ -24,8 +39,7 @@ export default function CareRecipientView() {
     displayPicture: user?.displayPicture,
     healthBackground: user?.healthBackground,
   });
-  // console.log(userDetails?.location.split(',')[1]);
-  // console.log(userDetails?.location.split(',')[2].trim());
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -39,10 +53,40 @@ export default function CareRecipientView() {
   const handleGender = (event: SelectChangeEvent) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    event.preventDefault();
+    const { files } = event.target;
+    const imageData = new FormData();
+    files?.length && imageData.append('profileImage', files[0]);
+
+    uploadImage(imageData);
+  };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     mutate(formData);
   };
+
+  useEffect(() => {
+    if (data) {
+      setFormData((prevValues) => ({
+        ...prevValues,
+        displayPicture: data?.imageUrl,
+      }));
+      return;
+    }
+    setFormData(() => ({
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      dateOfBirth: user?.dateOfBirth,
+      gender: user?.gender,
+      contactInfo: user?.contactInfo,
+      location: user?.location.split(',')[0],
+      displayPicture: user?.displayPicture,
+      healthBackground: user?.healthBackground,
+    }));
+  }, [data, user]);
 
   return (
     <div className="flex flex-col items-center py-3 px-3">
@@ -54,13 +98,22 @@ export default function CareRecipientView() {
             Fill Your Profile
           </Typography>
           <div className="relative">
-            <div className="absolute right-3 bottom-4 z-10">
-              <AddAPhotoIcon
-                fontSize="large"
-                color="primary"
-                onClick={() => {}}
-              />
+            <div className="absolute -right-4 bottom-4 z-10">
+              <Button
+                component="label"
+                variant="text"
+                startIcon={<AddAPhotoIcon style={{ fontSize: 30 }} />}
+                disableRipple
+                disableTouchRipple
+              >
+                <VisuallyHiddenInput
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+              </Button>
             </div>
+
             <div className="">
               <Avatar
                 alt={formData.firstName}
