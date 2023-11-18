@@ -34,7 +34,6 @@ export default function ProfileCard({
   const [userType] = useState(sessionStorage.getItem('userType'));
   const { acceptMutate } = useAccept(id);
   const { rejectMutate } = useReject(id);
-
   return (
     <div className="flex  p-4 shadow-md rounded-lg">
       <div className="">

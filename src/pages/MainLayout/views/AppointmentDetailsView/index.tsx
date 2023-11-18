@@ -2,6 +2,7 @@ import Button from '@mui/material/Button/Button';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import isBetween from 'dayjs/plugin/isBetween';
 import PatientInformation from './components/PatientInformation';
 import ProfileCard from './components/ProfileCard';
 import ScheduleAbout from './components/ScheduleAbout';
@@ -12,6 +13,7 @@ import { CareRecipient, HealthProfessional, UserType } from '../../../../types';
 import ChatSessionView from '../../components/ChatSessionView';
 import LoadingSpinner from '../../../../components/LoadingCircle';
 
+dayjs.extend(isBetween);
 export default function AppointmentDetails() {
   const [userType] = useState(sessionStorage.getItem('userType'));
 
@@ -41,15 +43,16 @@ export default function AppointmentDetails() {
   };
 
   const currentDate = dayjs();
+  const appointmentTime = dayjs(appointmentDetails?.scheduledTime);
 
-  const isSameDate = currentDate.isSame(
-    appointmentDetails?.scheduledTime,
-    'day',
+  const startOfAppointmentMinute = appointmentTime.startOf('hour');
+  const endOfAppointmentMinute = appointmentTime.endOf('hour');
+  const isSameDate = currentDate.isSame(appointmentTime, 'day');
+  const isDuringAppointmentMinute = currentDate.isBetween(
+    startOfAppointmentMinute,
+    endOfAppointmentMinute,
   );
-  const isAfterTime = currentDate.isAfter(
-    appointmentDetails?.scheduledTime,
-    'hour',
-  );
+  const isAfterTime = currentDate.isAfter(appointmentTime, 'hour');
 
   return (
     <>
@@ -98,13 +101,15 @@ export default function AppointmentDetails() {
               variant="contained"
               startIcon={<MessagingIcon />}
               onClick={handleClickOpen}
-              disabled={!isSameDate || isAfterTime}
+              disabled={!isSameDate || !isDuringAppointmentMinute}
             >
-              {isAfterTime
+              {!isSameDate
+                ? 'Not Today'
+                : isAfterTime
                 ? 'Appointment Ended'
-                : `Appointment Starts: ${dayjs(
-                    appointmentDetails.scheduledTime,
-                  )}`}
+                : !isDuringAppointmentMinute
+                ? 'Not Time Yet'
+                : `Appointment Starts: ${dayjs(appointmentTime)}`}
             </Button>
           </>
         ) : (
