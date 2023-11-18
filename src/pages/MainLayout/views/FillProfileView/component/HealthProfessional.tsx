@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   MenuItem,
@@ -9,14 +9,28 @@ import {
   Typography,
 } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
+import { styled } from '@mui/material/styles';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { useUpdateProfileDetails } from '../hooks/useUpDateProfile';
 import { useUserInfo } from '../../../../LogIn/hooks/useUserInfo';
 import LoadingSpinner from '../../../../../components/LoadingCircle';
+import { useImageFileUpload } from '../hooks/useImageUpload';
 
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 export default function HealthProfessionalView() {
   const { data: user, isLoading } = useUserInfo();
   const { mutate } = useUpdateProfileDetails();
+  const { mutate: uploadImage, data } = useImageFileUpload();
   const [formData, setFormData] = useState({
     firstName: user?.firstName,
     lastName: user?.lastName,
@@ -36,10 +50,39 @@ export default function HealthProfessionalView() {
   const handleGender = (event: SelectChangeEvent) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const { files } = event.target;
+
+    const imageData = new FormData();
+    files?.length && imageData.append('profileImage', files[0]);
+
+    uploadImage(imageData);
+  };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     mutate(formData);
   };
+  useEffect(() => {
+    if (data) {
+      setFormData((prevValues) => ({
+        ...prevValues,
+        displayPicture: data?.imageUrl,
+      }));
+      return;
+    }
+    setFormData(() => ({
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      experience: user?.experience,
+      medicalLicenseNumber: user?.medicalLicenseNumber,
+      gender: user?.gender,
+      contactInfo: user?.contactInfo,
+      specialization: user?.specialization.name,
+      displayPicture: user?.displayPicture,
+      about: user?.about,
+    }));
+  }, [data, user]);
   return (
     <div className="flex pt-3 flex-col items-center">
       {isLoading ? (
@@ -50,18 +93,29 @@ export default function HealthProfessionalView() {
             Fill Your Profile
           </Typography>
           <div className="relative">
-            <div className="absolute right-3 bottom-4 z-30">
-              <AddAPhotoIcon
-                fontSize="large"
-                color="primary"
-                onClick={() => console.log('add photo')}
+            <div className="absolute -right-4 bottom-4 z-10">
+              <Button
+                component="label"
+                variant="text"
+                startIcon={<AddAPhotoIcon style={{ fontSize: 30 }} />}
+                disableRipple
+                disableTouchRipple
+              >
+                <VisuallyHiddenInput
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+              </Button>
+            </div>
+
+            <div className="">
+              <Avatar
+                alt={formData.firstName}
+                src={formData.displayPicture}
+                sx={{ width: 150, height: 150, zIndex: 0 }}
               />
             </div>
-            <Avatar
-              alt={formData.firstName}
-              src={formData.displayPicture}
-              sx={{ width: 150, height: 150 }}
-            />
           </div>
 
           <form

@@ -53,9 +53,7 @@ export default function CareRecipientView() {
   const handleGender = (event: SelectChangeEvent) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-  const handleImageUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const { files } = event.target;
     const imageData = new FormData();
