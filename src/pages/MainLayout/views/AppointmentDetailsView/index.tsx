@@ -78,7 +78,7 @@ export default function AppointmentDetails() {
                 firstName={appointmentDetails.careRecipient.firstName}
                 lastName={appointmentDetails.careRecipient.lastName}
                 image={appointmentDetails.careRecipient.displayPicture}
-                age="45"
+                age={appointmentDetails.careRecipient.age}
                 location={appointmentDetails.careRecipient.location}
                 id={id}
                 appointmentStatus={appointmentDetails.status}
@@ -90,6 +90,7 @@ export default function AppointmentDetails() {
               lastName={appointmentDetails.careRecipient.lastName}
               gender={appointmentDetails.careRecipient.gender}
               purpose={appointmentDetails.purpose}
+              age={appointmentDetails.careRecipient.age}
             />
             <Button
               sx={{

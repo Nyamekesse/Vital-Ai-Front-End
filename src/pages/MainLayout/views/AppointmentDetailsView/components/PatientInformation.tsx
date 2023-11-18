@@ -5,6 +5,7 @@ type Props = {
   lastName: string;
   gender: string;
   purpose: string;
+  age: number;
 };
 
 export default function PatientInformation({
@@ -12,6 +13,7 @@ export default function PatientInformation({
   lastName,
   gender,
   purpose,
+  age,
 }: Props) {
   return (
     <div className="flex flex-col">
@@ -42,7 +44,7 @@ export default function PatientInformation({
         sx={{ fontWeight: 400, fontSize: '1rem' }}
         mt={1}
       >
-        Age&nbsp;&nbsp;&nbsp;&nbsp;: 26
+        Age&nbsp;&nbsp;&nbsp;&nbsp;: {age}&nbsp;years
       </Typography>
       <Typography
         variant="caption"

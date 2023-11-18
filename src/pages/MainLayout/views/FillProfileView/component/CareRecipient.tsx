@@ -34,6 +34,7 @@ export default function CareRecipientView() {
     lastName: user?.lastName,
     dateOfBirth: user?.dateOfBirth,
     gender: user?.gender,
+    age: user?.age,
     contactInfo: user?.contactInfo,
     location: user?.location.split(',')[0],
     displayPicture: user?.displayPicture,
@@ -79,6 +80,7 @@ export default function CareRecipientView() {
       lastName: user?.lastName,
       dateOfBirth: user?.dateOfBirth,
       gender: user?.gender,
+      age: user?.age,
       contactInfo: user?.contactInfo,
       location: user?.location.split(',')[0],
       displayPicture: user?.displayPicture,
@@ -145,6 +147,21 @@ export default function CareRecipientView() {
               size="small"
               defaultValue={user.lastName}
               key="lastname"
+            />
+            <TextField
+              margin="dense"
+              name="age"
+              label="Age"
+              placeholder="Enter lastname..."
+              type="number"
+              onChange={handleInputChange}
+              size="small"
+              defaultValue={user.age}
+              key="age"
+              inputProps={{
+                min: 16,
+                max: 100,
+              }}
             />
             <TextField
               margin="dense"

@@ -14,7 +14,7 @@ type Props = {
   lastName: string;
   specialization?: string;
   organization?: string;
-  age?: string;
+  age?: number;
   location?: string;
   id?: string;
   appointmentStatus?: string;

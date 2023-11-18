@@ -7,6 +7,7 @@ export interface CareRecipient {
   lastName: string;
   dateOfBirth: Date | string;
   gender: Gender;
+  age: number;
   contactInfo: string;
   location: string;
   healthBackground: string;
