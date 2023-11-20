@@ -4,7 +4,7 @@ import { LogInPage, MainLayout, SignUpPage } from './pages';
 import FilterHealthProfessionals from './pages/MainLayout/views/FilterHealthProfessionalsView';
 import AppointmentsHistoryView from './pages/MainLayout/views/AppointmentsHistoryView';
 import AppointmentDetails from './pages/MainLayout/views/AppointmentDetailsView';
-import FillProfile from './pages/MainLayout/views/FillProfileView';
+import ProfileDetailsView from './pages/MainLayout/views/ProfileDetailsView';
 import HomeScreen from './pages/MainLayout/views/HomeView';
 import PageNotFound from './pages/404 page';
 import HealthProfessionalDetailsView from './pages/MainLayout/views/HealthProfessionalDetailsView';
@@ -14,6 +14,7 @@ import RecommendDrugView from './pages/MainLayout/views/RecommendDrugView';
 import { MapView } from './pages/MainLayout/views/MapView';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import AuthProvider from './AuthProvider';
+import RegisterProfileDetails from './pages/MainLayout/views/RegisterProfileDetails';
 
 function App() {
   return (
@@ -43,12 +44,14 @@ function App() {
               element={<FavoriteHealthProfessionalView />}
             />
             <Route path="/map" element={<MapView />} />
-            <Route path="/profile/me" element={<FillProfile />} />
+            <Route path="/profile/me" element={<ProfileDetailsView />} />
+
             <Route path="/predict-disease" element={<PredictDiseaseView />} />
             <Route path="/recommend-drug" element={<RecommendDrugView />} />
           </Route>
           <Route path="/log-in" element={<LogInPage />} />
           <Route path="/register-new-user" element={<SignUpPage />} />
+          <Route path="/new/profile/me" element={<RegisterProfileDetails />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Loading />

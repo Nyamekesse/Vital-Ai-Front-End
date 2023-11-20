@@ -10,7 +10,7 @@ export default function Form() {
     username: '',
     email: '',
     password: '',
-    userType: 'PATIENT',
+    userType: 'HEALTH_PROFESSIONAL',
   };
   const [formData, setFormData] = useState(initialState);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

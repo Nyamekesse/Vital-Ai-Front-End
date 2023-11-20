@@ -171,7 +171,7 @@ export default function HealthProfessionalView() {
               margin="dense"
               name="experience"
               label="Experience"
-              placeholder="Contact Info"
+              placeholder="Years of Experience in field"
               defaultValue={user?.experience}
               type="text"
               onChange={handleInputChange}

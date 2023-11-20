@@ -7,4 +7,5 @@ export const queryKeys = {
   organizationTeams: 'organization-teams',
   chats: 'chats',
   connections: 'connections',
+  specializations: 'specializations',
 };

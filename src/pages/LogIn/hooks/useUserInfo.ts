@@ -5,6 +5,7 @@ import { queryKeys } from '../../../react-query/constants';
 import axiosInstance from '../../../axios-instance';
 import { SERVER_ERROR } from '../../../shared/constants';
 import { InfoResponse } from '../../../types';
+import { parseJwt } from '../../../utils/extractUserType';
 
 interface IUseUserInfo {
   data: InfoResponse;
@@ -26,8 +27,13 @@ export const getUserDetails = async () => {
 
 export function useUserInfo(): IUseUserInfo {
   const [isLoggedIn] = useState(sessionStorage.getItem('isLoggedIn'));
+  const storedToken = sessionStorage.getItem('token');
+  let profileCompleted = false;
+  if (storedToken !== null) {
+    profileCompleted = parseJwt(storedToken).profileCompleted === true;
+  }
   const { data, isLoading } = useQuery(queryKeys.user, getUserDetails, {
-    enabled: isLoggedIn === 'true',
+    enabled: isLoggedIn === 'true' && profileCompleted,
   });
   return { data, isLoading };
 }

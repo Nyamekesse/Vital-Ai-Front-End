@@ -10,7 +10,6 @@ interface IUseOrganization {
 
 async function getOrganizations(): Promise<Organization[]> {
   const { data } = await axiosInstance.get('/organizations');
-
   return data.organizations;
 }
 
