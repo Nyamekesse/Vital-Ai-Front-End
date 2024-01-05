@@ -51,35 +51,39 @@ export default function QuestionAndAnsweringView({
     setMessage(value);
   };
   const handleSubmit = () => {
-    setMessage('');
-    if (message.length > 0) {
-      const newMessage = {
-        _id: new Date().getTime().toString(),
-        author: {
-          role: 'User',
-          display_picture: currentUser?.displayPicture,
-        },
-        content: message,
-        date: new Date().toISOString(),
-      };
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    if (import.meta.env.PROD) {
+      alert('Model instance stopped due to accrued cost on AWS Sage Maker');
+    } else {
+      setMessage('');
+      if (message.length > 0) {
+        const newMessage = {
+          _id: new Date().getTime().toString(),
+          author: {
+            role: 'User',
+            display_picture: currentUser?.displayPicture,
+          },
+          content: message,
+          date: new Date().toISOString(),
+        };
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
 
-      mutate(message, {
-        onSuccess: (responseData) => {
-          const res = {
-            _id: new Date().getTime().toString(),
-            author: {
-              role: 'bot',
-              display_picture:
-                'https://api.multiavatar.com/TA-Ai.svg?apikey=LFTk59wNposvr3',
-            },
-            content: responseData,
-            date: new Date().toISOString(),
-          };
+        mutate(message, {
+          onSuccess: (responseData) => {
+            const res = {
+              _id: new Date().getTime().toString(),
+              author: {
+                role: 'bot',
+                display_picture:
+                  'https://api.multiavatar.com/TA-Ai.svg?apikey=LFTk59wNposvr3',
+              },
+              content: responseData,
+              date: new Date().toISOString(),
+            };
 
-          setMessages((prevMessages) => [...prevMessages, res]);
-        },
-      });
+            setMessages((prevMessages) => [...prevMessages, res]);
+          },
+        });
+      }
     }
   };
 

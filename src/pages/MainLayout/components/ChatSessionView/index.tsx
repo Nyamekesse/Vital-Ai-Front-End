@@ -80,7 +80,7 @@ export default function ChatSessionView({
         const { messages } = data;
         setMessages(messages);
       });
-  });
+  }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;

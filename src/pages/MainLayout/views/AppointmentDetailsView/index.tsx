@@ -25,10 +25,10 @@ export default function AppointmentDetails() {
     CareRecipient | HealthProfessional | null
   >(null);
   const handleClickOpen = () => {
-    if (appointmentDetails && userType === UserType.CARE_RECIPIENT) {
+    if (userType === UserType.CARE_RECIPIENT) {
       setCurrentUser(appointmentDetails.healthProfessional);
     }
-    if (appointmentDetails && userType === UserType.HEALTH_PROFESSIONAL) {
+    if (userType === UserType.HEALTH_PROFESSIONAL) {
       setCurrentUser(appointmentDetails.careRecipient);
 
       setEnd([
