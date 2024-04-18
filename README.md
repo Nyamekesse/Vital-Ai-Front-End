@@ -9,8 +9,6 @@ Welcome to the frontend repository of VitalAI, a cutting-edge healthcare platfor
 - [Introduction](#introduction)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Installation](#installation)
-- [Usage](#usage)
 - [Google Collaboratory Notebooks](#google-collaboratory-notebooks)
 - [Screenshots Demo](#screenshots-demo)
 - [Contributing](#contributing)
@@ -38,18 +36,6 @@ Our frontend is built using modern technologies and libraries to ensure a smooth
 - [React Query](https://react-query.tanstack.com/): Enables efficient data fetching and synchronization for improved performance.
 - [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for building custom and responsive designs.
 - [Material-UI](https://material-ui.com/): Provides a rich set of UI components for a modern and polished look.
-
-## Installation
-
-To set up the frontend locally, follow these steps:
-
-1. Clone the repository: `git clone https://github.com/Nyamekesse/Vital-Ai-Front-End.git`
-2. Install dependencies: `cd vitalai-frontend` and `npm install`
-3. Start the development server: `npm run dev`
-
-## Usage
-
-Once the development server is running, visit `http://localhost:5001` in your web browser to access the application.
 
 ## Google Collaboratory Notebooks
 
@@ -108,6 +94,6 @@ This section displays some of the screens of the project:
 
 ## Contributing
 
-We welcome contributions to improve VitalAI! Feel free to open issues, submit pull requests, or provide feedback to help us enhance our platform.
+I welcome contributions to improve VitalAI! Feel free to open issues, submit pull requests, or provide feedback to help us enhance our platform.
 
-For more information about the backend of VitalAI, please visit the [backend repository]('https://github.com/Vital-Ai-GH/backend-server'). If you have any questions or need support, contact us at [nyamekessesamuel@duck.com](mailto:nyamekessesamuel@duck.com). Thank you for being a part of the VitalAI community!
+For more information about the backend of VitalAI, please visit the [Backend repository](https://github.com/Nyamekesse/Vital-Ai-Node-Back-end.git) or the [AI Flask Sever](https://github.com/Nyamekesse/Vital-Ai-Flask-Server.git) .If you have any questions or need support, contact me on [nyamekessesamuel@duck.com](mailto:nyamekessesamuel@duck.com). Thank you for being a part of the VitalAI community!
