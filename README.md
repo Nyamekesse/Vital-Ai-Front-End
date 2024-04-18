@@ -1,6 +1,6 @@
 # VitalAI Healthcare Platform - Frontend
 
-![VitalAI Logo](https://github.com/Vital-Ai-GH/frontend-web/blob/main/src/assets/Vital-Ai-Cover-Logo.png)
+![VitalAI Logo](https://github.com/Nyamekesse/Vital-Ai-Front-End/blob/main/src/assets/Vital-Ai-Cover-Logo.png)
 
 Welcome to the frontend repository of VitalAI, a cutting-edge healthcare platform that aims to provide fast and reliable medical care services to patients through the power of Artificial Intelligence.
 
@@ -43,7 +43,7 @@ Our frontend is built using modern technologies and libraries to ensure a smooth
 
 To set up the frontend locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/Vital-Ai-GH/frontend-web.git`
+1. Clone the repository: `git clone https://github.com/Nyamekesse/Vital-Ai-Front-End.git`
 2. Install dependencies: `cd vitalai-frontend` and `npm install`
 3. Start the development server: `npm run dev`
 
@@ -68,43 +68,43 @@ This section displays some of the screens of the project:
 
 - ### Home page - patients view
 
-  ![home page patients view](https://github.com/Vital-Ai-GH/frontend-web/blob/main/screenshots/home-screen.png)
+  ![home page patients view](https://github.com/Nyamekesse/Vital-Ai-Front-End/blob/main/screenshots/home-screen.png)
 
 - ### View health practitioners details - patients view
 
-  ![view health practitioners details](https://github.com/Vital-Ai-GH/frontend-web/blob/main/screenshots/doctor-details-view.png)
+  ![view health practitioners details](https://github.com/Nyamekesse/Vital-Ai-Front-End/blob/main/screenshots/doctor-details-view.png)
 
 - ### List of available health professionals by Organization - patients view
 
-  ![list of available health professionals by Organization](https://github.com/Vital-Ai-GH/frontend-web/blob/main/screenshots/list-of-doctors-by-organization.png)
+  ![list of available health professionals by Organization](https://github.com/Nyamekesse/Vital-Ai-Front-End/blob/main/screenshots/list-of-doctors-by-organization.png)
 
 - ### User interaction with medical bot
 
-  ![bot question and answering](https://github.com/Vital-Ai-GH/frontend-web/blob/main/screenshots/bot-interactions.png)
+  ![bot question and answering](https://github.com/Nyamekesse/Vital-Ai-Front-End/blob/main/screenshots/bot-interactions.png)
 
 - ### Disease prediction model
 
-  ![disease prediction model](https://github.com/Vital-Ai-GH/frontend-web/blob/main/screenshots/prediction-selected-symtoms.png)
+  ![disease prediction model](https://github.com/Nyamekesse/Vital-Ai-Front-End/blob/main/screenshots/prediction-selected-symtoms.png)
 
 - ### Disease prediction model results(patients view)
 
-  ![disease prediction model results](https://github.com/Vital-Ai-GH/frontend-web/blob/main/screenshots/prediction-results.png)
+  ![disease prediction model results](https://github.com/Nyamekesse/Vital-Ai-Front-End/blob/main/screenshots/prediction-results.png)
 
 - ### Home page - health practitioners view
 
-  ![home page health practitioners view](https://github.com/Vital-Ai-GH/frontend-web/blob/main/screenshots/doctor-hompage.png)
+  ![home page health practitioners view](https://github.com/Nyamekesse/Vital-Ai-Front-End/blob/main/screenshots/doctor-hompage.png)
 
 - ### Drug recommendation (health practitioners view)
 
-  ![drug recommendation model](https://github.com/Vital-Ai-GH/frontend-web/blob/main/screenshots/drug-recommendation-selected.png)
+  ![drug recommendation model](https://github.com/Nyamekesse/Vital-Ai-Front-End/blob/main/screenshots/drug-recommendation-selected.png)
 
 - ### Drug recommendation model results(health practitioners view)
 
-  ![drug recommendation model results](https://github.com/Vital-Ai-GH/frontend-web/blob/main/screenshots/drug-prediction-results.png)
+  ![drug recommendation model results](https://github.com/Nyamekesse/Vital-Ai-Front-End/blob/main/screenshots/drug-prediction-results.png)
 
 - ### Realtime health practitioner and patients chat(health practitioners view)
 
-  ![Realtime health practitioner and patients chat](https://github.com/Vital-Ai-GH/frontend-web/blob/main/screenshots/real-time-chat.png)
+  ![Realtime health practitioner and patients chat](https://github.com/Nyamekesse/Vital-Ai-Front-End/blob/main/screenshots/real-time-chat.png)
 
 ## Contributing
 
